@@ -1,0 +1,17 @@
+.show-info {
+    height: 300px;
+    line-height: 3;
+    border: 5px solid;
+}
+
+.show-picture {
+    height: 300px;
+    float: left;
+    display: inline;
+}
+
+.show-text {
+    float: right;
+    width: 500px;
+    margin-right: 200px;
+}
