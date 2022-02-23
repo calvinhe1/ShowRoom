@@ -17,8 +17,8 @@ function App() {
 
   return (
     <div>
-      <Header />
       <BrowserRouter>
+      <Header />
         <Routes>
           <Route exact path='/' render={() => 
                             (<Home />)}/>
