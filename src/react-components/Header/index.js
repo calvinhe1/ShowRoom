@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useState } from "react";
 
 import {Link} from 'react-router-dom';
 import "./styles.css";
@@ -10,15 +10,6 @@ function Header() {
   
   // retrieve user from context
   const userProfile = useUserProfileContext()
-
-  const [user, setUser] = useState({userName: 'user', 
-                                    profilePicture: '/images/profile-picture.jpg',
-                                    isAdmin: true});
-
-  function handleLogout(e) {
-    e.preventDefault();
-    setUser(null);
-  }
 
   function handleLogin(e){
     if (userProfile.isLoggedIn){
