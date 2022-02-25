@@ -3,24 +3,10 @@ import "./styles.css";
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
-import ShowsBar from "../ShowsBar";
-
 function ShowInfo(props) {
 
-    let { id } = useParams();
-
-    id === undefined ? id = 0 : id = parseInt(id);
-
-    let tempShow = props.showList.find(show => show.showId === id);
-
-    const [show, setShow] = useState(tempShow);
-
-    useEffect(() => {
-        console.log(props);
-    }, [props]);
-
+    const [show, setShow] = useState(props.shows.find(show => show.showId === props.currentShowId));
     const [edited, setEdited] = useState(false);
-
      //Should store genres as an array 
      function getGenre(genres) {
         if (!genres) return;
@@ -43,22 +29,18 @@ function ShowInfo(props) {
         setEdited(true);
     }
 
-    function saveChanges(e) {
-        e.preventDefault();
-        //TODO this would send new info to the server
-    }
 
     function discardChanges(e) {
         e.preventDefault();
-        //TODO this would discard changes and load in what's from the server
-        let temp = Object.assign({}, props.show);
+        let temp = props.shows.find(show => show.showId === props.currentShowId);
         setShow(temp);
     }
 
     return (
         <div>
-            <div className={props.user.isAdmin ? "admin-view show-info" : "show-info"}>
-                <img src={show.picture} alt="show picture" className="show-picture"></img>
+            <div className={!props.currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
+                {/** TODO this image input can be used for admins to set new images */}
+                <input type="image" src={show.picture} alt="show picture" className="show-picture"></input>
                 <div className="show-text">
                     <form>
                         <div>
@@ -66,7 +48,7 @@ function ShowInfo(props) {
                             <input type="text" 
                                 placeholder="title" 
                                 name="title" 
-                                disabled={!props.user.isAdmin}
+                                disabled={!props.currentUser?.isAdmin}
                                 onChange={changeShow}
                                 value={show.title}></input>
                         </div>
@@ -75,7 +57,7 @@ function ShowInfo(props) {
                             <input type="text" 
                                 placeholder="genre" 
                                 name="genre" 
-                                disabled={!props.user.isAdmin}
+                                disabled={!props.currentUser?.isAdmin}
                                 onChange={changeShow}
                                 value={getGenre(show.genre)}></input>
                         </div>
@@ -84,42 +66,42 @@ function ShowInfo(props) {
                             <input type="date" 
                                 placeholder="start date" 
                                 name="startDate" 
-                                disabled={!props.user.isAdmin}
+                                disabled={!props.currentUser?.isAdmin}
                                 onChange={changeShow}
                                 value={show.startDate}></input>
                        
                         
-                            {show.endDate || props.user.isAdmin? 
-                                <span>
+                            {show.endDate || props.currentUser?.isAdmin ? 
+                                <div>
                                     <label>End Date: </label>
                                     <input type="date" 
                                         placeholder="end date" 
                                         name="endDate" 
-                                        disabled={!props.user.isAdmin}
+                                        disabled={!props.currentUser?.isAdmin}
                                         onChange={changeShow}
                                         value={show.endDate}></input>
-                                </span> :
+                                </div> :
                                 <label>Ongoing</label>
                             }
                         </div>
                         <div>
                             <label>Description: </label>
-                            <input type="text"
+                            <br></br>
+                            <textarea type="text"
                                 placeholder="description"
                                 name="description"
-                                disabled={!props.user.isAdmin}
+                                disabled={!props.currentUser?.isAdmin}
                                 onChange={changeShow}
-                                value={show.description}></input>
+                                value={show.description}></textarea>
                         </div>
-                        { props.user.isAdmin && edited ?     
+                        { props.currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
-                                <button onClick={saveChanges}>SAVE</button>
-                                <button onClick={discardChanges}>DISCARD</button>
+                                <button onClick={() => props.changeShow(show)} className="admin-button save-button">SAVE</button>
+                                <button onClick={discardChanges} className="admin-button discard-button">DISCARD</button>
                             </div> :
                             null     
                         }                         
                     </form>
-                    <ShowsBar shows={props.showList} currentShow={id}/>
                 </div>
             </div>
         </div>

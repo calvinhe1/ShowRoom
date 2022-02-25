@@ -2,20 +2,18 @@ import "./styles.css";
 
 import ShowInfo from "../../react-components/ShowInfo";
 import ShowsBar from "../../react-components/ShowsBar";
-
-import {useState, useEffect} from "react";
-
-import {useParams} from "react-router-dom";
+import CommentSection from "../../react-components/CommentSection";
 
 function ShowPage(props) {
 
-    //TODO user from server
-    const [user, setUser] = useState({userName: 'user', isAdmin: true});
-
     return (
         <div>
-            <ShowInfo user={user} showList={props.showList}></ShowInfo>
-            {/** TODO comment section */}
+            <ShowInfo key={props.showId} currentUser={props.currentUser} shows={props.shows} currentShowId={props.showId} changeShow={props.changeShow}></ShowInfo>
+            <div className="showbar">
+                <ShowsBar changePage={props.changePage} shows={props.shows} currentShowId={props.showId}/>
+            </div>
+
+            <CommentSection currentShowId={props.showId} currentUser={props.currentUser} comments={props.comments} addComment={props.addComment} deleteComment={props.deleteComment} users={props.users}/>
         </div>
 
     );
