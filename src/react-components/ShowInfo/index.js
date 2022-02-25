@@ -20,13 +20,18 @@ function ShowInfo(props) {
         return res;
     }
 
-    const changeShow = e => {
+    function editShow(e) {
         let temp = Object.assign({}, show)
         e.target.name === 'genre' ? 
             temp[e.target.name] = e.target.value.split(',').map(c => c.trim()) :
             temp[e.target.name] = e.target.value;
         setShow(temp);
         setEdited(true);
+    }
+
+    function saveShow(e) {
+        e.preventDefault();
+        props.changeShow(show);
     }
 
 
@@ -49,7 +54,7 @@ function ShowInfo(props) {
                                 placeholder="title" 
                                 name="title" 
                                 disabled={!props.currentUser?.isAdmin}
-                                onChange={changeShow}
+                                onChange={editShow}
                                 value={show.title}></input>
                         </div>
                         <div>
@@ -58,7 +63,7 @@ function ShowInfo(props) {
                                 placeholder="genre" 
                                 name="genre" 
                                 disabled={!props.currentUser?.isAdmin}
-                                onChange={changeShow}
+                                onChange={editShow}
                                 value={getGenre(show.genre)}></input>
                         </div>
                         <div>
@@ -67,7 +72,7 @@ function ShowInfo(props) {
                                 placeholder="start date" 
                                 name="startDate" 
                                 disabled={!props.currentUser?.isAdmin}
-                                onChange={changeShow}
+                                onChange={editShow}
                                 value={show.startDate}></input>
                        
                         
@@ -78,7 +83,7 @@ function ShowInfo(props) {
                                         placeholder="end date" 
                                         name="endDate" 
                                         disabled={!props.currentUser?.isAdmin}
-                                        onChange={changeShow}
+                                        onChange={editShow}
                                         value={show.endDate}></input>
                                 </div> :
                                 <label>Ongoing</label>
@@ -91,12 +96,12 @@ function ShowInfo(props) {
                                 placeholder="description"
                                 name="description"
                                 disabled={!props.currentUser?.isAdmin}
-                                onChange={changeShow}
+                                onChange={editShow}
                                 value={show.description}></textarea>
                         </div>
                         { props.currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
-                                <button onClick={() => props.changeShow(show)} className="admin-button save-button">SAVE</button>
+                                <button onClick={saveShow} className="admin-button save-button">SAVE</button>
                                 <button onClick={discardChanges} className="admin-button discard-button">DISCARD</button>
                             </div> :
                             null     

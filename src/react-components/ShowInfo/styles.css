@@ -57,3 +57,7 @@ textarea {
     background-color: red;
     border-color: red;
 }
+
+.edit-buttons {
+    height: 40px;
+}
