@@ -17,44 +17,13 @@ import Profile from "./pages/Profile";
 // contexts
 import { ProvideUserProfileContext } from './contexts/UserProfile';
 
+// mock data
+import { showList, userList, commentList } from './local-data';
+
 // import styling and assets
 import './App.css';
 
 function App() {
-
-  //TODO this will all come from the server
-  const showList = [{showId: 0,
-        picture: '/images/aot.jpg',
-        title: 'Attack on Titan',
-        genre: ['action', 'dark fantasy'],
-        startDate: '2009-09-09',
-        endDate: '2001-04-09',
-        description: 'When giants attack'},
-        
-        {showId: 1,
-        picture: '/images/death-note.jpg',
-        title: 'Death Note',
-        genre: ['Mystery', 'Supernatural thriller'],
-        startDate: '2003-12-01',
-        endDate: '2006-05-15',
-        description: 'An angry twink finds a magical book called the death note'}];
-
-  //TODO get this from context/server
-  const userList = [{userId: 0, 
-                     userName: 'admin', 
-                     profilePicture: '/images/profile-picture.jpg',
-                     isAdmin: true},
-                    {userId: 1,
-                     userName: 'user',
-                     profilePicture: '/images/profile-picture.jpg',
-                     isAdmin: false}];
-
-  const commentList = [
-      {showId: 0, userId: 0, text: 'Love this show', date: new Date().toDateString(), commentId: 0},
-      {showId: 0, userId: 1, text: 'Me too!', date: new Date().toDateString(), commentId: 1},
-      {showId: 1, userId: 0, text: 'Hate this show', date: new Date().toDateString(), commentId: 2},
-      {showId: 1, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
-  ];
 
   const [shows, setShows] = useState(showList);
   const [users, setUsers] = useState(userList);
@@ -78,6 +47,7 @@ function App() {
   function deleteComment(commentId) {
     const newComments = comments.filter(comment => comment.commentId !== commentId);
     setComments(newComments)
+    //TODO send comment changes to server
   }
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
+import { userList } from "../../local-data";
 
 export const userProfileDefaultValues = {
     // set default export states and functions here
@@ -22,16 +23,13 @@ export function useProvideUserProfileContext(){
 
     useEffect(() => {
         if (isLoggedIn){
-            setProfile({userId: 0, userName: 'user', profilePicture: '/images/profile-picture.jpg', isAdmin: true})
+            //TODO actually figure out what user is logged in
+            setProfile(userList[0])
         } else {
             setProfile({});
         }
 
-    }, [isLoggedIn])
-
-    useEffect(() => {
-        console.log("useProvideUserProfileContext loaded")
-    }, [])
+    }, [isLoggedIn]);
 
     return {
         profile,

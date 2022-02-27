@@ -42,10 +42,12 @@ function CommentSection(props) {
                         return c.showId === props.currentShowId ? <Comment comment={c} users={props.users} deleteComment={props.deleteComment} key={uid(c)}/> : null;
                     })
                 }
-                <div className="comment-new-container">
-                    <input type="text" placeholder="Enter comment" value={comment} className="comment-new" onChange={changeComment}></input>
-                    <button onClick={postNewComment} className="post-button">Post</button>
-                </div>
+                {
+                    currentUser.userId !== undefined ? <div className="comment-new-container">
+                        <input type="text" placeholder="Enter comment" value={comment} className="comment-new" onChange={changeComment}></input>
+                        <button onClick={postNewComment} className="post-button">Post</button>
+                    </div> : null
+                }
             </div>
         </div>
     );
