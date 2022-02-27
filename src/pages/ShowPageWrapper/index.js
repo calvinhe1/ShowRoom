@@ -23,7 +23,7 @@ function ShowPageWrapper(props) {
     }
 
     return (
-        <ShowPage changePage={changePage} shows={props.shows} showId={showId} currentUser={props.currentUser} comments={props.comments} changeShow={props.changeShow} addComment={props.addComment} deleteComment={props.deleteComment} users={props.users}/>
+        <ShowPage changePage={changePage} shows={props.shows} showId={showId} comments={props.comments} changeShow={props.changeShow} addComment={props.addComment} deleteComment={props.deleteComment} users={props.users}/>
     )
 }
 

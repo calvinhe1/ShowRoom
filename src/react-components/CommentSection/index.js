@@ -6,9 +6,13 @@ import {uid} from "react-uid";
 
 import {useState} from "react";
 
+import { useUserProfileContext } from './../../contexts/UserProfile';
+
 function CommentSection(props) {
 
     const [comment, setComment] = useState('');
+
+    const currentUser = useUserProfileContext().profile;
 
     function changeComment(e) {
         e.preventDefault();
@@ -19,7 +23,7 @@ function CommentSection(props) {
         if (comment === '') return;
         const newComment = {
             showId: props.currentShowId,
-            userId: props.currentUser.userId,
+            userId: currentUser.userId,
             text: comment,
             date: new Date().toDateString(),
         }
@@ -35,7 +39,7 @@ function CommentSection(props) {
             <div className="comment-section">
                 {
                     props.comments.map(c => {
-                        return c.showId === props.currentShowId ? <Comment comment={c} currentUser={props.currentUser} users={props.users} deleteComment={props.deleteComment} key={uid(c)}/> : null;
+                        return c.showId === props.currentShowId ? <Comment comment={c} users={props.users} deleteComment={props.deleteComment} key={uid(c)}/> : null;
                     })
                 }
                 <div className="comment-new-container">

@@ -1,10 +1,26 @@
 import {Link} from 'react-router-dom';
 import "./styles.css";
 
+import { useUserProfileContext } from '../../contexts/UserProfile';
+
 /* The Header Component */
 function Header(props) {
+  
+  // retrieve user from context
+  const userProfile = useUserProfileContext();
+
+
+  function handleLogin(e){
+    if (userProfile.isLoggedIn){
+      userProfile.setIsLoggedIn(false);
+    } else {
+      userProfile.setIsLoggedIn(true);
+    }
+  }
 
   return (
+    userProfile.isLoggedIn ? 
+    ////////////////////// LOGGED IN VIEW //////////////////////
       <div className="header">
           <span className="header-left">
             <Link to="/">
@@ -14,27 +30,43 @@ function Header(props) {
 
           <span className="header-right">
             {
-              props.currentUser?.isAdmin ?
+              userProfile.profile.isAdmin ?
               <Link to="/admin-home">
                 <button className="manage-button">Manage</button>
               </Link>
               : null
             }
-            {
-              props.currentUser ? 
-              <span>
-                <button className="logout-button" onClick={props.signOut}>Logout</button>
-                {/** TODO link to their actual profile */}
-                <Link to="/profile">
-                  <img src={props.currentUser.profilePicture} alt="profile picture" className="profile-pic"></img>
-                </Link>
-              </span> : 
-              <Link to="/login">
-                <button className="login-button">Login</button>
+            <span>
+              <button className="logout-button" onClick={handleLogin}>Logout</button>
+              <Link to="/profile">
+                <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
               </Link>
-            }
+            </span>
           </span>
       </div>
+    :
+    ///////////////////////// LOGGED OUT VIEW /////////////////////////
+    <div className="header">
+          <span className="header-left">
+            <Link to="/">
+              <h1 className="logo">ShowRoom</h1>
+            </Link>
+          </span>
+
+          <span className="header-right">
+            {
+              userProfile.profile.isAdmin ?
+              <Link to="/admin-home">
+                <button className="manage-button">Manage</button>
+              </Link>
+              : null
+            }
+            { /** TODO login page <Link to="/login"> */}
+              <button className="login-button" onClick={handleLogin}>Login</button>
+            { /** </Link> */}
+          </span>
+      </div>
+
   );
 }
 

@@ -1,14 +1,17 @@
 import "./styles.css";
 
-import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useState} from "react";
+
+import { useUserProfileContext } from './../../contexts/UserProfile';
 
 function ShowInfo(props) {
 
+    const currentUser =  useUserProfileContext().profile;
+
     const [show, setShow] = useState(props.shows.find(show => show.showId === props.currentShowId));
     const [edited, setEdited] = useState(false);
-     //Should store genres as an array 
-     function getGenre(genres) {
+    //Should store genres as an array 
+    function getGenre(genres) {
         if (!genres) return;
 
         let res = genres[0]
@@ -32,6 +35,7 @@ function ShowInfo(props) {
     function saveShow(e) {
         e.preventDefault();
         props.changeShow(show);
+        setEdited(false);
     }
 
 
@@ -39,11 +43,12 @@ function ShowInfo(props) {
         e.preventDefault();
         let temp = props.shows.find(show => show.showId === props.currentShowId);
         setShow(temp);
+        setEdited(false);
     }
 
     return (
         <div>
-            <div className={!props.currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
+            <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
                 {/** TODO this image input can be used for admins to set new images */}
                 <input type="image" src={show.picture} alt="show picture" className="show-picture"></input>
                 <div className="show-text">
@@ -53,7 +58,7 @@ function ShowInfo(props) {
                             <input type="text" 
                                 placeholder="title" 
                                 name="title" 
-                                disabled={!props.currentUser?.isAdmin}
+                                disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
                                 value={show.title}></input>
                         </div>
@@ -62,7 +67,7 @@ function ShowInfo(props) {
                             <input type="text" 
                                 placeholder="genre" 
                                 name="genre" 
-                                disabled={!props.currentUser?.isAdmin}
+                                disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
                                 value={getGenre(show.genre)}></input>
                         </div>
@@ -71,18 +76,18 @@ function ShowInfo(props) {
                             <input type="date" 
                                 placeholder="start date" 
                                 name="startDate" 
-                                disabled={!props.currentUser?.isAdmin}
+                                disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
                                 value={show.startDate}></input>
                        
                         
-                            {show.endDate || props.currentUser?.isAdmin ? 
+                            {show.endDate || currentUser?.isAdmin ? 
                                 <div>
                                     <label>End Date: </label>
                                     <input type="date" 
                                         placeholder="end date" 
                                         name="endDate" 
-                                        disabled={!props.currentUser?.isAdmin}
+                                        disabled={!currentUser?.isAdmin}
                                         onChange={editShow}
                                         value={show.endDate}></input>
                                 </div> :
@@ -95,11 +100,11 @@ function ShowInfo(props) {
                             <textarea type="text"
                                 placeholder="description"
                                 name="description"
-                                disabled={!props.currentUser?.isAdmin}
+                                disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
                                 value={show.description}></textarea>
                         </div>
-                        { props.currentUser?.isAdmin && edited ?     
+                        { currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
                                 <button onClick={saveShow} className="admin-button save-button">SAVE</button>
                                 <button onClick={discardChanges} className="admin-button discard-button">DISCARD</button>

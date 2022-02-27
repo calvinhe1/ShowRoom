@@ -1,8 +1,11 @@
-import './App.css';
-import React, { useState } from 'react';
 
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+// import components
 import Header from './react-components/Header';
 
+// import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ShowPageWrapper from "./pages/ShowPageWrapper";
@@ -11,7 +14,11 @@ import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
 
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+// contexts
+import { ProvideUserProfileContext } from './contexts/UserProfile';
+
+// import styling and assets
+import './App.css';
 
 function App() {
 
@@ -32,6 +39,7 @@ function App() {
         endDate: '2006-05-15',
         description: 'An angry twink finds a magical book called the death note'}];
 
+  //TODO get this from context/server
   const userList = [{userId: 0, 
                      userName: 'admin', 
                      profilePicture: '/images/profile-picture.jpg',
@@ -51,8 +59,6 @@ function App() {
   const [shows, setShows] = useState(showList);
   const [users, setUsers] = useState(userList);
   const [comments, setComments] = useState(commentList);
-  //TODO this will come from login page
-  const [currentUser, setCurrentUser] = useState(users[0]);
 
   function changeShow(newShow) {
     const newShowList = showList.map(show => {
@@ -74,24 +80,22 @@ function App() {
     setComments(newComments)
   }
 
-  function signOut() {
-    setCurrentUser(undefined);
-  }
-
   return (
     <div>
-      <BrowserRouter>
-        <Header currentUser={currentUser} signOut={signOut}/>
-        <Routes>
-          <Route exact path='/' element={<Home shows={shows} />}/>
-          <Route exact path='/login' element={<Login />}/>
-          <Route path='/show_page/:id' element={<ShowPageWrapper shows={shows} currentUser={currentUser} comments={comments} changeShow={changeShow} addComment={addComment} deleteComment={deleteComment} users={users}/>}/>
-          <Route exact path='/admin_home' element={<AdminHome/>}/>
-          <Route exact path='/user_list' element={<UserList/>}/>
-          <Route exact path='/show_list' element={<ShowList/>}/>
-          <Route exact path='/profile' element={<Profile/>}/>
-        </Routes>
-      </BrowserRouter>
+      <ProvideUserProfileContext>
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <Route exact path='/' element={<Home shows={shows} />}/>
+            <Route exact path='/login' element={<Login />}/>
+            <Route path='/show_page/:id' element={<ShowPageWrapper shows={shows} comments={comments} changeShow={changeShow} addComment={addComment} deleteComment={deleteComment} users={users}/>}/>
+            <Route exact path='/admin_home' element={<AdminHome/>}/>
+            <Route exact path='/user_list' element={<UserList/>}/>
+            <Route exact path='/show_list' element={<ShowList/>}/>
+            <Route exact path='/profile' element={<Profile/>}/>
+          </Routes>
+        </BrowserRouter>
+      </ProvideUserProfileContext>
     </div>
   );
 }
