@@ -1,41 +1,71 @@
-import './App.css';
-import React, { useState } from 'react';
 
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+// import components
 import Header from './react-components/Header';
 
+// import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ShowPage from "./pages/ShowPage";
+import ShowPageWrapper from "./pages/ShowPageWrapper";
 import AdminHome from "./pages/AdminHome";
 import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
 
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+// contexts
+import { ProvideUserProfileContext } from './contexts/UserProfile';
+
+// mock data
+import { showList, userList, commentList } from './local-data';
+
+// import styling and assets
+import './App.css';
 
 function App() {
 
+  const [shows, setShows] = useState(showList);
+  const [users, setUsers] = useState(userList);
+  const [comments, setComments] = useState(commentList);
+
+  function changeShow(newShow) {
+    const newShowList = showList.map(show => {
+      return show.showId === newShow.showId ? newShow : show
+    });
+
+    setShows(newShowList);
+    //TODO send show changes to server
+  }
+
+  function addComment(comment) {
+    comments.push(comment);
+    setComments(comments);
+    //TODO send comment changes to server
+  }
+
+  function deleteComment(commentId) {
+    const newComments = comments.filter(comment => comment.commentId !== commentId);
+    setComments(newComments)
+    //TODO send comment changes to server
+  }
+
   return (
     <div>
-      <BrowserRouter>
-      <Header />
-        <Routes>
-          <Route exact path='/' render={() => 
-                            (<Home />)}/>
-          <Route exact path='/login' render={() => 
-                            (<Login />)}/>
-          <Route exact path='/show_page' render={() => 
-                            (<ShowPage />)}/>
-          <Route exact path='/admin_home' render={() => 
-                            (<AdminHome />)}/>
-          <Route exact path='/user_list' render={() => 
-                            (<UserList />)}/>
-          <Route exact path='/show_list' render={() => 
-                            (<ShowList />)}/>
-          <Route exact path='/profile' render={() => 
-                            (<Profile />)}/>
-        </Routes>
-      </BrowserRouter>
+      <ProvideUserProfileContext>
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <Route exact path='/' element={<Home shows={shows} />}/>
+            <Route exact path='/login' element={<Login />}/>
+            <Route path='/show_page/:id' element={<ShowPageWrapper shows={shows} comments={comments} changeShow={changeShow} addComment={addComment} deleteComment={deleteComment} users={users}/>}/>
+            <Route exact path='/admin_home' element={<AdminHome/>}/>
+            <Route exact path='/user_list' element={<UserList/>}/>
+            <Route exact path='/show_list' element={<ShowList/>}/>
+            <Route exact path='/profile' element={<Profile/>}/>
+          </Routes>
+        </BrowserRouter>
+      </ProvideUserProfileContext>
     </div>
   );
 }
