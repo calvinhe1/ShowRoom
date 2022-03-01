@@ -22,12 +22,11 @@ export function useProvideUserProfileContext(){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (isLoggedIn){
-            //TODO actually figure out what user is logged in
-            setProfile(userList[0])
-        } else {
-            setProfile({});
+        if (!isLoggedIn){
+            // reset userprofile to {} when logout
+            setProfile({})
         }
+        
 
     }, [isLoggedIn]);
 
