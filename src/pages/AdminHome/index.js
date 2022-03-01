@@ -1,10 +1,12 @@
 import "./styles.css"
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import UserList from "../UserList";
 import ShowList from "../ShowList";
 import Profile from "../Profile";
 import { showList, userList, commentList } from '../../local-data';
 import { useState, useEffect, createContext, useContext } from "react";
+
+import { uid } from "react-uid";
 
 function AdminHome() {
     return (
@@ -24,24 +26,39 @@ function AdminHome() {
     );
 }
 
-function AdminManageShows() {
+function AdminManageShows(props) {
+
+    const navigate = useNavigate();
+
+    function addShow(e) {
+        e.preventDefault();
+        const newShowId = props.addShow();
+        navigate('/show_page/' + newShowId);
+    }
+
     return (
         <div>
             <h1>Shows in Database: </h1>
             {
-            <Link to="/add_new_show">
-            <button className="addButton"> Add new show </button>
-            </Link>
+                showList.map(show => {
+                    return (
+                        <div key={uid(show)}>
+                            <Link to={"/show_page/" + show.showId}>
+                                <button> {show.title} </button>
+                            </Link>
+                        </div>
+                    )
+                })
             }
-
+            <button onClick={addShow}> Add Show </button>
         </div>
     );
-
 
 }
 
 function AdminManageUsers() {
     return (
+        /*
         <div>
             <h1>Users in Database: </h1>
             {
@@ -49,6 +66,26 @@ function AdminManageUsers() {
             <button className="addButton"> Add new user </button>
             </Link>
             }
+        </div>*/
+        <div>
+            <h1>Users in Database: </h1>
+            {
+                userList.map(user => {
+                    return (
+                        <div key={uid(user)}>
+                            
+                            <button> {user.userName}</button>
+                            {
+                            /*User pages not made yet.
+                            <Link to={"/show_page/" + show.showId}>
+                                <button> {show.title} </button>
+                            </Link>*/
+                            }
+                        </div>
+                    )
+                })
+            }
+
         </div>
     );
 }
@@ -56,7 +93,6 @@ function AdminManageUsers() {
 
 function AddShow() {
 
-   
     return (
         <div>
             <form id ="addForm">
@@ -86,10 +122,6 @@ function AddShow() {
 }
 
 function AddUser() {
-
-    const [checkBox, setCheckBox] = useState(1);
-
-
 
     return (
         <div>

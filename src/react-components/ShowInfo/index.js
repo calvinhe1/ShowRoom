@@ -25,9 +25,13 @@ function ShowInfo(props) {
 
     function editShow(e) {
         let temp = Object.assign({}, show)
-        e.target.name === 'genre' ? 
-            temp[e.target.name] = e.target.value.split(',').map(c => c.trim()) :
+        if (e.target.name === 'genre') { 
+            temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
+        } else if (e.target.name === 'picture') {
+            temp[e.target.name] = e.target.value.replaceAll('//', '/');
+        } else {
             temp[e.target.name] = e.target.value;
+        }
         setShow(temp);
         setEdited(true);
     }
@@ -50,7 +54,11 @@ function ShowInfo(props) {
         <div>
             <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
                 {/** TODO this image input can be used for admins to set new images */}
-                <input type="image" src={show.picture} alt="show picture" className="show-picture"></input>
+                <img src={show?.picture} alt="show picture" className="show-picture"></img>
+                { 
+                    currentUser?.isAdmin ? 
+                    <input type="file" onChange={editShow} name="picture"></input> : null
+                }
                 <div className="show-text">
                     <form>
                         <div>
@@ -60,7 +68,7 @@ function ShowInfo(props) {
                                 name="title" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={show.title}></input>
+                                value={show?.title}></input>
                         </div>
                         <div>
                             <label>Genre: </label>
@@ -69,7 +77,7 @@ function ShowInfo(props) {
                                 name="genre" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={getGenre(show.genre)}></input>
+                                value={getGenre(show?.genre)}></input>
                         </div>
                         <div>
                             <label>Start Date: </label>
