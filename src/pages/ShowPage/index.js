@@ -9,6 +9,7 @@ function ShowPage(props) {
     return (
         <div>
             <ShowInfo key={props.showId} shows={props.shows} currentShowId={props.showId} changeShow={props.changeShow}></ShowInfo>
+            
             <div className="showbar">
                 <ShowsBar changePage={props.changePage} shows={props.shows} currentShowId={props.showId}/>
             </div>

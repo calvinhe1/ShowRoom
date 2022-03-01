@@ -39,6 +39,16 @@ function App() {
     //TODO send show changes to server
   }
 
+  function addShow() {
+    const uid = Math.floor(Math.random() * 100000);
+    const newShow = {
+      showId: uid
+    };
+    shows.push(newShow);
+    setShows(shows);
+    return uid;
+  }
+
   function addComment(comment) {
     comments.push(comment);
     setComments(comments);
@@ -66,7 +76,7 @@ function App() {
             <Route path='/show_page/:id' element={<ShowPageWrapper shows={shows} comments={comments} changeShow={changeShow} addComment={addComment} deleteComment={deleteComment} users={users}/>}/>
             <Route exact path='/admin_home' element={<AdminHome/>}/>
             <Route exact path='/admin_manage_users' element={<AdminManageUsers/>}/>
-            <Route exact path='/admin_manage_shows' element={<AdminManageShows/>}/>
+            <Route exact path='/admin_manage_shows' element={<AdminManageShows addShow={addShow}/>} />
             <Route exact path='/add_new_show' element={<AddShow/>}/>
             <Route exact path='/add_new_user' element={<AddUser/>}/>
             <Route exact path='/user_list' element={<UserList/>}/>
