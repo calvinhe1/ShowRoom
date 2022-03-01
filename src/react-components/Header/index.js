@@ -31,7 +31,7 @@ function Header(props) {
           <span className="header-right">
             {
               userProfile.profile.isAdmin ?
-              <Link to="/admin-home">
+              <Link to="/admin_home">
                 <button className="manage-button">Manage</button>
               </Link>
               : null
