@@ -66,7 +66,7 @@ function Login() {
 
                 {/* <br></br> */}
 
-                <label for="password">Password</label>
+                <label id="password">Password</label>
                 <input type="password" 
                     placeholder="Enter Password" 
                     value={loginInfo.password} 
