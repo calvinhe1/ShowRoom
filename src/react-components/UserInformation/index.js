@@ -11,7 +11,7 @@ function UserInformation(props) {
                 <img className='profile-picture' src={props.user.profilePicture} alt='Profile Picture'></img>
             </div>
             <div className='username-div'>
-                <h1>Username: {props.user.userName}</h1>
+                <h1>Username: {props.user.username}</h1>
                 <button className='edit-link' href="">Change Username</button>
                 <button className='edit-link' href="">Change Password</button>
                 <button className='edit-link' href="">Delete Account</button>
