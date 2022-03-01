@@ -26,10 +26,12 @@
 
 export const userList = [{userId: 0, 
                  userName: 'admin', 
+                 password: 'admin',
                  profilePicture: '/images/profile-picture.jpg',
                  isAdmin: true},
                 {userId: 1,
                  userName: 'user',
+                 password: 'user',
                  profilePicture: '/images/profile-picture-2.jpg',
                  isAdmin: false}];
 
