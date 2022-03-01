@@ -9,7 +9,7 @@ import Header from './react-components/Header';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ShowPageWrapper from "./pages/ShowPageWrapper";
-import {AdminHome, AdminManageShows, AdminManageUsers, addShow, addUser} from "./pages/AdminHome";
+import {AdminHome, AdminManageShows, AdminManageUsers, AddShow, AddUser} from "./pages/AdminHome";
 import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
@@ -62,8 +62,8 @@ function App() {
             <Route exact path='/admin_home' element={<AdminHome/>}/>
             <Route exact path='/admin_manage_users' element={<AdminManageUsers/>}/>
             <Route exact path='/admin_manage_shows' element={<AdminManageShows/>}/>
-            <Route exact path='/add_new_show' element={<addShow/>}/>
-            <Route exact path='/add_new_user' element={<addUser/>}/>
+            <Route exact path='/add_new_show' element={<AddShow/>}/>
+            <Route exact path='/add_new_user' element={<AddUser/>}/>
             <Route exact path='/user_list' element={<UserList/>}/>
             <Route exact path='/show_list' element={<ShowList/>}/>
             <Route exact path='/profile' element={<Profile/>}/>

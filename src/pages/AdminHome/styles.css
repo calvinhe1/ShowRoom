@@ -27,5 +27,12 @@ margin-right: 50px;
     border-radius: 15%;
     height: 50px;
     width: 150px;
-    
+}
+
+#addForm {
+    position: relative;
+    float:left;
+    left: 30%;
+    top: 100px;
+
 }
