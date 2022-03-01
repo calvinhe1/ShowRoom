@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 
 // contexts
 import { ProvideUserProfileContext } from './contexts/UserProfile';
+import { ProvideUserListContext } from './contexts/UserList';
 
 // mock data
 import { showList, userList, commentList } from './local-data';
@@ -52,7 +53,11 @@ function App() {
 
   return (
     <div>
+      {/* contexts, making the indent the same to prevent too many indents */}
       <ProvideUserProfileContext>
+      <ProvideUserListContext>
+
+        {/* navigation */}
         <BrowserRouter>
           <Header/>
           <Routes>
@@ -70,6 +75,8 @@ function App() {
             
           </Routes>
         </BrowserRouter>
+
+      </ProvideUserListContext>
       </ProvideUserProfileContext>
     </div>
   );
