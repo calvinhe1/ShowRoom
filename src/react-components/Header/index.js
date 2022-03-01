@@ -10,12 +10,9 @@ function Header(props) {
   const userProfile = useUserProfileContext();
 
 
-  function handleLogin(e){
-    if (userProfile.isLoggedIn){
-      userProfile.setIsLoggedIn(false);
-    } else {
-      userProfile.setIsLoggedIn(true);
-    }
+  function handleLogout(e){
+    userProfile.setIsLoggedIn(false)
+    
   }
 
   return (
@@ -37,7 +34,9 @@ function Header(props) {
               : null
             }
             <span>
-              <button className="logout-button" onClick={handleLogin}>Logout</button>
+              <Link to="/">
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
+              </Link>
               <Link to="/profile">
                 <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
               </Link>
@@ -61,9 +60,9 @@ function Header(props) {
               </Link>
               : null
             }
-            { /** TODO login page <Link to="/login"> */}
-              <button className="login-button" onClick={handleLogin}>Login</button>
-            { /** </Link> */}
+            <Link to="/login">
+              <button className="login-button">Login</button>
+            </Link>
           </span>
       </div>
 
