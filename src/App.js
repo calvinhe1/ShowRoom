@@ -9,7 +9,7 @@ import Header from './react-components/Header';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ShowPageWrapper from "./pages/ShowPageWrapper";
-import AdminHome from "./pages/AdminHome";
+import {AdminHome, AdminManageShows, AdminManageUsers, addShow, addUser} from "./pages/AdminHome";
 import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
@@ -42,8 +42,8 @@ function App() {
     comments.push(comment);
     setComments(comments);
     //TODO send comment changes to server
-  }
-
+  } 
+  
   function deleteComment(commentId) {
     const newComments = comments.filter(comment => comment.commentId !== commentId);
     setComments(newComments)
@@ -60,9 +60,14 @@ function App() {
             <Route exact path='/login' element={<Login />}/>
             <Route path='/show_page/:id' element={<ShowPageWrapper shows={shows} comments={comments} changeShow={changeShow} addComment={addComment} deleteComment={deleteComment} users={users}/>}/>
             <Route exact path='/admin_home' element={<AdminHome/>}/>
+            <Route exact path='/admin_manage_users' element={<AdminManageUsers/>}/>
+            <Route exact path='/admin_manage_shows' element={<AdminManageShows/>}/>
+            <Route exact path='/add_new_show' element={<addShow/>}/>
+            <Route exact path='/add_new_user' element={<addUser/>}/>
             <Route exact path='/user_list' element={<UserList/>}/>
             <Route exact path='/show_list' element={<ShowList/>}/>
             <Route exact path='/profile' element={<Profile/>}/>
+            
           </Routes>
         </BrowserRouter>
       </ProvideUserProfileContext>

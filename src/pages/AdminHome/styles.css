@@ -16,5 +16,16 @@ top: 200px;
 left:30%;
 margin-right: 50px;
 
+}
 
+.addButton {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 50px;
+    width: 150px;
+    
 }
