@@ -56,7 +56,7 @@ function Login() {
     return (
         <div>
             <form>
-                <label for="username">Username</label>
+                <label id="username">Username</label>
                 <input type="text" 
                     placeholder="Enter Username" 
                     value={loginInfo.username} 

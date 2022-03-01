@@ -19,8 +19,8 @@ export function useProvideUserListContext(){
     useEffect(() => {
         // initial call to set list of users with default
         const defaultlist = {
-            0: {username: 'admin', password: 'admin', profilePicture: '/images/profile-picture.jpg', isAdmin: true},
-            1: {username: 'user', password: 'user', profilePicture: '/images/profile-picture-2.jpg', isAdmin: false}
+            0: {username: 'admin', password: 'admin', profilePicture: '/images/profile-picture.jpg', isAdmin: true, userId: 0},
+            1: {username: 'user', password: 'user', profilePicture: '/images/profile-picture-2.jpg', isAdmin: false, userId: 1}
         }
 
         setUsers(defaultlist);
