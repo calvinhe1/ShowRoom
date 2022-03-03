@@ -6,7 +6,11 @@
     genre: ['action', 'dark fantasy'],
     startDate: '2009-09-09',
     endDate: '2001-04-09',
-    description: 'Eren Yeager is determined to help save humanity when titans re-appear and being to feast on human flesh.'},
+    description: 'Eren Yeager is determined to help save humanity when titans re-appear and being to feast on human flesh.',
+    rating: 5.0,
+    ratingCount: 1,
+    likes: 0,
+    commentCount: 0},
     
     {showId: 1,
     picture: '/images/death-note.jpg',
@@ -14,7 +18,11 @@
     genre: ['Mystery', 'Supernatural thriller'],
     startDate: '2003-12-01',
     endDate: '2006-05-15',
-    description: 'A normal, undistinguished college student discovers an odd notebook lying on the ground. He soon discovers that the notebook has magic powers: If someone\'s name is written on it while the writer imagines that person\'s face, he or she will die.'}, 
+    description: 'A normal, undistinguished college student discovers an odd notebook lying on the ground. He soon discovers that the notebook has magic powers: If someone\'s name is written on it while the writer imagines that person\'s face, he or she will die.',
+    rating: 4.0,
+    ratingCount: 1,
+    likes: 0,
+    commentCount: 0}, 
     
     {showId: 2,
     picture: '/images/castlevania.jpg',
@@ -22,7 +30,13 @@
     genre: ['Action', 'Horror', 'Adventure'],
     startDate: '2017-07-17',
     endDate: '2021-05-13', 
-    description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.'}];
+    description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.',
+    rating: 3.0,
+    ratingCount: 1,
+    likes: 0,
+    commentCount: 0}];
+
+
 
 export const userList = [{userId: 0, 
                  userName: 'admin', 
