@@ -19,6 +19,7 @@ import { ProvideUserProfileContext } from './contexts/UserProfile';
 import { ProvideUserListContext } from './contexts/UserList';
 import { ProvideShowListContext } from './contexts/ShowList';
 import { ProvideCommentListContext } from './contexts/CommentList';
+import { ProvideShowRatingsListContext } from './contexts/ShowRatingList';
 
 // import styling and assets
 import './App.css';
@@ -32,6 +33,7 @@ function App() {
       <ProvideUserListContext>
       <ProvideShowListContext>
       <ProvideCommentListContext>
+      <ProvideShowRatingsListContext>
 
         {/* navigation */}
         <BrowserRouter>
@@ -52,6 +54,7 @@ function App() {
           </Routes>
         </BrowserRouter>
 
+      </ProvideShowRatingsListContext>
       </ProvideCommentListContext>
       </ProvideShowListContext>
       </ProvideUserListContext>

@@ -4,6 +4,7 @@ import {useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
 import { useShowListContext } from "../../contexts/ShowList";
+import ShowRating from "./../ShowRating";
 
 function ShowInfo(props) {
 
@@ -114,6 +115,7 @@ function ShowInfo(props) {
                         }                         
                     </form>
                 </div>
+                <ShowRating show={show}></ShowRating>
             </div>
         </div>
     );

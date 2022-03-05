@@ -1,5 +1,6 @@
 import "./styles.css"
 import {Link, useNavigate} from 'react-router-dom';
+import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
 
 import { uid } from "react-uid";
 import { useShowListContext } from "../../contexts/ShowList";
@@ -30,9 +31,12 @@ function AdminManageShows() {
 
     const navigate = useNavigate();
 
+    const showRatingList = useShowRatingsListContext();
+
     function addShow(e) {
         e.preventDefault();
         const newShowId = showListContext.addShow();
+        showRatingList.addNewShowRating(newShowId);
         navigate('/show_page/' + newShowId);
     }
 

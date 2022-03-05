@@ -24,6 +24,8 @@
     endDate: '2021-05-13', 
     description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.'}];
 
+
+
 export const userList = [{userId: 0, 
                  username: 'admin', 
                  password: 'admin',
@@ -41,3 +43,21 @@ export const commentList = [
   {showId: 1, userId: 0, text: 'Hate this show', date: new Date().toDateString(), commentId: 2},
   {showId: 1, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
 ];
+
+export const ratingList = {
+  0: {
+    rating: 5.0,
+    ratingCount: 1,
+    ratings: {0: 5.0}, //UserId: rating 
+  },
+  1: {
+      rating: 5.0,
+      ratingCount: 1,
+      ratings: {0: 5.0}, //UserId: rating 
+    },
+  2: {
+      rating: 5.0,
+      ratingCount: 1,
+      ratings: {0: 5.0}, //UserId: rating 
+    }
+}
