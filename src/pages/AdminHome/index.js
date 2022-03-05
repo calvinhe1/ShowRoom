@@ -1,12 +1,9 @@
 import "./styles.css"
 import {Link, useNavigate} from 'react-router-dom';
-import UserList from "../UserList";
-import ShowList from "../ShowList";
-import Profile from "../Profile";
-import { showList, userList, commentList } from '../../local-data';
-import { useState, useEffect, createContext, useContext } from "react";
 
 import { uid } from "react-uid";
+import { useShowListContext } from "../../contexts/ShowList";
+import { useUserListContext } from "../../contexts/UserList";
 
 function AdminHome() {
     return (
@@ -26,13 +23,16 @@ function AdminHome() {
     );
 }
 
-function AdminManageShows(props) {
+function AdminManageShows() {
+
+    const showListContext = useShowListContext();
+    const shows = showListContext.getShows();
 
     const navigate = useNavigate();
 
     function addShow(e) {
         e.preventDefault();
-        const newShowId = props.addShow();
+        const newShowId = showListContext.addShow();
         navigate('/show_page/' + newShowId);
     }
 
@@ -40,7 +40,7 @@ function AdminManageShows(props) {
         <div>
             <h1>Shows in Database: </h1>
             {
-                showList.map(show => {
+                shows.map(show => {
                     return (
                         <div key={uid(show)}>
                             <Link to={"/show_page/" + show.showId}>
@@ -57,6 +57,10 @@ function AdminManageShows(props) {
 }
 
 function AdminManageUsers() {
+
+    const userListContext = useUserListContext();
+    const users = userListContext.getUsers();
+    
     return (
         /*
         <div>
@@ -70,7 +74,7 @@ function AdminManageUsers() {
         <div>
             <h1>Users in Database: </h1>
             {
-                userList.map(user => {
+                users.map(user => {
                     return (
                         <div key={uid(user)}>
                             

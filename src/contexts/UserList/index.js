@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
+import { userList } from "../../local-data";
 
 export const userListDefaultValues = {
     users: {},
     setUsers: () => {},
+    getUsers: () => {},
+    getUserById: () => {}
 }
 
 export const userListContext = createContext(userListDefaultValues);
@@ -18,19 +21,22 @@ export function useProvideUserListContext(){
 
     useEffect(() => {
         // initial call to set list of users with default
-        const defaultlist = {
-            0: {username: 'admin', password: 'admin', profilePicture: '/images/profile-picture.jpg', isAdmin: true, userId: 0},
-            1: {username: 'user', password: 'user', profilePicture: '/images/profile-picture-2.jpg', isAdmin: false, userId: 1}
-        }
+        setUsers(userList);
+    }, []);
 
-        setUsers(defaultlist);
-    }, [])
+    function getUsers() {
+        return users;
+    }
 
-
+    function getUserById(id) {
+        return users.find(user => user.userId === id);
+    }
 
     return{
         users,
-        setUsers
+        setUsers,
+        getUsers,
+        getUserById
     }
 }
 

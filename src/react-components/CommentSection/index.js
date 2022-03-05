@@ -7,12 +7,17 @@ import {uid} from "react-uid";
 import {useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
+import { useCommentListContext } from "../../contexts/CommentList";
 
 function CommentSection(props) {
 
     const [comment, setComment] = useState('');
 
-    const currentUser = useUserProfileContext().profile;
+    const userContext = useUserProfileContext();
+    const currentUser = userContext.profile;
+
+    const commentContext = useCommentListContext();
+    const comments = commentContext.getCommentsByShowId(props.currentShowId);
 
     function changeComment(e) {
         e.preventDefault();
@@ -28,8 +33,7 @@ function CommentSection(props) {
             date: new Date().toDateString(),
         }
         //TODO better uuid's (for server)
-        newComment.commentId = Math.floor(Math.random() * 100000);
-        props.addComment(newComment);
+        commentContext.addComment(newComment);
         setComment('');
     }
 
@@ -38,8 +42,8 @@ function CommentSection(props) {
             <label className="comment-label">Comment Section!</label>
             <div className="comment-section">
                 {
-                    props.comments.map(c => {
-                        return c.showId === props.currentShowId ? <Comment comment={c} users={props.users} deleteComment={props.deleteComment} key={uid(c)}/> : null;
+                    comments.map(c => {
+                        return c.showId === props.currentShowId ? <Comment comment={c} key={uid(c)}/> : null;
                     })
                 }
                 {

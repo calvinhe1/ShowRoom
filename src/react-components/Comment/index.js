@@ -1,17 +1,25 @@
 import "./styles.css";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
+import { useUserListContext } from "../../contexts/UserList";
+import { useCommentListContext } from "../../contexts/CommentList";
 
 function Comment(props) {
 
-    const currentUser = useUserProfileContext().profile;
+    const userContext = useUserProfileContext();
+    const currentUser = userContext.profile;
 
-    function deleteComment() {
-        props.deleteComment(props.comment.commentId);
+    const userListContext = useUserListContext();
+
+    const commentContext = useCommentListContext();
+
+    function deleteComment(e) {
+        e.preventDefault();
+        commentContext.deleteCommentById(props.comment.commentId);
     }
 
     function getProfilePicture() {
-        const user = props.users.find(user => user.userId === props.comment.userId);
+        const user = userListContext.getUserById(props.comment.userId);
         return user.profilePicture;
     }
 
