@@ -17,12 +17,7 @@ export function useUserListContext(){
 }
 
 export function useProvideUserListContext(){
-    const [users, setUsers] = useState({});
-
-    useEffect(() => {
-        // initial call to set list of users with default
-        setUsers(userList);
-    }, []);
+    const [users, setUsers] = useState(userList);
 
     function getUsers() {
         return users;

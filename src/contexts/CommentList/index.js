@@ -18,12 +18,7 @@ export function useCommentListContext(){
 }
 
 export function useProvideCommentListContext() {
-    const [comments, setComments] = useState({});
-
-    useEffect(() => {
-        // initial call to set list of shows
-        setComments(commentList);
-    }, []);
+    const [comments, setComments] = useState(commentList);
 
     function getComments() {
         return comments;

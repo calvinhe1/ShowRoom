@@ -19,12 +19,7 @@ export function useShowListContext(){
 }
 
 export function useProvideShowListContext(){
-    const [shows, setShows] = useState({});
-
-    useEffect(() => {
-        // initial call to set list of shows
-        setShows(showList);
-    }, [])
+    const [shows, setShows] = useState(showList);
 
     function getShows() {
         return shows;
