@@ -1,10 +1,7 @@
 import "./styles.css"
 import {Link, useNavigate} from 'react-router-dom';
-import UserList from "../UserList";
-import ShowList from "../ShowList";
-import Profile from "../Profile";
-import { showList, userList, commentList } from '../../local-data';
-import { useState, useEffect, createContext, useContext } from "react";
+import { showList, userList } from '../../local-data';
+import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
 
 import { uid } from "react-uid";
 
@@ -30,9 +27,12 @@ function AdminManageShows(props) {
 
     const navigate = useNavigate();
 
+    const showRatingList = useShowRatingsListContext();
+
     function addShow(e) {
         e.preventDefault();
         const newShowId = props.addShow();
+        showRatingList.addNewShowRating(newShowId);
         navigate('/show_page/' + newShowId);
     }
 

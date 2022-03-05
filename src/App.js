@@ -17,9 +17,10 @@ import Profile from "./pages/Profile";
 // contexts
 import { ProvideUserProfileContext } from './contexts/UserProfile';
 import { ProvideUserListContext } from './contexts/UserList';
+import { ProvideShowRatingsListContext } from './contexts/ShowRatingList';
 
 // mock data
-import { showList, userList, commentList } from './local-data';
+import { showList, userList, commentList, showRatingList } from './local-data';
 
 // import styling and assets
 import './App.css';
@@ -66,6 +67,7 @@ function App() {
       {/* contexts, making the indent the same to prevent too many indents */}
       <ProvideUserProfileContext>
       <ProvideUserListContext>
+      <ProvideShowRatingsListContext>
 
         {/* navigation */}
         <BrowserRouter>
@@ -86,6 +88,7 @@ function App() {
           </Routes>
         </BrowserRouter>
 
+      </ProvideShowRatingsListContext>
       </ProvideUserListContext>
       </ProvideUserProfileContext>
     </div>

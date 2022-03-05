@@ -11,9 +11,10 @@
 }
 
 .show-text {
-    float: right;
-    width: 500px;
-    margin-right: 200px;
+    display: inline-block;
+    width: 400px;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 .input {
