@@ -75,3 +75,35 @@ margin-right: 50px;
 .addShowButton:hover {
     opacity: 1;
 }
+
+.formField {
+
+    margin: 15px;
+
+}
+
+.textBar {
+
+    width: 350px;
+}
+
+
+
+#addUser {
+
+
+    
+    
+
+    /*
+    display: block;
+    width: 400px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    border: 2px solid lightblue;
+    box-shadow: 2px 2px 2px lightgrey*/
+
+
+}
