@@ -93,7 +93,9 @@ function AdminManageUsers() {
                     )
                 })
             }
-
+            <Link to={"/add_new_user"}>
+                <button className="addShowButton">Add User </button>
+            </Link>
         </div>
     );
 }
@@ -132,17 +134,17 @@ function AddShow() {
 function AddUser() {
 
     return (
-        <div>
+        <div id="addUser">
             <form id ="addForm">
 
                 <label htmlFor="profilePicture">Profile picture:</label><br></br>
-                <input type="file" name ="profilePicture"></input><br></br>
+                <input type="file" name ="profilePicture"></input><br></br><br></br>
 
-                <label htmlFor="userName">Username:</label><br></br>
-                <input type="text" name ="userName"></input><br></br>
+                <label htmlFor="userName" className ="textInputs">Username:</label><br></br>
+                <input type="text" name ="userName" className="textBar"></input><br></br><br></br>
 
-                <label htmlFor="pass">Password: </label><br></br>
-                <input type="text" name ="pass"></input><br></br><br></br>
+                <label htmlFor="pass" className = "textInputs">Password: </label><br></br>
+                <input type="text" name ="pass" className="textBar"></input><br></br><br></br>
 
                 <input type="submit"></input>
             </form>
