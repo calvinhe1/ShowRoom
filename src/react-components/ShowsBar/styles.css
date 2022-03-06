@@ -1,0 +1,11 @@
+.showsbar-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.showsbar-column {
+    float: left;
+    padding: 15px;
+    width: 175px;
+}

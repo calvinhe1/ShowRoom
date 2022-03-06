@@ -8,7 +8,8 @@ export const showRatingsListDefaultValues = {
     setShowRating: () => {},
     addNewShowRating: () => {},
     getShowRatingById: () => {},
-    addShowRating: () => {}
+    addShowRating: () => {},
+    getHighestRatedIds: () => {}
 }
 
 export const showRatingsListContext = createContext(showRatingsListDefaultValues);
@@ -54,6 +55,20 @@ export function useProvideShowRatingsListContext(){
         setShowRatings(showRatings);
     }
 
+    function getHighestRatedIds() {
+        const shows = Object.keys(showRatings);
+        shows.sort((a, b) => {
+            if (showRatings[a].rating > showRatings[b].rating) {
+                return -1;
+            } else if (showRatings[a].rating > showRatings[b].rating) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        return shows;
+    }
+
 
     return{
         showRatings,
@@ -61,7 +76,8 @@ export function useProvideShowRatingsListContext(){
         setShowRating,
         addNewShowRating,
         getShowRatingById,
-        addShowRating
+        addShowRating,
+        getHighestRatedIds
     }
 }
 
