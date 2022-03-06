@@ -1,0 +1,5 @@
+.show-section-container{
+    overflow: auto;
+    display: grid;
+    margin:10px;
+}
