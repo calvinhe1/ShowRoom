@@ -1,0 +1,15 @@
+.top-show-container{
+    display: block;
+    float: left;
+    margin-right: 50px;
+    display: grid;
+}
+
+.top-show-picture {
+    height: 300px;
+    margin: auto;
+}
+
+.top-show-title{
+    text-align: center;
+}

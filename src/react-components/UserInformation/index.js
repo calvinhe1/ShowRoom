@@ -6,6 +6,7 @@ import { uid } from "react-uid";
 import { useUserProfileContext } from './../../contexts/UserProfile';
 
 import UserCommentSection from "./../UserCommentSection";
+import UserShowSection from "./../UserShowSection";
 
 function UserInformation(props) {
 
@@ -30,6 +31,7 @@ function UserInformation(props) {
             </div>
             <div className='top-shows-div'>
                 <h1>My Top Shows</h1>
+                <UserShowSection></UserShowSection>
             </div>
             <div className='recent-comments-div'>
                 <h1>Recent Comments</h1>

@@ -19,14 +19,12 @@ function UserCommentSection(props) {
     const commentContext = useCommentListContext();
     const comments = commentContext.getCommentsByUserId(currentUser.userId);
 
-    console.log(comments)
-
     return (
         <div className="comment-section-container">
             <div className="comment-section">
                 {
                     comments.map(c => {
-                        return <UserComment comment={c} key={uid(c)} hideDelete = {true}/>;
+                        return <UserComment comment={c} key={uid(c)}/>;
                     })
                 }
             </div>

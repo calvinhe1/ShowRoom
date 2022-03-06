@@ -98,5 +98,6 @@ export const ratingList = {
   5: {
     rating: 0.0,
     ratingCount: 0,
+    ratings: {}
   }
 }

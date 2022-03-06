@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
 import { ratingList } from "../../local-data";
@@ -8,6 +9,7 @@ export const showRatingsListDefaultValues = {
     setShowRating: () => {},
     addNewShowRating: () => {},
     getShowRatingById: () => {},
+    getUsersTop5ShowsById: () => {},
     addShowRating: () => {},
     getHighestRatedIds: () => {}
 }
@@ -39,6 +41,14 @@ export function useProvideShowRatingsListContext(){
 
     function getShowRatingById(id) {
         return showRatings[id];
+    }
+
+    function getUsersTop5ShowsById(id){
+        const shows = Object.keys(showRatings);
+        const userShowIds = shows.filter(show => showRatings[show].ratings[id]);
+        userShowIds.sort((a, b) => {return showRatings[a].ratings[id] - showRatings[b].ratings[id]});
+        if (userShowIds.length > 5) userShowIds.splice(0, 5);
+        return userShowIds;
     }
 
     function addShowRating(showId, userId, rating) {
@@ -76,6 +86,7 @@ export function useProvideShowRatingsListContext(){
         setShowRating,
         addNewShowRating,
         getShowRatingById,
+        getUsersTop5ShowsById,
         addShowRating,
         getHighestRatedIds
     }
