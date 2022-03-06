@@ -9,7 +9,7 @@ import CommentCount from "../CommentCount";
 import { useCommentListContext } from "../../contexts/CommentList";
 import { useEffect, useRef } from "react";
 
-const MAX_SHOWS_RENDERED = 5;
+const MAX_SHOWS_RENDERED = 10;
 
 function ShowsBar(props) {
 
