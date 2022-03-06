@@ -63,6 +63,9 @@ function Header(props) {
             <Link to="/login">
               <button className="login-button">Login</button>
             </Link>
+            <Link to="/signup">
+              <button className="login-button">Signup</button>
+            </Link>
           </span>
       </div>
 
