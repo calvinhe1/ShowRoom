@@ -8,7 +8,8 @@ export const showListDefaultValues = {
     getShows: () => {},
     getShowById: () => {},
     setShow: () => {},
-    addShow: () => {}
+    addShow: () => {},
+    getShowsByGenre: () => {}
 }
 
 export const showListContext = createContext(showListDefaultValues);
@@ -26,11 +27,11 @@ export function useProvideShowListContext(){
     }
 
     function getShowById(id) {
-        return shows.find(show => show.showId === id);
+        return shows.find(show => show.showId == id);
     }
 
     function setShow(show) {
-        const newShowList = shows.map(s => s.showId === show.showId ? show : s);
+        const newShowList = shows.map(s => s.showId == show.showId ? show : s);
         setShows(newShowList);
     }
 
@@ -49,13 +50,18 @@ export function useProvideShowListContext(){
         return newShow.showId;
     }
 
+    function getShowsByGenre(genre) {
+        return shows.filter(show => show.genre.includes(genre));
+    }
+
     return {
         shows,
         setShows,
         getShows,
         getShowById,
         setShow,
-        addShow
+        addShow,
+        getShowsByGenre
     }
 }
 

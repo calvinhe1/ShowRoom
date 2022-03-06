@@ -22,7 +22,32 @@
     genre: ['Action', 'Horror', 'Adventure'],
     startDate: '2017-07-17',
     endDate: '2021-05-13', 
-    description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.'}];
+    description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.'}, 
+    
+    {showId: 3,
+    picture: '/images/onepiece.jpg',
+    title: 'One Piece',
+    genre: ['Pirates', 'Action', 'Adventure', 'Fantasy'],
+    startDate: '1999-10-20',
+    endDate: '',
+    description: 'Luffy, a young man made of rubber, whom, inspired by his childhood idol, the powerful pirate "Red Haired" Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates.'},
+  
+    {showId: 4,
+    picture: '/images/demonslayer.jpg',
+    title: 'Demon Slayer: Kimetsu no Yaiba',
+    genre: ['Adventure', 'Fantasy'],
+    startDate: '2016-02-15',
+    endDate: '2020-05-18',
+    description: 'A boy raised by boars, who wears a boar\'s head, boards the Infinity Train on a new mission with the Flame Pillar along with another boy who reveals his true power when he sleeps. Their mission is to defeat a demon who has been tormenting people and killing the demon slayers who oppose it.'},
+  
+    {showId: 5,
+    picture: '/images/aceattorney.jpg',
+    title: 'Ace Attorney',
+    genre: ['Drama'],
+    startDate: '2016-04-02',
+    endDate: '2019-03-30',
+    description: 'Follow rookie defense attorney Phoenix Wright as he stands in court to defend clients accused of murder, aided by his spirit medium assistant, Maya Fey.'}
+  ];
 
 
 
@@ -51,13 +76,27 @@ export const ratingList = {
     ratings: {0: 5.0}, //UserId: rating 
   },
   1: {
-      rating: 5.0,
+      rating: 4.0,
       ratingCount: 1,
-      ratings: {0: 5.0}, //UserId: rating 
+      ratings: {0: 5.0}, 
     },
   2: {
-      rating: 5.0,
+      rating: 3.0,
       ratingCount: 1,
-      ratings: {0: 5.0}, //UserId: rating 
-    }
+      ratings: {0: 5.0}, 
+    },
+  3: {
+    rating: 2.0,
+    ratingCount: 1,
+    ratings: {0: 5.0}, 
+  },
+  4: {
+    rating: 1.0,
+    ratingCount: 1,
+    ratings: {0: 5.0}, 
+  },
+  5: {
+    rating: 0.0,
+    ratingCount: 0,
+  }
 }
