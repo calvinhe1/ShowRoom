@@ -82,7 +82,7 @@ function AdminManageUsers() {
                     return (
                         <div key={uid(user)}>
                             
-                            <button className="Name"> {user.userName}</button>
+                            <button className="Name"> {user.username}</button>
                             {
                             /*User pages not made yet.
                             <Link to={"/show_page/" + show.showId}>
