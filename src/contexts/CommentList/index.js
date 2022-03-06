@@ -6,6 +6,7 @@ export const commentListDefaultValues = {
     comments: {},
     getComments: () => {},
     getCommentsByShowId: () => {},
+    getCommentsByUserId: () => {},
     addComment: () => {},
     deleteCommentById: () => {}
 }
@@ -28,6 +29,10 @@ export function useProvideCommentListContext() {
         return comments.filter(comment => comment.showId === id);
     }
 
+    function getCommentsByUserId (id){
+        return comments.filter(comment => comment.userId === id);
+    }
+
     function addComment(comment) {
         const commentId = comments[comments.length - 1] + 1; //From lecture, replace with server UUID's
         comment.commentId = commentId;
@@ -45,6 +50,7 @@ export function useProvideCommentListContext() {
         comments,
         getComments,
         getCommentsByShowId,
+        getCommentsByUserId,
         addComment,
         deleteCommentById
     }
