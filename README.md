@@ -1,4 +1,4 @@
-# team27
+# Team 27
 
 # Starting the application:
 
