@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import "./styles.css";
 
 import { useUserProfileContext } from '../../contexts/UserProfile';
+import Search from '../Search';
 
 /* The Header Component */
 function Header(props) {
@@ -40,6 +41,7 @@ function Header(props) {
               <Link to="/profile">
                 <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
               </Link>
+              <Search></Search>
             </span>
           </span>
       </div>
@@ -66,6 +68,7 @@ function Header(props) {
             <Link to="/signup">
               <button className="login-button">Signup</button>
             </Link>
+            <Search></Search>
           </span>
       </div>
 
