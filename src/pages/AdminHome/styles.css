@@ -1,0 +1,108 @@
+.buttonsAdmin {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    width: 150px;
+    height: 150px;
+    max-height: 600px;
+    font-size: 25px;
+    position: relative;
+    top: 200px;
+    left:30%;
+    margin-right: 50px;
+
+}
+
+.addButton {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 50px;
+    width: 150px;
+}
+
+#addForm {
+    position: relative;
+    float:left;
+    left: 30%;
+    display: block;
+    width: 375px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    border: 2px solid lightblue;
+    box-shadow: 2px 2px 2px lightgrey;
+    padding: 10px;
+    
+}
+
+.Name {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    opacity: 0.8;
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.Name:hover {
+    opacity: 1;
+}
+
+.manageDB {
+    text-align: center;
+    color: crimson;
+    text-decoration: underline;
+    text-decoration-color:  #56144D;
+}
+
+.addShowButton {
+    color: crimson;
+    background-color: lightblue;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 25px;
+    width: 100px;
+    opacity: 0.8;
+    font-weight: 1000;
+    margin: 25px;
+}
+
+.addShowButton:hover {
+    opacity: 1;
+}
+
+.formField {
+
+    margin: 15px;
+
+}
+
+.textBar {
+
+    width: 350px;
+}
+
+.addAdminButton {
+    color: crimson;
+    background-color: lightblue;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    opacity: 0.8;
+    font-weight: 1000;
+    margin: 25px;
+}

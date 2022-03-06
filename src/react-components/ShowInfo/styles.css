@@ -1,0 +1,64 @@
+.show-info {
+    height: 300px;
+    line-height: 2;
+    border: 5px solid;
+}
+
+.show-picture {
+    height: 300px;
+    float: left;
+    display: inline;
+}
+
+.show-text {
+    display: inline-block;
+    width: 400px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.input {
+    width: 250px;
+}
+
+.user-view input {
+    background-color: transparent;
+    border: none;
+}
+
+.user-view textarea {
+    height: 120px;
+    background-color: transparent;
+    border: none;
+    resize: none;
+}
+
+textarea {
+    height: 80px;
+    width: 300px;
+}
+
+.admin-button {
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 10%;
+    height: 30px;
+    width: 80px;
+    margin: 10px;
+}
+
+.save-button {
+    background-color: green;
+    border-color: green;
+    margin-left: 0;
+}
+
+.discard-button {
+    background-color: red;
+    border-color: red;
+}
+
+.edit-buttons {
+    height: 40px;
+}
