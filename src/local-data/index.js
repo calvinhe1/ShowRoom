@@ -27,12 +27,12 @@
 
 
 export const userList = [{userId: 0, 
-                 userName: 'admin', 
+                 username: 'admin', 
                  password: 'admin',
                  profilePicture: '/images/profile-picture.jpg',
                  isAdmin: true},
                 {userId: 1,
-                 userName: 'user',
+                 username: 'user',
                  password: 'user',
                  profilePicture: '/images/profile-picture-2.jpg',
                  isAdmin: false}];
@@ -43,3 +43,21 @@ export const commentList = [
   {showId: 1, userId: 0, text: 'Hate this show', date: new Date().toDateString(), commentId: 2},
   {showId: 1, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
 ];
+
+export const ratingList = {
+  0: {
+    rating: 5.0,
+    ratingCount: 1,
+    ratings: {0: 5.0}, //UserId: rating 
+  },
+  1: {
+      rating: 5.0,
+      ratingCount: 1,
+      ratings: {0: 5.0}, //UserId: rating 
+    },
+  2: {
+      rating: 5.0,
+      ratingCount: 1,
+      ratings: {0: 5.0}, //UserId: rating 
+    }
+}

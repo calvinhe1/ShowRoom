@@ -3,17 +3,19 @@ import "./styles.css";
 import {useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
+import { useShowListContext } from "../../contexts/ShowList";
 import ShowRating from "./../ShowRating";
 
 function ShowInfo(props) {
 
     const currentUser =  useUserProfileContext().profile;
+    const showContext = useShowListContext();
+    const show = showContext.getShowById(props.currentShowId);
 
-    const [show, setShow] = useState(props.shows.find(show => show.showId === props.currentShowId));
     const [edited, setEdited] = useState(false);
     //Should store genres as an array 
     function getGenre(genres) {
-        if (!genres) return;
+        if (!genres || genres.length === 0) return '';
 
         let res = genres[0]
         if (genres.length > 1) {
@@ -33,22 +35,14 @@ function ShowInfo(props) {
         } else {
             temp[e.target.name] = e.target.value;
         }
-        setShow(temp);
+        showContext.setShow(temp);
         setEdited(true);
     }
 
     function saveShow(e) {
         e.preventDefault();
-        props.changeShow(show);
         setEdited(false);
-    }
-
-
-    function discardChanges(e) {
-        e.preventDefault();
-        let temp = props.shows.find(show => show.showId === props.currentShowId);
-        setShow(temp);
-        setEdited(false);
+        //TODO send changes to server
     }
 
     return (
@@ -116,7 +110,6 @@ function ShowInfo(props) {
                         { currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
                                 <button onClick={saveShow} className="admin-button save-button">SAVE</button>
-                                <button onClick={discardChanges} className="admin-button discard-button">DISCARD</button>
                             </div> :
                             null     
                         }                         

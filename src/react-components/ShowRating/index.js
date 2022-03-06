@@ -2,13 +2,13 @@ import "./styles.css";
 
 import {useState, useEffect} from "react";
 
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
+import { showRatingsListContext, useShowRatingsListContext } from "../../contexts/ShowRatingList";
 import { useUserProfileContext } from "../../contexts/UserProfile";
 
 function ShowRating(props) {
 
     const currentShowRatingContext = useShowRatingsListContext();
-    const currentShowRating = currentShowRatingContext.showRatings[props.show.showId];
+    const currentShowRating = currentShowRatingContext.getShowRatingById(props.show.showId);
     const userProfile = useUserProfileContext();
 
     const arr = [...Array(5).keys()];
@@ -24,18 +24,10 @@ function ShowRating(props) {
     }
 
     function submit(e) {
+        e.preventDefault();
         if (userProfile.isLoggedIn) {
-            //TODO this average calculation can probably be moved to the server in phase 2
-            if (!currentShowRating.ratings[userProfile.profile.userId]) {
-                currentShowRating.ratingCount++;
-            }
-            currentShowRating.ratings[userProfile.profile.userId] = parseFloat(e.target.id);
-            let total = 0;
-            Object.keys(currentShowRating.ratings).forEach(key => {
-                total += currentShowRating.ratings[key];
-            });
-            currentShowRating.rating = total / currentShowRating.ratingCount;
-            currentShowRatingContext.setShowRating(props.show.showId, currentShowRating);
+            const rating = parseFloat(e.target.id);
+            currentShowRatingContext.addShowRating(props.show.showId, userProfile.profile.userId, rating);
         } else {
             alert("Must be logged in to vote");
         }

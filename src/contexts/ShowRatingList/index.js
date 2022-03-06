@@ -1,11 +1,14 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
+import { ratingList } from "../../local-data";
 
 export const showRatingsListDefaultValues = {
     showRatings: {},
     setShowRatings: () => {},
     setShowRating: () => {},
-    addNewShowRating: () => {}
+    addNewShowRating: () => {},
+    getShowRatingById: () => {},
+    addShowRating: () => {}
 }
 
 export const showRatingsListContext = createContext(showRatingsListDefaultValues);
@@ -16,31 +19,7 @@ export function useShowRatingsListContext(){
 }
 
 export function useProvideShowRatingsListContext(){
-    const [showRatings, setShowRatings] = useState({});
-
-    useEffect(() => {
-        // initial call to set list of users with default
-        const defaultList = {
-            //Key is the showId aka the primary key in the show relation - CSC343 :)
-            0: {
-              rating: 5.0,
-              ratingCount: 1,
-              ratings: {0: 5.0}, //UserId: rating 
-            },
-            1: {
-                rating: 5.0,
-                ratingCount: 1,
-                ratings: {0: 5.0}, //UserId: rating 
-              },
-            2: {
-                rating: 5.0,
-                ratingCount: 1,
-                ratings: {0: 5.0}, //UserId: rating 
-              }
-        }
-
-        setShowRatings(defaultList);
-    }, [])
+    const [showRatings, setShowRatings] = useState(ratingList);
 
     function setShowRating(showId, show) {
         showRatings[showId] = show;
@@ -57,12 +36,32 @@ export function useProvideShowRatingsListContext(){
         setShowRatings(showRatings);
     }
 
+    function getShowRatingById(id) {
+        return showRatings[id];
+    }
+
+    function addShowRating(showId, userId, rating) {
+        const show = showRatings[showId];
+        if (!show.ratings[userId]) {
+            show.ratingCount++;
+        }
+        show.ratings[userId] = rating;
+        let total = 0;
+        Object.keys(show.ratings).forEach(key => {
+            total += show.ratings[key];
+        });
+        show.rating = total / show.ratingCount;
+        setShowRatings(showRatings);
+    }
+
 
     return{
         showRatings,
         setShowRatings,
         setShowRating,
-        addNewShowRating
+        addNewShowRating,
+        getShowRatingById,
+        addShowRating
     }
 }
 
