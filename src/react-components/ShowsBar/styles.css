@@ -9,8 +9,10 @@
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    width: 98%;
+    width: 800px;
     display: inline-block;
+    padding-left: 20px;
+    margin-left: 80px;
 }
 
 .showsbar-column {
@@ -26,13 +28,13 @@
 .scroll-button {
     width: 30px;
     position: absolute;
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
 .scroll-button-left {
-    left: 2%;
+    width: 50px;
 }
 
 .scroll-button-right {
-    left: 65.5%;
+    width: 50px;
 }

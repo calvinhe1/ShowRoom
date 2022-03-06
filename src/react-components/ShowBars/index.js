@@ -7,7 +7,7 @@ import { useShowListContext } from "../../contexts/ShowList";
 function ShowBars() {
 
     const showContext = useShowListContext();
-    const defaultGenres = ['Action', 'Drama', 'Fantasy', 'Sports', 'Comedy'];
+    const defaultGenres = ['Action', 'Drama', 'Fantasy'];
 
     const ratingContext = useShowRatingsListContext();
     const highestRatedIds = ratingContext.getHighestRatedIds();

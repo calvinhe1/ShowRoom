@@ -1,6 +1,6 @@
 .showbars-container {
     padding-left: 20px;
-    width: 70%;
+    width: 66%;
     padding-top: 10px;
 }
 
@@ -14,4 +14,6 @@
     margin: 30px 10px;
     background-color: white;
     padding: 5px;
+    width: 1000px;
+    padding: 20px;
 }

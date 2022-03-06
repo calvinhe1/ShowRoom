@@ -26,6 +26,8 @@
     height: 50px;
     border-radius: 50%;
     padding-top: 5px;
+    /* position: relative;
+    right: 70px; */
 }
 
 .login-button, .manage-button, .logout-button {
@@ -43,11 +45,11 @@
 .manage-button {
     position: absolute;
     top: 15px;
-    right: 150px;
+    right: 380px;
 }
 
 .logout-button {
     position: absolute;
     top: 15px;
-    right: 80px;
-}
+    right: 310px;
+} 

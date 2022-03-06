@@ -19,7 +19,7 @@ function Header(props) {
   return (
     userProfile.isLoggedIn ? 
     ////////////////////// LOGGED IN VIEW //////////////////////
-      <div className="header">
+      <div className="header logged-in">
           <span className="header-left">
             <Link to="/">
               <h1 className="logo">ShowRoom</h1>
@@ -34,15 +34,13 @@ function Header(props) {
               </Link>
               : null
             }
-            <span>
-              <Link to="/">
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
-              </Link>
-              <Link to="/profile">
-                <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
-              </Link>
-              <Search></Search>
-            </span>
+            <Link to="/">
+              <button className="logout-button" onClick={handleLogout}>Logout</button>
+            </Link>
+            <Link to="/profile">
+              <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
+            </Link>
+            <Search></Search>
           </span>
       </div>
     :
@@ -55,13 +53,6 @@ function Header(props) {
           </span>
 
           <span className="header-right">
-            {
-              userProfile.profile.isAdmin ?
-              <Link to="/admin-home">
-                <button className="manage-button">Manage</button>
-              </Link>
-              : null
-            }
             <Link to="/login">
               <button className="login-button">Login</button>
             </Link>
