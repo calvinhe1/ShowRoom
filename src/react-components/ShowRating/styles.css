@@ -29,4 +29,5 @@
     display: inline-block;
     position: absolute;
     margin-top: 30px;
+    z-index: -1;
 }
