@@ -10,12 +10,12 @@ function ShowCard(props) {
     }
 
     return (
-        <div className="show-card">
+        <span className="show-card">
             {/** TODO How do I propogate this URL change better? */}
             <Link to={'/show_page/' + props.show.showId} onClick={navigate}>
                 <img src={props.show.picture} alt="show photo" className="show-photo"></img>
             </Link>            
-        </div>
+        </span>
     );
 }
 

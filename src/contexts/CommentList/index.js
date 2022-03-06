@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import { commentList } from "../../local-data";
 
 export const commentListDefaultValues = {
@@ -8,7 +8,8 @@ export const commentListDefaultValues = {
     getCommentsByShowId: () => {},
     getCommentsByUserId: () => {},
     addComment: () => {},
-    deleteCommentById: () => {}
+    deleteCommentById: () => {},
+    getMostCommentedIds: () => {}
 }
 
 export const commentListContext = createContext(commentListDefaultValues);
@@ -46,13 +47,36 @@ export function useProvideCommentListContext() {
         setComments(newComments);
     }    
 
+    function getMostCommentedIds() {
+        const commentCounts = comments.reduce((prev, cur) => {
+            if (prev[cur.showId] === undefined) {
+                prev[cur.showId] = 1;
+                return prev
+            }
+            prev[cur.showId]++;
+            return prev;
+        }, {});
+        const list = Object.keys(commentCounts)
+        list.sort((a, b) => {
+            if (commentCounts[a] > commentCounts[b]) {
+                return -1
+            } else if (commentCounts[a] < commentCounts[b]) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        return list;
+    }
+
     return {
         comments,
         getComments,
         getCommentsByShowId,
         getCommentsByUserId,
         addComment,
-        deleteCommentById
+        deleteCommentById,
+        getMostCommentedIds
     }
 }
 

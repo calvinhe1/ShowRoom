@@ -41,20 +41,20 @@ function AdminManageShows() {
     }
 
     return (
-        <div>
-            <h1>Shows in Database: </h1>
+        <div className="manageDB">
+            <h1>Database shows: </h1>
             {
                 shows.map(show => {
                     return (
                         <div key={uid(show)}>
                             <Link to={"/show_page/" + show.showId}>
-                                <button> {show.title} </button>
+                                <button className="Name"> {show.title} </button>
                             </Link>
                         </div>
                     )
                 })
             }
-            <button onClick={addShow}> Add Show </button>
+            <button onClick={addShow} className="addShowButton">Add Show </button>
         </div>
     );
 
@@ -75,14 +75,14 @@ function AdminManageUsers() {
             </Link>
             }
         </div>*/
-        <div>
+        <div className="manageDB">
             <h1>Users in Database: </h1>
             {
                 users.map(user => {
                     return (
                         <div key={uid(user)}>
                             
-                            <button> {user.userName}</button>
+                            <button className="Name"> {user.userName}</button>
                             {
                             /*User pages not made yet.
                             <Link to={"/show_page/" + show.showId}>
