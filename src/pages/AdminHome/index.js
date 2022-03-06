@@ -148,7 +148,10 @@ function AddUser() {
                 <label htmlFor="pass" className = "textInputs">Password: </label><br></br>
                 <input type="text" name ="pass" className="textBar" placeholder="Enter Password"></input><br></br><br></br>
 
-                <input type="submit"></input>
+                <Link to={"/admin_manage_users"}>
+                    <input type="submit"></input>
+                </Link>
+                
             </form>
         </div>
     );
