@@ -8,6 +8,8 @@ import Header from './react-components/Header';
 // import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Signup from './pages/Signup';
+
 import ShowPageWrapper from "./pages/ShowPageWrapper";
 import {AdminHome, AdminManageShows, AdminManageUsers, AddShow, AddUser} from "./pages/AdminHome";
 import UserList from "./pages/UserList";
@@ -41,6 +43,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />}/>
             <Route exact path='/login' element={<Login />}/>
+            <Route exact path='/signup' element={<Signup/>}/>
             <Route path='/show_page/:id' element={<ShowPageWrapper />}/>
             <Route exact path='/admin_home' element={<AdminHome/>}/>
             <Route exact path='/admin_manage_users' element={<AdminManageUsers/>}/>

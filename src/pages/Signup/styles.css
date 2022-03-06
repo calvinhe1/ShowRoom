@@ -1,4 +1,3 @@
-
 .formField{
     margin: 15px;
 }
@@ -18,12 +17,12 @@
     box-shadow: 2px 2px 2px lightgrey;
 }
 
-#loginButton{
+#signupButton{
     width: 60px;
     margin-left: 170px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
 }
 
-#signupLink {
-    margin-left: 130px;
+#loginLink {
+    margin-left: 75px;
 }
