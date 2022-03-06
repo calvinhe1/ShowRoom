@@ -27,7 +27,6 @@ function UserInformation(props) {
                 <h1>Username: {currentUser.username}</h1>
                 <button className='edit-link' href="">Change Username</button>
                 <button className='edit-link' href="">Change Password</button>
-                <button className='edit-link' href="">Delete Account</button>
             </div>
             <div className='top-shows-div'>
                 <h1>My Top Shows</h1>

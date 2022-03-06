@@ -1,15 +1,16 @@
 .top-show-container{
-    display: block;
-    float: left;
     margin-right: 50px;
+    grid-row: 1;
     display: grid;
+}
+
+.top-show-title{
+    grid-row: 1;
+    text-align: center;
 }
 
 .top-show-picture {
     height: 300px;
     margin: auto;
-}
-
-.top-show-title{
-    text-align: center;
+    grid-row: 2;
 }
