@@ -37,20 +37,20 @@ function AdminManageShows(props) {
     }
 
     return (
-        <div>
-            <h1>Shows in Database: </h1>
+        <div className="manageDBTitle">
+            <h1>Database shows: </h1>
             {
                 showList.map(show => {
                     return (
                         <div key={uid(show)}>
                             <Link to={"/show_page/" + show.showId}>
-                                <button> {show.title} </button>
+                                <button className="showName"> {show.title} </button>
                             </Link>
                         </div>
                     )
                 })
             }
-            <button onClick={addShow}> Add Show </button>
+            <button onClick={addShow} className="addShowButton">Add Show </button>
         </div>
     );
 

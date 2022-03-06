@@ -36,3 +36,44 @@ margin-right: 50px;
     top: 100px;
 
 }
+
+.showName {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    opacity: 0.8;
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.showName:hover {
+    opacity: 1;
+}
+
+.manageDBTitle {
+    text-align: center;
+    color: crimson;
+    text-decoration: underline;
+    text-decoration-color:  #56144D;
+}
+
+.addShowButton {
+    color: crimson;
+    background-color: lightblue;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 25px;
+    width: 100px;
+    opacity: 0.8;
+    font-weight: 1000;
+    margin: 25px;
+}
+
+.addShowButton:hover {
+    opacity: 1;
+}
