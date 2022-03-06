@@ -6,6 +6,7 @@ export const commentListDefaultValues = {
     comments: {},
     getComments: () => {},
     getCommentsByShowId: () => {},
+    getCommentsByUserId: () => {},
     addComment: () => {},
     deleteCommentById: () => {},
     getMostCommentedIds: () => {}
@@ -27,6 +28,10 @@ export function useProvideCommentListContext() {
 
     function getCommentsByShowId(id) {
         return comments.filter(comment => comment.showId === id);
+    }
+
+    function getCommentsByUserId (id){
+        return comments.filter(comment => comment.userId === id);
     }
 
     function addComment(comment) {
@@ -68,6 +73,7 @@ export function useProvideCommentListContext() {
         comments,
         getComments,
         getCommentsByShowId,
+        getCommentsByUserId,
         addComment,
         deleteCommentById,
         getMostCommentedIds
