@@ -1,18 +1,18 @@
 .buttonsAdmin {
-color: #fff;
-background-color: #007bff;
-border-color: #007bff;
-cursor: pointer;
-border: 1px solid transparent;
-border-radius: 15%;
-width: 150px;
-height: 150px;
-max-height: 600px;
-font-size: 25px;
-position: relative;
-top: 200px;
-left:30%;
-margin-right: 50px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    width: 150px;
+    height: 150px;
+    max-height: 600px;
+    font-size: 25px;
+    position: relative;
+    top: 200px;
+    left:30%;
+    margin-right: 50px;
 
 }
 
@@ -31,8 +31,16 @@ margin-right: 50px;
     position: relative;
     float:left;
     left: 30%;
-    top: 100px;
-
+    display: block;
+    width: 375px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    border: 2px solid lightblue;
+    box-shadow: 2px 2px 2px lightgrey;
+    padding: 10px;
+    
 }
 
 .Name {
@@ -87,23 +95,14 @@ margin-right: 50px;
     width: 350px;
 }
 
-
-
-#addUser {
-
-
-    
-    
-
-    /*
-    display: block;
-    width: 400px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 20px;
-    border: 2px solid lightblue;
-    box-shadow: 2px 2px 2px lightgrey*/
-
-
+.addAdminButton {
+    color: crimson;
+    background-color: lightblue;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    opacity: 0.8;
+    font-weight: 1000;
+    margin: 25px;
 }
