@@ -37,14 +37,14 @@ function AdminManageShows(props) {
     }
 
     return (
-        <div className="manageDBTitle">
+        <div className="manageDB">
             <h1>Database shows: </h1>
             {
                 showList.map(show => {
                     return (
                         <div key={uid(show)}>
                             <Link to={"/show_page/" + show.showId}>
-                                <button className="showName"> {show.title} </button>
+                                <button className="Name"> {show.title} </button>
                             </Link>
                         </div>
                     )
@@ -67,14 +67,14 @@ function AdminManageUsers() {
             </Link>
             }
         </div>*/
-        <div>
+        <div className="manageDB">
             <h1>Users in Database: </h1>
             {
                 userList.map(user => {
                     return (
                         <div key={uid(user)}>
                             
-                            <button> {user.userName}</button>
+                            <button className="Name"> {user.userName}</button>
                             {
                             /*User pages not made yet.
                             <Link to={"/show_page/" + show.showId}>

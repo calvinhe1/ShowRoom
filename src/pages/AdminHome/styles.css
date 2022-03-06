@@ -1,5 +1,3 @@
-
-
 .buttonsAdmin {
 color: #fff;
 background-color: #007bff;
@@ -37,7 +35,7 @@ margin-right: 50px;
 
 }
 
-.showName {
+.Name {
     background-color: #007bff;
     border-color: #007bff;
     color: #fff;
@@ -49,11 +47,11 @@ margin-right: 50px;
     font-size: 20px;
 }
 
-.showName:hover {
+.Name:hover {
     opacity: 1;
 }
 
-.manageDBTitle {
+.manageDB {
     text-align: center;
     color: crimson;
     text-decoration: underline;
