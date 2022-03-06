@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 
 import './styles.css'
 
@@ -7,39 +7,28 @@ import { useUserProfileContext } from '../../contexts/UserProfile';
 import { useUserListContext } from '../../contexts/UserList';
 
 
-function Login() {
+function Signup() {
     const navigate = useNavigate();
     const [loginInfo, setLoginInfo] = useState({username: "", password: ""})
 
     const userProfile = useUserProfileContext();
     const userList = useUserListContext();
 
-    function handleLogin(e){
-        // currently checks through list of all users for one that matches loginInfo
-        // will change this when we add backend for api calls
+    function handleSignup(e){
+        // creates a temporary user login credential that is not stored; will change in phase 2
         
         e.preventDefault(); //prevent refresh
+        let current = {userId: 2,
+            username: loginInfo.username,
+            password: loginInfo.password,
+            profilePicture: '/images/profile-picture-2.jpg',
+            isAdmin: false}
 
-        let loginSuccess = false;
-        for (let key in userList.users){
-            let current = userList.users[key];
+        userProfile.setProfile(current);
+        userProfile.setIsLoggedIn(true);
 
-            if (loginInfo.username === current.username && loginInfo.password === current.password){
-                loginSuccess = true;
-                userProfile.setProfile(userList.users[key])
-                break;
-            }
-            
-        }
-
-        if (loginSuccess){
-            userProfile.setIsLoggedIn(true)
-
-            navigate("/")   ;
-
-        } else {
-            alert("incorrect credentials, please try again")
-        }
+        alert("A temporary profile has been created");
+        navigate("/");
         
     }
 
@@ -77,15 +66,14 @@ function Login() {
 
                 </input><br/>
 
-                <button type="submit" className='formField' id='loginButton' onClick={handleLogin}>Login</button>
+                <button type="submit" className='formField' id='signupButton' onClick={handleSignup}>Login</button>
 
-                <Link to="/signup">
-                    <p id='signupLink'>Click here to signup!</p>
+                <Link to="/login">
+                    <p id='loginLink'>Already have an account? Login here!</p>
                 </Link>
-
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Signup;
