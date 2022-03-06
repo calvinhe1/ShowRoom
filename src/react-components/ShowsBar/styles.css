@@ -4,8 +4,35 @@
     clear: both;
 }
 
+.showsbar-row {
+    height: 300px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 98%;
+    display: inline-block;
+}
+
 .showsbar-column {
-    float: left;
     padding: 15px;
     width: 175px;
+    display: inline-block;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-button {
+    width: 30px;
+    position: absolute;
+    margin-top: 5%;
+}
+
+.scroll-button-left {
+    left: 2%;
+}
+
+.scroll-button-right {
+    left: 65.5%;
 }
