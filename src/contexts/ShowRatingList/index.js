@@ -46,7 +46,7 @@ export function useProvideShowRatingsListContext(){
     function getUsersTop5ShowsById(id){
         const shows = Object.keys(showRatings);
         const userShowIds = shows.filter(show => showRatings[show].ratings[id]);
-        userShowIds.sort((a, b) => {return showRatings[a].ratings[id] - showRatings[b].ratings[id]});
+        userShowIds.sort((a, b) => {return showRatings[b].ratings[id] - showRatings[a].ratings[id]});
         if (userShowIds.length > 5) userShowIds.splice(0, 5);
         return userShowIds;
     }
