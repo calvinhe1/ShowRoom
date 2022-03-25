@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
-import { userList } from "../../local-data";
+import { createUser, loginUser, logoutUser } from "../../actions/user";
 
 export const userProfileDefaultValues = {
     // set default export states and functions here
     profile: {}, 
-    setProfile: () => {},
-    isLoggedIn: false,
-    setIsLoggedIn: () => {}
+    login: () => {},
+    logout: () => {},
+    signUp: () => {},
 }
 export const userProfileContext = createContext(userProfileDefaultValues);
 
@@ -19,22 +19,24 @@ export function useUserProfileContext(){
 export function useProvideUserProfileContext(){
     // set main functions and states here
     const [profile, setProfile] = useState({});
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    useEffect(() => {
-        if (!isLoggedIn){
-            // reset userprofile to {} when logout
-            setProfile({})
-        }
-        
+    function login(loginInfo) {
+        loginUser(loginInfo, setProfile);
+    }
 
-    }, [isLoggedIn]);
+    function logout() {
+        logoutUser(setProfile);
+    }
+
+    function signUp(loginInfo) {
+        createUser(loginInfo, setProfile);
+    }
 
     return {
         profile,
-        setProfile,
-        isLoggedIn,
-        setIsLoggedIn
+        login,
+        logout,
+        signUp,
     }
 
 }
