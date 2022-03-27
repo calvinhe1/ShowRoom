@@ -12,12 +12,11 @@ function Header(props) {
 
 
   function handleLogout(e){
-    userProfile.setIsLoggedIn(false)
-    
+    userProfile.logout();
   }
 
   return (
-    userProfile.isLoggedIn ? 
+    userProfile?.profile?.userId ? 
     ////////////////////// LOGGED IN VIEW //////////////////////
       <div className="header logged-in">
           <span className="header-left">

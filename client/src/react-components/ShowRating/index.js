@@ -25,7 +25,7 @@ function ShowRating(props) {
 
     function submit(e) {
         e.preventDefault();
-        if (userProfile.isLoggedIn) {
+        if (userProfile.userId) {
             const rating = parseFloat(e.target.id);
             currentShowRatingContext.addShowRating(props.show.showId, userProfile.profile.userId, rating);
         } else {
