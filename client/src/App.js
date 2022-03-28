@@ -15,6 +15,7 @@ import {AdminHome, AdminManageShows, AdminManageUsers, AddShow, AddUser} from ".
 import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
+import Seasons from "./pages/Seasons";
 
 // contexts
 import { ProvideUserProfileContext } from './contexts/UserProfile';
@@ -49,6 +50,7 @@ function App() {
             <Route exact path='/login' element={<Login />}/>
             <Route exact path='/signup' element={<Signup/>}/>
             <Route path='/show_page/:id' element={<ShowPageWrapper />}/>
+            <Route exact path='/seasons' element={<Seasons />}/>
             <Route exact path='/admin_home' element={<AdminHome/>}/>
             <Route exact path='/admin_manage_users' element={<AdminManageUsers/>}/>
             <Route exact path='/admin_manage_shows' element={<AdminManageShows />} />
@@ -67,7 +69,6 @@ function App() {
       </ProvideUserListContext>
       </ProvideUserProfileContext>
   
-
   
     </div>
   );

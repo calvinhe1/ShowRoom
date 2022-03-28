@@ -17,7 +17,7 @@ function Seasons() {
             <h2>Seasons: </h2>
             <form>
                 <select name="seasons">
-                    <option value="" selected disabled hidden>Pick season</option>
+                    <option value="Pick">Pick Season</option>
                     {
                         seasons.map(season => {
                             return (
