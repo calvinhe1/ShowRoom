@@ -13,6 +13,10 @@ function ShowInfo(props) {
     const show = showContext.getShowById(props.currentShowId);
 
     const [edited, setEdited] = useState(false);
+
+    //Store seasons as an array
+
+
     //Should store genres as an array 
     function getGenre(genres) {
         if (!genres || genres.length === 0) return '';
@@ -27,6 +31,7 @@ function ShowInfo(props) {
     }
 
     function editShow(e) {
+        
         let temp = Object.assign({}, show)
         if (e.target.name === 'genre') { 
             temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
@@ -96,6 +101,15 @@ function ShowInfo(props) {
                                 </div> :
                                 <label>Ongoing</label>
                             }
+                        </div>
+                        <div>
+                            <label>Season start: </label>
+                            <input type="text" 
+                                placeholder="season" 
+                                name="season" 
+                                disabled={!currentUser?.isAdmin}
+                                onChange={editShow}
+                                value={show.season}></input>
                         </div>
                         <div>
                             <label>Description: </label>

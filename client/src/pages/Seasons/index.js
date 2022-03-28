@@ -4,7 +4,7 @@ import {useState} from "react";
 import ShowSeasonBars from "../../react-components/ShowSeasonBars";
 import "./styles.css";
 import {Link, useNavigate} from 'react-router-dom';
-
+import SeasonsDropdown from "../../react-components/SeasonsDropdown";
 
 
 //Display all showbars filtered by season.
@@ -22,8 +22,12 @@ function Seasons(props) {
         setShowId(id);
     }
     */
+
+
+    
     return (
-        <div className="home">
+        <div className="home">  
+            <SeasonsDropdown></SeasonsDropdown>
             <ShowSeasonBars></ShowSeasonBars>
         </div>
     )

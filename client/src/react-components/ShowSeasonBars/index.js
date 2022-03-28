@@ -4,12 +4,13 @@ import { useCommentListContext } from "../../contexts/CommentList";
 import ShowsBar from "../ShowsBar";
 import { useShowListContext } from "../../contexts/ShowList";
 import {useSeasonListContext } from "../../contexts/Season";
+
 import { uid } from "react-uid";
 
 
 //Rather than displaying the home elements, display by season.
 
-function ShowSeasonsBars() {
+function ShowSeasonBars() {
 
     const showContext = useShowListContext();
     const defaultGenres = ['Action', 'Drama', 'Fantasy'];
@@ -44,4 +45,4 @@ function ShowSeasonsBars() {
     )
 }
 
-export default ShowSeasonsBars;
+export default ShowSeasonBars;

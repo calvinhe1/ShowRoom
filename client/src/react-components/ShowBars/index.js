@@ -4,6 +4,7 @@ import { useCommentListContext } from "../../contexts/CommentList";
 import ShowsBar from "../ShowsBar";
 import { useShowListContext } from "../../contexts/ShowList";
 
+
 function ShowBars() {
 
     const showContext = useShowListContext();
