@@ -70,20 +70,11 @@ export const commentList = [
 ];
 
 export const episodeList = [
-  {showId: 0, 
-  episode: 1},
-
-  {showId: 1, 
-  episode: 1},
-
-  {showId: 2, 
-  episode: 1},
-
-  {showId:3,
-  episode:1},
-  
-  {showId:3,
-  episode:2}
+  {showId: 0, episode: 1},
+  {showId: 1, episode: 1},
+  {showId: 2, episode: 1},
+  {showId: 3, episode: 1},
+  {showId: 3, episode: 2}
 ];
 
 export const ratingList = {
