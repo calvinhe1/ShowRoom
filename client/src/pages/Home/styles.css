@@ -5,3 +5,9 @@
 .home {
     background-color: aliceblue;
 }
+
+.dropdown {
+    position: fixed;
+    right: 5%;
+    font-size: 25px;
+}

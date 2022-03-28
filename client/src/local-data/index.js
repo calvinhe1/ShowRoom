@@ -49,7 +49,13 @@
     description: 'Follow rookie defense attorney Phoenix Wright as he stands in court to defend clients accused of murder, aided by his spirit medium assistant, Maya Fey.'}
   ];
 
+export const seasonList = [
+  {season: 'Winter 2022'},
+  {season: 'Fall 2021'},
+  {season: 'Winter 2021'},
+  {season: 'Fall 2016'},
 
+]
 
 export const userList = [{userId: 0, 
                  username: 'admin', 

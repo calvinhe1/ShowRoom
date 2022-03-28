@@ -22,6 +22,7 @@ import { ProvideUserListContext } from './contexts/UserList';
 import { ProvideShowListContext } from './contexts/ShowList';
 import { ProvideCommentListContext } from './contexts/CommentList';
 import { ProvideShowRatingsListContext } from './contexts/ShowRatingList';
+import { ProvideSeasonListContext } from './contexts/Season';
 
 // import styling and assets
 import './App.css';
@@ -31,11 +32,14 @@ function App() {
   return (
     <div>
       {/* contexts, making the indent the same to prevent too many indents */}
+      
       <ProvideUserProfileContext>
       <ProvideUserListContext>
       <ProvideShowListContext>
       <ProvideCommentListContext>
       <ProvideShowRatingsListContext>
+      <ProvideSeasonListContext>
+    
 
         {/* navigation */}
         <BrowserRouter>
@@ -56,12 +60,15 @@ function App() {
             
           </Routes>
         </BrowserRouter>
-
+      </ProvideSeasonListContext>
       </ProvideShowRatingsListContext>
       </ProvideCommentListContext>
       </ProvideShowListContext>
       </ProvideUserListContext>
       </ProvideUserProfileContext>
+  
+
+  
     </div>
   );
 }
