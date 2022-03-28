@@ -69,6 +69,23 @@ export const commentList = [
   {showId: 1, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
 ];
 
+export const episodeList = [
+  {showId: 0, 
+  episode: 1},
+
+  {showId: 1, 
+  episode: 1},
+
+  {showId: 2, 
+  episode: 1},
+
+  {showId:3,
+  episode:1},
+  
+  {showId:3,
+  episode:2}
+];
+
 export const ratingList = {
   0: {
     rating: 5.0,
