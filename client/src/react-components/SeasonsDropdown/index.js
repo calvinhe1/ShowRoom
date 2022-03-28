@@ -18,16 +18,12 @@ function SeasonsDropdown() {
     const [season, setSeason] = useState(false);
 
     useEffect(() => {
-
         if (season == false) {
             setSeason(true)
         }
-        
      });
 
-
     const handleOnChange = (e) => {
-      
         setPick(e.target.value)
     }
 
@@ -35,11 +31,8 @@ function SeasonsDropdown() {
         return pick;
     }
 
-
     const seasonContext = useSeasonListContext();
     const seasons = seasonContext.getSeasons();
-
-
 
     return (
         <div id="filter">

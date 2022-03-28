@@ -42,7 +42,7 @@
     genre: ['Adventure', 'Fantasy'],
     startDate: '2016-02-15',
     endDate: '2020-05-18',
-    description: 'A boy raised by boars, who wears a boar\'s head, boards the Infinity Train on a new mission with the Flame Pillar along with another boy who reveals his true power when he sleeps. Their mission is to defeat a demon who has been tormenting people and killing the demon slayers who oppose it.',
+    description: 'A boy raised by boars, who wears a boar\'s head, boards the Infinity Train on a new mission with the Flame Pillar along with another boy who reveals his true power when he sleeps. Their mission is to defeat a demon who has been tormenting people.',
     season: 'Fall 2016'},
 
     {showId: 5,
