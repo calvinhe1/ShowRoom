@@ -26,14 +26,22 @@ function Comment(props) {
     return (
         <div className="comment-container">
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
+
             <img className="comment-user" src={getProfilePicture()} alt={currentUser.userName}></img>
-            <span className="comment-text">{props.comment.text}</span>
-            {/** TODO more feautres, likes? dislikes? etc */}
-            {
-                currentUser?.userId === props.comment.userId || currentUser?.isAdmin ?
-                <button onClick={deleteComment} className="comment-delete">X</button> : null
-            }
-            <span className="comment-date">{props.comment.date}</span>
+
+            <div className="comment-text">{props.comment.text}</div>
+            <div className="comment-vote">
+                <button className="vote-button"> Like </button>
+                <button className="vote-button"> Dislike </button>
+            </div>
+
+
+            <div className="comment-date">{props.comment.date}</div>
+            <button onClick={deleteComment} className="comment-delete">X</button>
+            {/* {
+                    currentUser?.userId === props.comment.userId || currentUser?.isAdmin ?
+                    <button onClick={deleteComment} className="comment-delete">X</button> : null
+            } */}
         </div>
     );
 }
