@@ -32,10 +32,8 @@ function Seasons(props) {
 
 
     const handleOnChange = (e) => {
-      
         setPick(e.target.value)
     }
-
 
     const seasonContext = useSeasonListContext();
     const seasons = seasonContext.getSeasons();

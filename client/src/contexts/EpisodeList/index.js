@@ -5,13 +5,14 @@ import { episodeList } from "../../local-data";
 
 export const episodeListDefaultValues = {
     episodes: {},
-    //setShows: () => {},
+    setEpisodes: () => {},
     getEpisodes: () => {},
-    setEpisode: () => {}
-    //getShowById: () => {},
-    //setShow: () => {},
-    //addShow: () => {},
-    //getShowsByGenre: () => {}
+    setEpisode: () => {},
+    getEpisodeById: () => {},
+    setEpisode: () => {},
+    addEpisode: () => {},
+    getEpisodesByGenre: () => {},
+    getAllEpisodesByShow: () => {}
 }
 
 export const episodeListContext = createContext(episodeListDefaultValues);
@@ -28,30 +29,42 @@ export function useProvideEpisodeListContext(){
         return episodes;
     }
 
-    function getShowById(id) {
+    function getEpisodeById(id) {
         return episodes.find(episode => episode.showId == id);
     }
 
+    function getAllEpisodesByShow(id) {
+        let arr = []
+        for (let i=0; i<episodes.length; i++) {
+            if (episodes[i].showId == id) {
+                arr.push(episodes[i])
+            }
+        }
+        return arr
+
+    }
+
+
     function setEpisode(episode) {
-        const newEpisodeList = episodes.map(s => s.showId == episode.showId ? episode: s);
+        const newEpisodeList = episodes.map(s => s.episode == episode.episode ? episode: s);
         setEpisodes(newEpisodeList);
     }
 
-    /*
+    
     function getEpisodeById(id) {
-        return episodes.find(episode => episode.showId == id);
-    }*/
+        return episodes.find(episode => episode.episode == id);
+    }
 
-    /*
-    function setShow(show) {
-        const newShowList = shows.map(s => s.showId == show.showId ? show : s);
-        setShows(newShowList);
-    }*/
+    
+    function setEpisode(Episode) {
+        const newEpisodeList = episodes.map(s => s.episode == Episode.episode ? Episode : s);
+        setEpisodes(newEpisodeList);
+    }
 
-    /*
-    function addShow() {
-        const newShow = {
-            showId: shows[shows.length - 1].showId + 1, //Id system inspired by lecture, use UUID's for server?
+    
+    function addEpisode() {
+        const newEpisode = {
+            episode: episodes[episodes.length - 1].episode + 1, //Id system inspired by lecture, use UUID's for server?
             picture: '/images/default-picture.jpg', //TODO allow users to upload photos to server
             title: '',
             genre: [],
@@ -59,28 +72,27 @@ export function useProvideEpisodeListContext(){
             endDate: '',
             description: ''
         };
-        shows.push(newShow);
-        setShows(shows);
-        return newShow.showId;
-    }*/
-    /*
-    function getShowsByGenre(genre) {
-        return shows.filter(show => show.genre.includes(genre));
-    }*/
+        episodes.push(newEpisode);
+        setEpisodes(episodes);
+        return newEpisode.episode;
+    }
+    
+    function getEpisodesByGenre(genre) {
+        return episodes.filter(episode => episode.genre.includes(genre));
+    }
 
     return {
-        /*
-        shows,
-        setShows,
-        getShows,
-        getShowById,
-        setShow,
-        addShow,
-        getShowsByGenre*/
-
+    
+        setEpisodes,
+        getEpisodes,
+        getEpisodeById,
+        setEpisode,
+        addEpisode,
+        getEpisodesByGenre,
         episodes,
         getEpisodes,
-        setEpisode
+        setEpisode,
+        getAllEpisodesByShow
     }
 }
 
