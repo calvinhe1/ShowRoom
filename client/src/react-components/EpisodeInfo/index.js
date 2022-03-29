@@ -5,12 +5,22 @@ import {useState} from "react";
 import { useUserProfileContext } from './../../contexts/UserProfile';
 import { useShowListContext } from "../../contexts/ShowList";
 import ShowRating from "./../ShowRating";
+import { useEpisodeListContext } from "../../contexts/EpisodeList";
+
 
 function EpisodeInfo(props) {
 
     const currentUser =  useUserProfileContext().profile;
     const showContext = useShowListContext();
     const show = showContext.getShowById(props.currentShowId);
+
+    const episodeContext = useEpisodeListContext();
+    const episode = (episodeContext.getAllEpisodesByShow(props.currentShowId))[props.episode-1]
+
+    console.log("EPISODE", episode)
+
+
+
 
     const [edited, setEdited] = useState(false);
 
@@ -30,9 +40,9 @@ function EpisodeInfo(props) {
         return res;
     }
 
-    function editShow(e) {
+    function editEpisode(e) {
         
-        let temp = Object.assign({}, show)
+        let temp = Object.assign({}, episode)
         if (e.target.name === 'genre') { 
             temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
         } else if (e.target.name === 'picture') {
@@ -40,11 +50,11 @@ function EpisodeInfo(props) {
         } else {
             temp[e.target.name] = e.target.value;
         }
-        showContext.setShow(temp);
+        episodeContext.setEpisode(temp, props.currentShowId);
         setEdited(true);
     }
 
-    function saveShow(e) {
+    function saveEpisode(e) {
         e.preventDefault();
         setEdited(false);
         //TODO send changes to server
@@ -57,73 +67,49 @@ function EpisodeInfo(props) {
                 <img src={show?.picture} alt="show picture" className="show-picture"></img>
                 { 
                     currentUser?.isAdmin ? 
-                    <input type="file" onChange={editShow} name="picture"></input> : null
+                    <input type="file" onChange={editEpisode} name="picture"></input> : null
                 }
                 <div className="show-text">
                     <form>
+                        <div>
+                            <label>Episode: </label>
+                            <input type="text" 
+                                placeholder="episode" 
+                                name="episode" 
+                                disabled={!currentUser?.isAdmin}
+                                onChange={editEpisode}
+                                value={episode?.episode}></input>
+                        </div>
                         <div>
                             <label>Title: </label>
                             <input type="text" 
                                 placeholder="title" 
                                 name="title" 
                                 disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={show?.title}></input>
-                        </div>
+                                onChange={editEpisode}
+                                value={episode?.title}></input>
+                        </div>              
                         <div>
-                            <label>Genre: </label>
-                            <input type="text" 
-                                placeholder="genre" 
-                                name="genre" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={getGenre(show?.genre)}></input>
-                        </div>
-                        <div>
-                            <label>Start Date: </label>
-                            <input type="date" 
-                                placeholder="start date" 
-                                name="startDate" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={show.startDate}></input>
-                       
-                        
-                            {show.endDate || currentUser?.isAdmin ? 
-                                <div>
-                                    <label>End Date: </label>
-                                    <input type="date" 
-                                        placeholder="end date" 
-                                        name="endDate" 
-                                        disabled={!currentUser?.isAdmin}
-                                        onChange={editShow}
-                                        value={show.endDate}></input>
-                                </div> :
-                                <label>Ongoing</label>
-                            }
-                        </div>
-                        <div>
-                            <label>Season start: </label>
-                            <input type="text" 
-                                placeholder="season" 
-                                name="season" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={show.season}></input>
-                        </div>
-                        <div>
+                            
                             <label>Description: </label>
                             <br></br>
                             <textarea type="text"
                                 placeholder="description"
                                 name="description"
                                 disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={show.description}></textarea>
+                                onChange={editEpisode}
+                                value={episode?.description}></textarea>
                         </div>
+                        <div>
+                            <label> <a href={episode?.link}>Watch here!</a></label>
+                            <input type="text" 
+                                name="link" 
+                                disabled={!currentUser?.isAdmin}
+                                onChange={editEpisode}></input>
+                        </div> 
                         { currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
-                                <button onClick={saveShow} className="admin-button save-button">SAVE</button>
+                                <button onClick={saveEpisode} className="admin-button save-button">SAVE</button>
                             </div> :
                             null     
                         }                         

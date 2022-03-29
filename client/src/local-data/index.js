@@ -82,11 +82,11 @@ export const commentList = [
 ];
 
 export const episodeList = [
-  {showId: 0, episode: 1, title: "The awakining", description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250"},
-  {showId: 1, episode: 1, title: "The awakining",description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250"},
-  {showId: 2, episode: 1, title: "The awakining",description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250"},
-  {showId: 3, episode: 1, title: "The awakining",description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250"},
-  {showId: 3, episode: 2, title: "The awakining",description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250"}
+  {showId: 0, episode: 1, title: "The awakining", description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 1, episode: 1, title: "The awakining",description: "INTENSE FIGHTING2", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
+  {showId: 2, episode: 1, title: "The awakining",description: "INTENSE FIGHTIN3G", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 3, episode: 1, title: "The awakining",description: "INTENSE FIGHTING4", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 3, episode: 2, title: "The awakining",description: "INTENSE FIGHTING5", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"}
 ];
 
 export const ratingList = {

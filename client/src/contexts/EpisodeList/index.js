@@ -12,7 +12,8 @@ export const episodeListDefaultValues = {
     setEpisode: () => {},
     addEpisode: () => {},
     getEpisodesByGenre: () => {},
-    getAllEpisodesByShow: () => {}
+    getAllEpisodesByShow: () => {},
+    getEpisodeByShow: () => {}
 }
 
 export const episodeListContext = createContext(episodeListDefaultValues);
@@ -44,9 +45,12 @@ export function useProvideEpisodeListContext(){
 
     }
 
+    function getEpisodeByShow(showId, epId) {
+        return episodes.find(episode => episode.episode == epId && episode.showId == showId);
+    }
 
-    function setEpisode(episode) {
-        const newEpisodeList = episodes.map(s => s.episode == episode.episode ? episode: s);
+    function setEpisode(episode, showId) {
+        const newEpisodeList = episodes.map(s => s.episode == episode.episode && s.showId == showId ? episode: s);
         setEpisodes(newEpisodeList);
     }
 
@@ -92,7 +96,8 @@ export function useProvideEpisodeListContext(){
         episodes,
         getEpisodes,
         setEpisode,
-        getAllEpisodesByShow
+        getAllEpisodesByShow,
+        getEpisodeByShow
     }
 }
 
