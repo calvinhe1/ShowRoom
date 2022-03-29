@@ -8,6 +8,7 @@ import ShowRating from "./../ShowRating";
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
 
 
+
 function EpisodeInfo(props) {
 
     const currentUser =  useUserProfileContext().profile;
@@ -19,13 +20,9 @@ function EpisodeInfo(props) {
 
     console.log("EPISODE", episode)
 
-
-
-
     const [edited, setEdited] = useState(false);
 
     //Store seasons as an array
-
 
     //Should store genres as an array 
     function getGenre(genres) {
@@ -64,7 +61,7 @@ function EpisodeInfo(props) {
         <div>
             <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
                 {/** TODO this image input can be used for admins to set new images */}
-                <img src={show?.picture} alt="show picture" className="show-picture"></img>
+                <img src={episode?.picture} alt="show picture" className="show-picture"></img>
                 { 
                     currentUser?.isAdmin ? 
                     <input type="file" onChange={editEpisode} name="picture"></input> : null

@@ -1,0 +1,18 @@
+#episodes {
+    white-space:nowrap;
+    color:white;
+    
+}
+
+.ep {
+    background-color: lightblue;
+    border-color: white;
+    margin:5px;
+    font-size: 25px;
+    padding-left:9px;
+    padding-right:9px;
+    position:relative;
+    bottom: 5px;
+    text-align: center;
+}
+

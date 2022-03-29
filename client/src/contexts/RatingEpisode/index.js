@@ -3,100 +3,100 @@ import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
 import { ratingList } from "../../local-data";
 
-export const showRatingsListDefaultValues = {
-    showRatings: {},
-    setShowRatings: () => {},
-    setShowRating: () => {},
-    addNewShowRating: () => {},
-    getShowRatingById: () => {},
-    getUsersTop5ShowsById: () => {},
-    addShowRating: () => {},
+export const episodeRatingsListDefaultValues = {
+    episodeRatings: {},
+    setEpisodeRatings: () => {},
+    setEpisodeRating: () => {},
+    addNewEpisodeRating: () => {},
+    getEpisodeRatingById: () => {},
+    getUsersTop5EpisodesById: () => {},
+    addEpisodeRating: () => {},
     getHighestRatedIds: () => {}
 }
 
-export const showRatingsListContext = createContext(showRatingsListDefaultValues);
+export const episodeRatingsListContext = createContext(episodeRatingsListDefaultValues);
 
-export function useShowRatingsListContext(){
+export function useEpisodeRatingsListContext(){
     // import this to files
-    return useContext(showRatingsListContext);
+    return useContext(episodeRatingsListContext);
 }
 
-export function useProvideShowRatingsListContext(){
-    const [showRatings, setShowRatings] = useState(ratingList);
+export function useProvideEpisodeRatingsListContext(){
+    const [episodeRatings, setEpisodeRatings] = useState(ratingList);
 
-    function setShowRating(showId, show) {
-        showRatings[showId] = show;
-        setShowRatings(showRatings);
+    function setEpisodeRating(episodeId, episode) {
+        episodeRatings[episodeId] = episode;
+        setEpisodeRatings(episodeRatings);
     }
 
-    function addNewShowRating(showId) {
+    function addNewEpisodeRating(episodeId) {
         const newRating = {
             rating: 0.0,
             ratingCount: 0,
             ratings: {}
         }
-        showRatings[showId] = newRating;
-        setShowRatings(showRatings);
+        episodeRatings[episodeId] = newRating;
+        setEpisodeRatings(episodeRatings);
     }
 
-    function getShowRatingById(id) {
-        return showRatings[id];
+    function getEpisodeRatingById(id) {
+        return episodeRatings[id];
     }
 
-    function getUsersTop5ShowsById(id){
-        const shows = Object.keys(showRatings);
-        const userShowIds = shows.filter(show => showRatings[show].ratings[id]);
-        userShowIds.sort((a, b) => {return showRatings[b].ratings[id] - showRatings[a].ratings[id]});
-        if (userShowIds.length > 5) userShowIds.splice(0, 5);
-        return userShowIds;
+    function getUsersTop5EpisodesById(id){
+        const episodes = Object.keys(episodeRatings);
+        const userEpisodeIds = episodes.filter(episode => episodeRatings[episode].ratings[id]);
+        userEpisodeIds.sort((a, b) => {return episodeRatings[b].ratings[id] - episodeRatings[a].ratings[id]});
+        if (userEpisodeIds.length > 5) userEpisodeIds.splice(0, 5);
+        return userEpisodeIds;
     }
 
-    function addShowRating(showId, userId, rating) {
-        const show = showRatings[showId];
-        if (!show.ratings[userId]) {
-            show.ratingCount++;
+    function addEpisodeRating(episodeId, userId, rating) {
+        const episode = episodeRatings[episodeId];
+        if (!episode.ratings[userId]) {
+            episode.ratingCount++;
         }
-        show.ratings[userId] = rating;
+        episode.ratings[userId] = rating;
         let total = 0;
-        Object.keys(show.ratings).forEach(key => {
-            total += show.ratings[key];
+        Object.keys(episode.ratings).forEach(key => {
+            total += episode.ratings[key];
         });
-        show.rating = total / show.ratingCount;
-        setShowRatings(showRatings);
+        episode.rating = total / episode.ratingCount;
+        setEpisodeRatings(episodeRatings);
     }
 
     function getHighestRatedIds() {
-        const shows = Object.keys(showRatings);
-        shows.sort((a, b) => {
-            if (showRatings[a].rating > showRatings[b].rating) {
+        const episodes = Object.keys(episodeRatings);
+        episodes.sort((a, b) => {
+            if (episodeRatings[a].rating > episodeRatings[b].rating) {
                 return -1;
-            } else if (showRatings[a].rating > showRatings[b].rating) {
+            } else if (episodeRatings[a].rating > episodeRatings[b].rating) {
                 return 1;
             } else {
                 return 0;
             }
         });
-        return shows;
+        return episodes;
     }
 
 
     return{
-        showRatings,
-        setShowRatings,
-        setShowRating,
-        addNewShowRating,
-        getShowRatingById,
-        getUsersTop5ShowsById,
-        addShowRating,
+        episodeRatings,
+        setEpisodeRatings,
+        setEpisodeRating,
+        addNewEpisodeRating,
+        getEpisodeRatingById,
+        getUsersTop5EpisodesById,
+        addEpisodeRating,
         getHighestRatedIds
     }
 }
 
-export function ProvideShowRatingsListContext({children}){
-    const showRatings = useProvideShowRatingsListContext()
+export function ProvideEpisodeRatingsListContext({children}){
+    const episodeRatings = useProvideEpisodeRatingsListContext()
     return (
-        <showRatingsListContext.Provider value={showRatings}>
+        <episodeRatingsListContext.Provider value={episodeRatings}>
             {children}
-        </showRatingsListContext.Provider>
+        </episodeRatingsListContext.Provider>
     )
 }
