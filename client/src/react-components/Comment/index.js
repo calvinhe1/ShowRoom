@@ -19,20 +19,33 @@ function Comment(props) {
     }
 
     function getProfilePicture() {
-        const user = userListContext.getUserById(props.comment.userId);
-        return user.profilePicture;
+        console.log(props.comment.userId)
+        // const user = userListContext.getUserById(props.comment.userId);
+        // return user.profilePicture;
+    }
+
+    function likeComment(){
+        console.log(currentUser)
+        // commentContext.likeCommentByIds(props.comment.commentId);
     }
 
     return (
         <div className="comment-container">
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
 
-            <img className="comment-user" src={getProfilePicture()} alt={currentUser.userName}></img>
+            {getProfilePicture()}
+            {/* <img className="comment-user" src={getProfilePicture()} alt={currentUser.userName}></img> */}
 
             <div className="comment-text">{props.comment.text}</div>
-            <div className="comment-vote">
-                <button className="vote-button"> Like </button>
-                <button className="vote-button"> Dislike </button>
+            <div className="vote-section">
+                <div className="vote-container">
+                    <button className="vote-button" onClick={likeComment}> Like </button>
+                    <span className="vote-number"> NUMBER </span>
+                </div>
+                <div className="vote-container">
+                    <button className="vote-button" > Dislike </button>
+                    <span className="vote-number"> NUMBER </span>
+                </div>
             </div>
 
 
