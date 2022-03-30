@@ -3,7 +3,6 @@ import "./styles.css";
 import ShowInfo from "../../react-components/ShowInfo";
 import ShowsBar from "../../react-components/ShowsBar";
 import CommentSection from "../../react-components/CommentSection";
-import ShowEpisodes from "../../react-components/Episodes";
 
 
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
