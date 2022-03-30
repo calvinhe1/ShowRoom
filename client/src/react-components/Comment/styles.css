@@ -14,28 +14,14 @@
 }
 
 .comment-text {
-    margin-left: 20px;
-    width: 600px;
+    width: 650px;
     overflow: scroll;
     max-height: 50px;
 }
 
-
 .comment-vote {
     margin-left: 20px;
     width: 100px;
-}
-
-.vote-button{
-    box-shadow: 0 9px #999;
-}
-
-.vote-number{
-    
-}
-
-.comment-date {
-   
 }
 
 .comment-delete {
