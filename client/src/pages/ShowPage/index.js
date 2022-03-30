@@ -27,17 +27,11 @@ function ShowPage(props) {
     const episodes = episodeListContext.getEpisodes();
 
     const episodesShow = episodeListContext.getAllEpisodesByShow(props.showId)
-
     const episodeRatingsContext = useEpisodeRatingsListContext();
-
     const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
-
     const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
-    console.log(topThree)
 
     const ratings = []
-
-
 
     for (let i=0; i<topThree.length; i++) {
         const epRating = episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating
@@ -71,10 +65,8 @@ function ShowPage(props) {
     }
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
-
     return (
         <div>
-            
             {
             !episode && topThree.length != 0? 
             (
@@ -86,20 +78,12 @@ function ShowPage(props) {
                             <div className = "ep" value={episode.episode} >{episode.episode}<br></br>
                             <div className = "rating">Rating: {episode.rating.toFixed(2)} </div>
                             
-                            </div>
-                        
-
-                         
+                            </div>                        
                         )
                     })
-
                 }
-
             </div>) : console.log("")
-            
             }
-          
-            
             
             <div className="epContainer" value ={value} onClick={handleOnChange} >
                 <br></br>
@@ -107,20 +91,14 @@ function ShowPage(props) {
                      Cover
                 </span>
                 {   
-
                     episodesShow.map(episode => {
                         return (
                             <span key={uid(episode)} className="ep" value={episode.episode}  >
                                 {episode.episode}
-                            </span>
-                            
-                            
+                            </span>  
                         )
                     })
-
-                   
-                } 
-                
+                }      
             </div>
             {
             episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>

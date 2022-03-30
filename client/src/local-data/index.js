@@ -82,11 +82,19 @@ export const commentList = [
 ];
 
 export const episodeList = [
-  {showId: 0, episode: 1, title: "The awakining", description: "INTENSE FIGHTING", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 1, episode: 1, title: "The awakining",description: "INTENSE FIGHTING2", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
-  {showId: 2, episode: 1, title: "The awakining",description: "INTENSE FIGHTIN3G", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 3, episode: 1, title: "The awakining",description: "INTENSE FIGHTING4", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 3, episode: 2, title: "The awakining",description: "INTENSE FIGHTING5", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"}
+  {showId: 0, episode: 1, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 0, episode: 2, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 0, episode: 3, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 1, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
+  {showId: 1, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
+  {showId: 1, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
+  {showId: 2, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 2, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 2, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 3, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 4, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 4, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+
 ];
 
 export const ratingList = {
@@ -126,26 +134,103 @@ export const ratingEpisodeList = {
   0: {
     episodes: [{ 
       episode: 1,
-      rating: 4.0,
+      rating: 2.0,
       ratingCount: 1,
       ratings: {0: 4.0}, 
     },
     { 
       episode: 2,
-      rating: 4.22,
+      rating: 3,
       ratingCount: 1,
-      ratings: {0: 4.0}, 
+      ratings: {0: 2.0}, 
     },
     { 
       episode: 3,
-      rating: 5.0,
+      rating: 2.0,
       ratingCount: 1,
       ratings: {0: 4.0}, 
     }
 
 
     ]
-     //UserId: rating 
+  
+  },
+  1: {
+    episodes: [{ 
+      episode: 1,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+    { 
+      episode: 2,
+      rating: 3,
+      ratingCount: 1,
+      ratings: {0: 2.0}, 
+    },
+    { 
+      episode: 3,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    }
+
+
+    ]
+  
+  },
+  2: {
+    episodes: [{ 
+      episode: 1,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+    { 
+      episode: 2,
+      rating: 3,
+      ratingCount: 1,
+      ratings: {0: 2.0}, 
+    },
+    { 
+      episode: 3,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    }
+
+
+    ]
+  
+  },
+  3: {
+    episodes: [{ 
+      episode: 1,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+
+    ]
+  
+  },
+  4: {
+    episodes: [{ 
+      episode: 1,
+      rating: 2.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+    { 
+      episode: 2,
+      rating: 3,
+      ratingCount: 1,
+      ratings: {0: 2.0}, 
+    },
+
+
+    ]
+  
   },
 
 

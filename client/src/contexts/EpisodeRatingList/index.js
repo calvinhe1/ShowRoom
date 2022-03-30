@@ -41,7 +41,7 @@ export function useProvideEpisodeRatingsListContext(){
     }
 
     function getEpisodeRatingById(showId, episodeId) {
-     
+       
         return episodeRatings[showId].episodes[episodeId-1];
     }
     
@@ -69,7 +69,7 @@ export function useProvideEpisodeRatingsListContext(){
 
     function getHighestRatedIds(showId) {
 
-        console.log("HEYQET")
+
 
         if (episodeRatings[showId] == undefined) 
             return
@@ -77,7 +77,7 @@ export function useProvideEpisodeRatingsListContext(){
         
         const episodes = episodeRatings[showId].episodes //access the show (An array of object episodes)
 
-        console.log("HEYQEwwwT")
+   
 
         episodes.sort((a,b) => { 
             if (a.rating < b.rating)  {
