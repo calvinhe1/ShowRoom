@@ -7,6 +7,8 @@ import { useShowListContext } from "../../contexts/ShowList";
 import ShowRating from "./../ShowRating";
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
 
+import ShowRatingEpisode from "./../ShowRatingEpisode";
+
 
 
 function EpisodeInfo(props) {
@@ -18,11 +20,9 @@ function EpisodeInfo(props) {
     const episodeContext = useEpisodeListContext();
     const episode = (episodeContext.getAllEpisodesByShow(props.currentShowId))[props.episode-1]
 
-    console.log("EPISODE", episode)
 
     const [edited, setEdited] = useState(false);
 
-    //Store seasons as an array
 
     //Should store genres as an array 
     function getGenre(genres) {
@@ -112,7 +112,8 @@ function EpisodeInfo(props) {
                         }                         
                     </form>
                 </div>
-                <ShowRating show={show}></ShowRating>
+                
+                {props.episode == "Cover" ? console.log("") : <ShowRatingEpisode episode={episode}></ShowRatingEpisode>}
             </div>
         </div>
     );

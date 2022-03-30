@@ -1,7 +1,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
-import { ratingList } from "../../local-data";
+import { ratingEpisodeList } from "../../local-data";
 
 export const episodeRatingsListDefaultValues = {
     episodeRatings: {},
@@ -22,27 +22,29 @@ export function useEpisodeRatingsListContext(){
 }
 
 export function useProvideEpisodeRatingsListContext(){
-    const [episodeRatings, setEpisodeRatings] = useState(ratingList);
+    const [episodeRatings, setEpisodeRatings] = useState(ratingEpisodeList);
 
     function setEpisodeRating(episodeId, episode) {
-        episodeRatings[episodeId] = episode;
+        episodeRatings[episodeId-1] = episode;
         setEpisodeRatings(episodeRatings);
     }
 
-    function addNewEpisodeRating(episodeId) {
+    function addNewEpisodeRating(showId, episodeId) {
         const newRating = {
+            episodeId: episodeId,
             rating: 0.0,
             ratingCount: 0,
             ratings: {}
         }
-        episodeRatings[episodeId] = newRating;
+        episodeRatings[showId].episodes.push(newRating)
         setEpisodeRatings(episodeRatings);
     }
 
-    function getEpisodeRatingById(id) {
-        return episodeRatings[id];
+    function getEpisodeRatingById(showId, episodeId) {
+     
+        return episodeRatings[showId].episodes[episodeId-1];
     }
-
+    
     function getUsersTop5EpisodesById(id){
         const episodes = Object.keys(episodeRatings);
         const userEpisodeIds = episodes.filter(episode => episodeRatings[episode].ratings[id]);
@@ -51,8 +53,8 @@ export function useProvideEpisodeRatingsListContext(){
         return userEpisodeIds;
     }
 
-    function addEpisodeRating(episodeId, userId, rating) {
-        const episode = episodeRatings[episodeId];
+    function addEpisodeRating(showId, episodeId, userId, rating) {
+        const episode = episodeRatings[showId].episodes[episodeId-1];
         if (!episode.ratings[userId]) {
             episode.ratingCount++;
         }
@@ -65,18 +67,30 @@ export function useProvideEpisodeRatingsListContext(){
         setEpisodeRatings(episodeRatings);
     }
 
-    function getHighestRatedIds() {
-        const episodes = Object.keys(episodeRatings);
-        episodes.sort((a, b) => {
-            if (episodeRatings[a].rating > episodeRatings[b].rating) {
+    function getHighestRatedIds(showId) {
+
+        console.log("HEYQET")
+
+        if (episodeRatings[showId] == undefined) 
+            return
+            
+        
+        const episodes = episodeRatings[showId].episodes //access the show (An array of object episodes)
+
+        console.log("HEYQEwwwT")
+
+        episodes.sort((a,b) => { 
+            if (a.rating < b.rating)  {
                 return -1;
-            } else if (episodeRatings[a].rating > episodeRatings[b].rating) {
-                return 1;
-            } else {
-                return 0;
             }
-        });
-        return episodes;
+            if (a.rating > b.rating) {
+                return 1;
+            }
+            return 0;
+        })
+
+        //Extract 0-2 elements (if it exists)
+        return episodes.reverse();
     }
 
 

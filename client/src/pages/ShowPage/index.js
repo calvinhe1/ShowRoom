@@ -14,6 +14,8 @@ import { uid } from "react-uid";
 import {Link, useNavigate} from 'react-router-dom';
 import EpisodeInfo from "../../react-components/EpisodeInfo";
 
+import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
+
 
 function ShowPage(props) {
 
@@ -26,6 +28,24 @@ function ShowPage(props) {
 
     const episodesShow = episodeListContext.getAllEpisodesByShow(props.showId)
 
+    const episodeRatingsContext = useEpisodeRatingsListContext();
+
+    const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
+
+    const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
+    console.log(topThree)
+
+    const ratings = []
+
+
+
+    for (let i=0; i<topThree.length; i++) {
+        const epRating = episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating
+        if (epRating != undefined)
+            ratings.push(episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating)
+    }
+
+    
     if (show != props.showId) {
         setEpisode(false)
         setShow(props.showId)
@@ -49,9 +69,37 @@ function ShowPage(props) {
        setValue(test)
        setShow(props.showId)
     }
- 
+
+    //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
+
     return (
         <div>
+            
+            {
+            !episode && topThree.length != 0? 
+            (
+            <div className = "highestRatedEpisodes"  onClick={handleOnChange}> Top Rated Episodes! 
+            <br></br><br></br>
+                {
+                    topThree.map(episode =>  {
+                        return (
+                            <div className = "ep" value={episode.episode} >{episode.episode}<br></br>
+                            <div className = "rating">Rating: {episode.rating.toFixed(2)} </div>
+                            
+                            </div>
+                        
+
+                         
+                        )
+                    })
+
+                }
+
+            </div>) : console.log("")
+            
+            }
+          
+            
             
             <div className="epContainer" value ={value} onClick={handleOnChange} >
                 <br></br>
@@ -65,9 +113,14 @@ function ShowPage(props) {
                             <span key={uid(episode)} className="ep" value={episode.episode}  >
                                 {episode.episode}
                             </span>
+                            
+                            
                         )
                     })
-                }
+
+                   
+                } 
+                
             </div>
             {
             episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>

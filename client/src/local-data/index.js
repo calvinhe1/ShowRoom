@@ -121,3 +121,33 @@ export const ratingList = {
     ratings: {}
   }
 }
+
+export const ratingEpisodeList = {
+  0: {
+    episodes: [{ 
+      episode: 1,
+      rating: 4.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+    { 
+      episode: 2,
+      rating: 4.22,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    },
+    { 
+      episode: 3,
+      rating: 5.0,
+      ratingCount: 1,
+      ratings: {0: 4.0}, 
+    }
+
+
+    ]
+     //UserId: rating 
+  },
+
+
+
+}

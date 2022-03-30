@@ -5,11 +5,26 @@ import {useState, useEffect} from "react";
 import { showRatingsListContext, useShowRatingsListContext } from "../../contexts/ShowRatingList";
 import { useUserProfileContext } from "../../contexts/UserProfile";
 
-function ShowRating(props) {
+import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
+
+function ShowRatingEpisode(props) {
 
     const currentShowRatingContext = useShowRatingsListContext();
-    const currentShowRating = currentShowRatingContext.getShowRatingById(props.show.showId);
+    //const currentShowRating = currentShowRatingContext.getShowRatingById(props.show.showId);
+
+    
+
+    const currentShowRating = currentShowRatingContext.getShowRatingById(props.episode.showId);
+
     const userProfile = useUserProfileContext();
+
+
+    const currentEpisodeRatingContext = useEpisodeRatingsListContext();
+  
+    const currentEpisodeRating = currentEpisodeRatingContext.getEpisodeRatingById(props.episode.showId, props.episode.episode)
+
+   
+
 
     const arr = [...Array(5).keys()];
 
@@ -27,28 +42,25 @@ function ShowRating(props) {
         e.preventDefault();
         if (userProfile.userId) {
             const rating = parseFloat(e.target.id);
-            currentShowRatingContext.addShowRating(props.show.showId, userProfile.profile.userId, rating);
+            //currentShowRatingContext.addShowRating(props.show.showId, userProfile.profile.userId, rating);
+            currentEpisodeRatingContext.addEpisodeRating(props.episode.showId, props.episode.episode, userProfile.profile.userId, rating);
         } else {
             alert("Must be logged in to vote");
         }
     }
 
     function getNumVotes(i) {
+        //SOMETHING WRONG HERE, should not all light up.
         let count = 0;
-        Object.keys(currentShowRating.ratings).forEach(r => {if (currentShowRating.ratings[r] == i) count++;})
-       
+        Object.keys(currentEpisodeRating.ratings).forEach(r => {if (currentEpisodeRating.ratings[r] == i) count++;})
         return count;
     }
 
     useEffect(() => {
         for (let i = 1; i <= 5; i++) {
-            const percent = (getNumVotes(i) / currentShowRating.ratingCount) * 100;
+            const percent = (getNumVotes(i) / currentEpisodeRating.ratingCount) * 100;
             const bar = document.getElementsByClassName('bar' + String(i))[0];
-
-        
-
             bar.style.width = String(percent) + '%';
-           
         }
     });
 
@@ -58,13 +70,13 @@ function ShowRating(props) {
             {
                 arr.map((i) => {
                     i++;
-                    return i <= Math.floor(currentShowRating.rating + 0.5) ? 
+                    return i <= Math.floor(currentEpisodeRating.rating + 0.5) ? 
                     <span className={i <= hoverIndex ? "fa fa-star hover-on" : hoverIndex ? "fa fa-star" : "fa fa-star checked"} id={i} onMouseOver={hoverOver} onMouseOut={hoverOut} key={i} onClick={submit}></span> :
                     <span className={i <= hoverIndex ? "fa fa-star hover-on" : "fa fa-star"} id={i} onMouseOver={hoverOver} onMouseOut={hoverOut} key={i} onClick={submit}></span>
                 })
             }
             <div>
-                {currentShowRating.rating.toFixed(1)} average based on {currentShowRating.ratingCount} review(s).
+                {currentEpisodeRating.rating.toFixed(1)} average based on {currentEpisodeRating.ratingCount} review(s).
             </div>
                 <div>
                     5 
@@ -105,4 +117,4 @@ function ShowRating(props) {
     )
 }
 
-export default ShowRating;
+export default ShowRatingEpisode;
