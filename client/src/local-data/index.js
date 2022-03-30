@@ -7,7 +7,7 @@
     startDate: '2009-09-09',
     endDate: '2001-04-09',
     description: 'Eren Yeager is determined to help save humanity when titans re-appear and being to feast on human flesh.',
-    season: 'Winter 2022'},
+    season: ['Winter 2022', "Fall 2021", "Fall 2016"]},
     
     {showId: 1,
     picture: '/images/death-note.jpg',
@@ -16,7 +16,7 @@
     startDate: '2003-12-01',
     endDate: '2006-05-15',
     description: 'A normal, undistinguished college student discovers an odd notebook lying on the ground. He soon discovers that the notebook has magic powers: If someone\'s name is written on it while the writer imagines that person\'s face, he or she will die.',
-    season: 'Fall 2021'}, 
+    season: ['Fall 2021']}, 
     
     {showId: 2,
     picture: '/images/castlevania.jpg',
@@ -25,16 +25,16 @@
     startDate: '2017-07-17',
     endDate: '2021-05-13', 
     description: 'A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.',
-    season: 'Winter 2021'}, 
+    season: ['Winter 2021']}, 
     
     {showId: 3,
     picture: '/images/onepiece.jpg',
     title: 'One Piece',
     genre: ['Pirates', 'Action', 'Adventure', 'Fantasy'],
-    startDate: '1999-10-20',
+    startDate: ['1999-10-20'],
     endDate: '',
     description: 'Luffy, a young man made of rubber, whom, inspired by his childhood idol, the powerful pirate "Red Haired" Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates.',
-    season: 'Fall 2020'},
+    season: ['Fall 2020']},
   
     {showId: 4,
     picture: '/images/demonslayer.jpg',
@@ -43,7 +43,7 @@
     startDate: '2016-02-15',
     endDate: '2020-05-18',
     description: 'A boy raised by boars, who wears a boar\'s head, boards the Infinity Train on a new mission with the Flame Pillar along with another boy who reveals his true power when he sleeps. Their mission is to defeat a demon who has been tormenting people.',
-    season: 'Fall 2016'},
+    season: ['Fall 2016']},
 
     {showId: 5,
     picture: '/images/aceattorney.jpg',
@@ -52,7 +52,7 @@
     startDate: '2016-04-02',
     endDate: '2019-03-30',
     description: 'Follow rookie defense attorney Phoenix Wright as he stands in court to defend clients accused of murder, aided by his spirit medium assistant, Maya Fey.',
-    season: 'Fall 2016'}
+    season: ['Fall 2016']}
   ];
 
 export const seasonList = [
@@ -60,7 +60,8 @@ export const seasonList = [
   {season: 'Fall 2021'},
   {season: 'Winter 2021'},
   {season: 'Fall 2020'},
-  {season: 'Fall 2016'}
+  {season: 'Fall 2016'},
+
 ]
 
 export const userList = [{userId: 0, 

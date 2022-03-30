@@ -30,12 +30,25 @@ function ShowInfo(props) {
         return res;
     }
 
+    function getSeason(seasons) {
+        if (!seasons || seasons.length === 0) return '';
+
+        let res = seasons[0]
+        if (seasons.length > 1) {
+            for (let i = 1; i < seasons.length; i++) {
+                res = res + ', ' + seasons[i];
+            }
+        }
+        return res;
+    }
+
+
     function editShow(e) {
         
         let temp = Object.assign({}, show)
         if (e.target.name === 'genre') { 
             temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
-        } else if (e.target.name === 'picture') {
+        } else if (e.target.name === 'picture' || e.target.name === 'season') {
             temp[e.target.name] = e.target.value.replaceAll('//', '/');
         } else {
             temp[e.target.name] = e.target.value;
@@ -103,13 +116,13 @@ function ShowInfo(props) {
                             }
                         </div>
                         <div>
-                            <label>Season start: </label>
+                            <label>Season(s): </label>
                             <input type="text" 
                                 placeholder="season" 
                                 name="season" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={show.season}></input>
+                                value={getSeason(show?.season)}></input>
                         </div>
                         <div>
                             <label>Description: </label>
