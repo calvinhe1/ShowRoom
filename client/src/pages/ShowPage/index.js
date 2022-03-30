@@ -58,10 +58,17 @@ function ShowPage(props) {
         const handleOnChange =  (e) => {
         let test = e.target.getAttribute("value")
 
-        //ensure value is actually set before moving on.
-       setValue(test)
-       setShow(props.showId)
-    }
+            //ensure value is actually set before moving on.
+
+
+
+        if (test != null) {
+            setValue(test)
+            setShow(props.showId)
+        }
+      
+        
+        }
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
     return (
@@ -69,19 +76,19 @@ function ShowPage(props) {
             {
             !episode && topThree.length != 0? 
             (
-            <div className = "highestRatedEpisodes"  onClick={handleOnChange}> Top Rated Episodes! 
+            <div className = "highestRatedEpisodes"  onClick={handleOnChange} > Top Rated Episodes! 
             <br></br><br></br>
                 {
                     topThree.map(episode =>  {
                         return (
-                            <div className = "ep" value={episode.episode} >{episode.episode}<br></br>
-                            <div className = "rating">Rating: {episode.rating.toFixed(2)} </div>
+                            <div key={uid(episode.episode)} className = "ep" value={episode.episode} >{episode.episode}<br></br>
+                            <div key={uid(episode.rating)} className = "rating"  value={episode.episode} >Rating: {episode.rating.toFixed(1)} </div>
                             
                             </div>                        
                         )
                     })
                 }
-            </div>) : console.log("")
+            </div>) : null
             }
             
             <div className="epContainer" value ={value} onClick={handleOnChange} >
@@ -100,8 +107,12 @@ function ShowPage(props) {
                 }      
             </div>
             {
+            
             episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>
+       
+            
             }
+        
            
             <div className="showbar">
                 <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>

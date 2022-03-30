@@ -41,7 +41,14 @@ export function useProvideEpisodeRatingsListContext(){
     }
 
     function getEpisodeRatingById(showId, episodeId) {
-       
+        
+        for (let i =0; i <episodeRatings[showId].episodes.length; i++) {
+            if (episodeRatings[showId].episodes[i].episode == episodeId)
+                return episodeRatings[showId].episodes[i]
+
+        }
+
+      
         return episodeRatings[showId].episodes[episodeId-1];
     }
     

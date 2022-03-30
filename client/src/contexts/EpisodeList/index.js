@@ -13,7 +13,8 @@ export const episodeListDefaultValues = {
     addEpisode: () => {},
     getEpisodesByGenre: () => {},
     getAllEpisodesByShow: () => {},
-    getEpisodeByShow: () => {}
+    getEpisodeByShow: () => {},
+    getEpisode: () => {}
 }
 
 export const episodeListContext = createContext(episodeListDefaultValues);
@@ -34,13 +35,31 @@ export function useProvideEpisodeListContext(){
         return episodes.find(episode => episode.showId == id);
     }
 
-    function getAllEpisodesByShow(id) {
+    function getEpisode(showId, episodeId) {
+        for (let i=0; i<episodes.length; i++) {
+            if (episodes[i].showId == showId && episodeId == episodes[i].episode) {
+              
+                return episodes[i]
+            }
+        }
+    }
+
+    function getAllEpisodesByShow(id, epId) {
+  
         let arr = []
         for (let i=0; i<episodes.length; i++) {
             if (episodes[i].showId == id) {
                 arr.push(episodes[i])
             }
+            if (episodes[i].showId == id && epId == episodes[i].episode) {
+
+                
+                return episodes[i]
+            }
+
+          
         }
+  
         return arr
 
     }
@@ -97,7 +116,8 @@ export function useProvideEpisodeListContext(){
         getEpisodes,
         setEpisode,
         getAllEpisodesByShow,
-        getEpisodeByShow
+        getEpisodeByShow,
+        getEpisode
     }
 }
 

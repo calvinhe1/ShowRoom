@@ -18,7 +18,13 @@ function EpisodeInfo(props) {
     const show = showContext.getShowById(props.currentShowId);
 
     const episodeContext = useEpisodeListContext();
-    const episode = (episodeContext.getAllEpisodesByShow(props.currentShowId))[props.episode-1]
+
+
+    //const episode = (episodeContext.getAllEpisodesByShow(props.currentShowId))[props.episode]
+
+ 
+    const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
+
 
 
     const [edited, setEdited] = useState(false);
@@ -113,7 +119,8 @@ function EpisodeInfo(props) {
                     </form>
                 </div>
                 
-                {props.episode == "Cover" ? console.log("") : <ShowRatingEpisode episode={episode}></ShowRatingEpisode>}
+                {props.episode == "Cover" ? null : <ShowRatingEpisode episode={episode}></ShowRatingEpisode>}
+            
             </div>
         </div>
     );

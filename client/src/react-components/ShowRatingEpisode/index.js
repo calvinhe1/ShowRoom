@@ -11,10 +11,15 @@ function ShowRatingEpisode(props) {
 
     const currentShowRatingContext = useShowRatingsListContext();
     //const currentShowRating = currentShowRatingContext.getShowRatingById(props.show.showId);
-    const currentShowRating = currentShowRatingContext.getShowRatingById(props.episode.showId);
+   
     const userProfile = useUserProfileContext();
     const currentEpisodeRatingContext = useEpisodeRatingsListContext();
+
+ 
+
     const currentEpisodeRating = currentEpisodeRatingContext.getEpisodeRatingById(props.episode.showId, props.episode.episode)
+
+
     const arr = [...Array(5).keys()];
 
     const [hoverIndex, setHoverIndex] = useState(undefined);

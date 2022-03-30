@@ -101,8 +101,8 @@ export const episodeList = [
 export const ratingList = {
   0: {
     rating: 5.0,
-    ratingCount: 1,
-    ratings: {0: 5.0}, //UserId: rating 
+    ratingCount: 2,
+    ratings: {0: 5.0, 1:5.0}, //UserId: rating 
   },
   1: {
       rating: 4.0,
@@ -135,19 +135,19 @@ export const ratingEpisodeList = {
   0: {
     episodes: [{ 
       episode: 1,
-      rating: 2.0,
-      ratingCount: 1,
-      ratings: {0: 4.0}, 
+      rating:1.5,
+      ratingCount: 2,
+      ratings: {0: 2.0, 1:2.0, 2:5.0},
     },
     { 
       episode: 2,
-      rating: 3,
+      rating: 3.0,
       ratingCount: 1,
-      ratings: {0: 2.0}, 
+      ratings: {0: 3.0}, 
     },
     { 
       episode: 3,
-      rating: 2.0,
+      rating: 4.0,
       ratingCount: 1,
       ratings: {0: 4.0}, 
     }
@@ -165,7 +165,7 @@ export const ratingEpisodeList = {
     },
     { 
       episode: 2,
-      rating: 3,
+      rating: 3.0,
       ratingCount: 1,
       ratings: {0: 2.0}, 
     },
@@ -189,7 +189,7 @@ export const ratingEpisodeList = {
     },
     { 
       episode: 2,
-      rating: 3,
+      rating: 3.0,
       ratingCount: 1,
       ratings: {0: 2.0}, 
     },
@@ -224,7 +224,7 @@ export const ratingEpisodeList = {
     },
     { 
       episode: 2,
-      rating: 3,
+      rating: 3.0,
       ratingCount: 1,
       ratings: {0: 2.0}, 
     },
