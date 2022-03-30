@@ -3,7 +3,7 @@
 const env = process.env.NODE_ENV;
 
 const log = console.log;
-const path = require('path')
+const path = require('path');
 
 const express = require("express");
 // starting the express server
@@ -49,9 +49,6 @@ const mongoChecker = (req, res, next) => {
 
 // Middleware for authentication of resources
 const authenticate = (req, res, next) => {
-    if (env !== 'production' && USE_TEST_USER)
-        req.session.user = TEST_USER_ID // test user on development. (remember to run `TEST_USER_ON=true node server.js` if you want to use this user.)
-
     if (req.session.user) {
         User.findById(req.session.user).then((user) => {
             if (!user) {
@@ -100,10 +97,12 @@ app.post("/users/login", mongoChecker, (req, res) => {
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.email = user.email; 
-            res.send({ userId: user._id, profilePicture: user.profilePicture }); //TODO send other user stuff like profile picture
+            res.send({ _id: user._id, 
+                       profilePicture: user.profilePicture,
+                       isAdmin: user.isAdmin }); //TODO send other user stuff like profile picture
         })
         .catch(error => {
-            res.status(400).send()
+            res.status(400).send();
         });
 });
 
@@ -114,18 +113,23 @@ app.post("/users/create", mongoChecker, async (req, res) => {
 
     const user = new User({
         email: email,
-        password: password
+        password: password,
+        isAdmin: false 
     });
 
     try {
 		const result = await user.save();
-		res.send({ userId: result._id, profilePictureL: result.profilePicture });
+		res.send({ _id: result._id, profilePictureL: result.profilePicture, isAdmin: result.isAdmin });
 	} catch (error) {
 		log(error);
 		if (isMongoError(error)) { 
 			res.status(500).send('Internal server error');
 		} else {
-			res.status(400).send('Bad Request'); 
+            if (error.code === 11000) {
+			    res.status(401).send('Account already exists'); 
+            } else {
+                res.status(400).send("Server error");
+            }
 		}
 	}
 });
@@ -145,19 +149,52 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
-    if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-        req.session.user = TEST_USER_ID;
-        req.session.email = TEST_USER_EMAIL;
-        res.send({ currentUser: TEST_USER_EMAIL })
-        return;
-    }
-
     if (req.session.user) {
-        res.send({ userId: req.session._id });
+        res.send({ _id: req.session._id });
     } else {
         res.status(401).send();
     }
 });
+
+app.get("/users/:id", mongoChecker, async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectID.isValid(id)) {
+        res.status(400).send('Can\'t find user');
+        return;
+    } 
+    const result = await User.findById(id);
+    const sendMe = {
+        _id: result?._id,
+        username: result?.username,
+        profilePicture: result?.profilePicture,
+        bio: result?.bio
+        //TODO top shows and stuff
+    }
+    res.send(sendMe);
+});
+
+
+app.delete("/users/:id", mongoChecker, authenticate, async (req, res) => {
+    const id = req.params.id;
+    //Only a user can edit themselves or an admin
+    if (id != req.user._id && !req.user.isAdmin) {
+        res.status(401).send('Unauthorized');
+    } else {
+        const result = await User.deleteOne({_id: id});
+        res.status(200).send(result);
+    }
+});
+
+app.post("/users", mongoChecker, authenticate, async (req, res) => {
+    //Only a user can edit themselves or an admin
+    if (req.body._id != req.user._id && !req.user.isAdmin) {
+        res.status(401).send('Unauthorized');
+    } else {
+        const result = await User.updateOne({_id: req.body._id}, {$set: { ...req.body }});
+        res.status(200).send(result);
+    }
+});
+
 
 /*** Webpage routes below **********************************/
 // Serve the build

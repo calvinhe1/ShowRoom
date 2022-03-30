@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import { useNavigate, Link} from 'react-router-dom';
 
-import './styles.css'
+import './styles.css';
 
 import { useUserProfileContext } from '../../contexts/UserProfile';
-import { useUserListContext } from '../../contexts/UserList';
-
 
 function Signup() {
     const navigate = useNavigate();
@@ -15,7 +13,11 @@ function Signup() {
 
     function handleSignup(e){
         e.preventDefault();
-        userProfile.signUp(loginInfo);
+        userProfile.signUp(loginInfo)
+        .then((res) => {
+            console.log(res);
+            navigate('/profile/' + res._id);
+        });
     }
 
 

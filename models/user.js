@@ -11,22 +11,31 @@ const UserSchema = new mongoose.Schema({
 		minlength: 1,
 		trim: true,
 		unique: true,
-		validate: {
-			validator: validator.isEmail,   // custom validator
-			message: 'Not valid email'
-		}
 	}, 
 	password: {
 		type: String,
 		required: true,
-		minlength: 6
+		minlength: 1
 	},
     profilePicture: {
         type: String,
         required: true,
         trim: true,
         default: '/images/profile-picture.jpg'
-    }
+    },
+	isAdmin: {
+		type: Boolean,
+		required: true,
+		default: false
+	},
+	username: {
+		type: String,
+		required: false
+	},
+	bio: {
+		type: String,
+		required: false
+	}
 });
 
 // An example of Mongoose middleware.
