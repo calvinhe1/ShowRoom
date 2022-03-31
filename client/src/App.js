@@ -15,6 +15,7 @@ import {AdminHome, AdminManageShows, AdminManageUsers, AddShow, AddUser} from ".
 import UserList from "./pages/UserList";
 import ShowList from "./pages/ShowList";
 import Profile from "./pages/Profile";
+import PublicProfile from "./pages/PublicProfile";
 
 // contexts
 import { ProvideUserProfileContext } from './contexts/UserProfile';
@@ -53,6 +54,7 @@ function App() {
             <Route exact path='/user_list' element={<UserList/>}/>
             <Route exact path='/show_list' element={<ShowList/>}/>
             <Route exact path='/profile' element={<Profile/>}/>
+            <Route exact path='/user' element={<PublicProfile/>}/>
             
           </Routes>
         </BrowserRouter>

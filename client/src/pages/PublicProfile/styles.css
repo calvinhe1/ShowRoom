@@ -1,0 +1,21 @@
+.profile-picture-div {
+	float: left;
+    /* overflow: auto; */
+}
+
+.edit-link{
+    margin-bottom: 30px;
+    display: block;
+}
+
+
+.profile-picture {
+    width: 200px;
+	border-radius: 50%; 
+	border-style: solid;
+	border-color: white;
+}
+
+.top-shows-div{
+    clear: both;
+}
