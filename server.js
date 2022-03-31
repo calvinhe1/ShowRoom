@@ -29,7 +29,12 @@ app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form 
 
 // express-session for managing user sessions
 const session = require("express-session");
-const MongoStore = require('connect-mongo') // to store session information on the database in production
+const MongoStore = require('connect-mongo'); // to store session information on the database in production
+const { application } = require('express');
+const { Show } = require('./models/show');
+const { Season } = require('./models/season');
+const { Episode } = require('./models/episode');
+const { Comment } = require('./models/comment');
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
     return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
@@ -195,6 +200,190 @@ app.post("/users", mongoChecker, authenticate, async (req, res) => {
     }
 });
 
+// Create a new show; todo: uncomment line with authenticate later
+// app.post("/shows/create", mongoChecker, authenticate, async (req, res) => {
+app.post("/shows/create", mongoChecker, async (req, res) => {
+
+    const title = req.body.title;
+    const description = req.body.description;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    const show = new Show({
+        title: title,
+        description: description,
+        startDate: startDate,
+        endDate: endDate
+    });
+
+    try {
+        const result = await show.save();
+        res.send({ showId: result._id, 
+            title: result.title, 
+            description: result.description, 
+            startDate: result.startDate, 
+            endDate: result.endDate});
+    } catch (error) {
+        log(error);
+        if (isMongoError(error)) { 
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad Request'); 
+        }
+    }
+});
+
+// check list of all 
+// app.get("/shows/find/:id", mongoChecker, async (req, res) => {
+app.get("/shows/find", mongoChecker, async (req, res) => {
+    const showId = req.body.id;
+
+    Show.findById(ObjectID(showId)).then((show) => {
+        res.send(show)
+    }).catch((error) => {
+        log(error)
+        res.status(400).send("Bad Request")
+    })
+});
+
+// Create a new show; todo: uncomment line with authenticate later
+// app.post("/seasons/create", mongoChecker, authenticate, async (req, res) => {
+app.post("/seasons/create", mongoChecker, async (req, res) => {
+
+    const showId = req.body.showId;
+    const seasonNum = req.body.seasonNum;
+    const title = req.body.title;
+    const description = req.body.description;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    const season = new Season({
+        showId: ObjectID(showId),
+        seasonNum: seasonNum,
+        title: title,
+        description: description,
+        startDate: startDate,
+        endDate: endDate
+    });
+
+    try {
+        const result = await season.save();
+        res.send({ seasonId: result._id, 
+            showId: result.showId,
+            seasonNum: result.seasonNum,
+            title: result.title, 
+            description: result.description, 
+            startDate: result.startDate, 
+            endDate: result.endDate});
+    } catch (error) {
+        log(error);
+        if (isMongoError(error)) { 
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad Request'); 
+        }
+    }
+});
+
+app.get("/seasons/find", mongoChecker, async (req, res) => {
+    const seasonId = req.body.id;
+
+    Season.findById(ObjectID(seasonId)).then((season) => {
+        res.send(season)
+    }).catch((error) => {
+        log(error)
+        res.status(400).send("Bad Request")
+    })
+});
+
+app.post("/episodes/create", mongoChecker, async (req, res) => {
+
+    const seasonId = req.body.seasonId;
+    const episodeNum = req.body.episodeNum;
+    const title = req.body.title;
+    const description = req.body.description;
+    const airDate = req.body.airDate;
+
+    const episode = new Episode({
+        seasonId: ObjectID(seasonId),
+        episodeNum: episodeNum,
+        title: title,
+        description: description,
+        airDate: airDate
+    });
+
+    try {
+        const result = await episode.save();
+        res.send({ episodeId: result._id, 
+            seasonId: result.seasonId,
+            episodeNum: result.episodeNum,
+            title: result.title, 
+            description: result.description, 
+            airDate: result.airDate});
+    } catch (error) {
+        log(error);
+        if (isMongoError(error)) { 
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad Request'); 
+        }
+    }
+});
+
+app.get("/episodes/find", mongoChecker, async (req, res) => {
+    const episodeId = req.body.id;
+
+    Episode.findById(ObjectID(episodeId)).then((episode) => {
+        res.send(episode)
+    }).catch((error) => {
+        log(error)
+        res.status(400).send("Bad Request")
+    })
+});
+
+app.post("/comments/create", mongoChecker, async (req, res) => {
+
+    const authorId = req.body.authorId;
+    const topicType = req.body.topicType;
+    const topicId = req.body.topicId;
+    const content = req.body.content;
+
+    const comment = new Comment({
+        authorId: ObjectID(authorId),
+        topicType: topicType,
+        topicId: topicId,
+        content: content
+    });
+
+    try {
+        const result = await comment.save();
+        res.send({ commentId: result._id, 
+            authorId: result.showId,
+            topicType: result.topicType,
+            topicId: result.topicId,
+            content: result.content,
+            createdAt: result.createdAt});
+    } catch (error) {
+        log(error);
+        if (isMongoError(error)) { 
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad Request'); 
+        }
+    }
+});
+
+app.get("/comments/find", mongoChecker, async (req, res) => {
+    // finds all comments by certain user
+    const commentId = req.body.id;
+
+    Comment.findById(ObjectID(commentId)).then((comment) => {
+        res.send(comment)
+    }).catch((error) => {
+        log(error)
+        res.status(400).send("Bad Request")
+    })
+});
 
 /*** Webpage routes below **********************************/
 // Serve the build
