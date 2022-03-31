@@ -231,25 +231,17 @@ app.post("/shows/create", mongoChecker, async (req, res) => {
 });
 
 // check list of all 
-app.get("/shows", (req, res) => {
-    if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-        req.session.user = TEST_USER_ID;
-        req.session.email = TEST_USER_EMAIL;
-        res.send({ currentUser: TEST_USER_EMAIL })
-        return;
-    }
+app.get("/shows/:id", mongoChecker, async (req, res) => {
+    console.log("get list of all here")
+    const showId = req.params.id;
 
-
-    if (req.session.user) {
-        res.send({ userId: req.session._id });
-    } else {
-        res.status(401).send();
-    }
+    Show.findById(showId).then((show) => {
+        res.send(show)
+    }).catch((error) => {
+        log(error)
+        res.status(400).send("Bad Request")
+    })
 });
-
-app.get("/hello", (req, res) => {
-    res.send("hello")
-})
     
 
 /*** Webpage routes below **********************************/

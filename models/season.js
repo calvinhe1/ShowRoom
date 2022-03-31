@@ -1,9 +1,18 @@
 /* Show mongoose model */
 const mongoose = require('mongoose')
 
-// Shows with only 1 season have len(seasonList) == 1
-const ShowSchema = new mongoose.Schema({
-    title: {
+// showId used to map season to show
+const SeasonSchema = new mongoose.Schema({
+    showId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    SeasonNum: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+	title: {
 		type: String,
 		required: true,
         default: ""
@@ -31,13 +40,12 @@ const ShowSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    seasonNum: {
+    episodeNum: {
         type: Number,
         required: true,
-        default: 1
+        default: 0
     }
 })
 
-const Show = mongoose.model('Show', ShowSchema)
-
-module.exports = { Show }
+const Season = mongoose.model('Season', SeasonSchema)
+module.exports = { Season }
