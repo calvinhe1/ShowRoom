@@ -16,7 +16,7 @@ export const checkSession = (app) => {
             }
         })
         .then(json => {
-            if (json && json.userId) {
+            if (json && json._id) {
                 app.setState(json);
             }
         })
@@ -42,21 +42,24 @@ export const loginUser = async (loginInfo, setProfile) => {
     });
 
     // Send the request with fetch()
-    await fetch(request)
+    return fetch(request)
         .then(res => {
             if (res.status === 200) {
                 return res.json();
             }
         })
         .then(json => {
-            if (json.userId !== undefined) {
+            if (json._id !== undefined) {
                 setProfile(json);
+                return true;
+            } else {
+                alert('Can\'t find user');
+                return false;
             }
         })
         .catch(error => {
             console.log(error);
         });
-    return;
 };
 
 export const createUser = (loginInfo, setProfile) => {
@@ -70,21 +73,22 @@ export const createUser = (loginInfo, setProfile) => {
     });
 
     // Send the request with fetch()
-    fetch(request)
+    return fetch(request)
         .then(res => {
             if (res.status === 200) {
                 return res.json();
+            } else if (res.status === 401) {
+                alert('Account already taken, please sign in.');
             }
         })
         .then(json => {
-            if (json.userId !== undefined) {
+            if (json._id !== undefined) {
                 setProfile(json);
             }
         })
         .catch(error => {
             console.log(error);
         });
-    return;
 }
 
 // A function to send a GET request to logout the current user
@@ -99,3 +103,48 @@ export const logoutUser = (setProfile) => {
             console.log(error);
         });
 };
+
+export const getUserInfo = (userId) => {
+    const request = new Request(`${API_HOST}/users/${userId}`, {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    return fetch(request)
+        .then((res) => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+export const modifyUser = (userInfo) => {
+    const request = new Request(`${API_HOST}/users`, {
+        method: "post",
+        body: JSON.stringify(userInfo),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    return fetch(request);
+}
+
+export const removeUser = (id) => {
+    const request = new Request(`${API_HOST}/users/${id}`, {
+        method: "delte",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    return fetch(request);
+}

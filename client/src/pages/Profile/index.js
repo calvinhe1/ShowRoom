@@ -1,10 +1,14 @@
 import "./styles.css"
 import UserInformation from "../../react-components/UserInformation";
 
-function Profile(props) {
+import { useParams } from 'react-router-dom';
+
+function Profile() {
+    const { id } = useParams();
+
     return (
         <div>
-            <UserInformation></UserInformation>
+            <UserInformation _id={id}></UserInformation>
         </div>
     );
 }
