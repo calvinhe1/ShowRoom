@@ -52,7 +52,7 @@ function App() {
             <Route exact path='/add_new_user' element={<AddUser/>}/>
             <Route exact path='/user_list' element={<UserList/>}/>
             <Route exact path='/show_list' element={<ShowList/>}/>
-            <Route exact path='/profile' element={<Profile/>}/>
+            <Route path='/profile/:id' element={<Profile/>}/>
             
           </Routes>
         </BrowserRouter>

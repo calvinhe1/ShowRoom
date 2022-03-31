@@ -16,7 +16,7 @@ function Header(props) {
   }
 
   return (
-    userProfile?.profile?.userId ? 
+    userProfile?.profile?._id ? 
     ////////////////////// LOGGED IN VIEW //////////////////////
       <div className="header logged-in">
           <span className="header-left">
@@ -36,7 +36,7 @@ function Header(props) {
             <Link to="/">
               <button className="logout-button" onClick={handleLogout}>Logout</button>
             </Link>
-            <Link to="/profile">
+            <Link to={"/profile/" + userProfile.profile._id}>
               <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
             </Link>
             <Search></Search>
