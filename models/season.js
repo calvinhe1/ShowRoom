@@ -7,7 +7,7 @@ const SeasonSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    SeasonNum: {
+    seasonNum: {
         type: Number,
         required: true,
         default: 1
@@ -36,11 +36,6 @@ const SeasonSchema = new mongoose.Schema({
         default: 0
     },
     numDislikes: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    episodeNum: {
         type: Number,
         required: true,
         default: 0
