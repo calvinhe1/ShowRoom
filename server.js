@@ -29,7 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form 
 
 // express-session for managing user sessions
 const session = require("express-session");
-const MongoStore = require('connect-mongo') // to store session information on the database in production
+const MongoStore = require('connect-mongo'); // to store session information on the database in production
+const { application } = require('express');
+const { Show, Season, Episode } = require('./models/show');
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
     return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
@@ -195,6 +197,60 @@ app.post("/users", mongoChecker, authenticate, async (req, res) => {
     }
 });
 
+// Create a new show; todo: uncomment line with authenticate later
+// app.post("/shows/create", mongoChecker, authenticate, async (req, res) => {
+app.post("/shows/create", mongoChecker, async (req, res) => {
+
+    const title = req.body.title;
+    const description = req.body.description;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    const show = new Show({
+        title: title,
+        description: description,
+        startDate: startDate,
+        endDate: endDate
+    });
+
+    try {
+        const result = await show.save();
+        res.send({ showId: result._id, 
+            title: result.title, 
+            description: result.description, 
+            startDate: result.startDate, 
+            endDate: result.endDate});
+    } catch (error) {
+        log(error);
+        if (isMongoError(error)) { 
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad Request'); 
+        }
+    }
+});
+
+// check list of all 
+app.get("/shows", (req, res) => {
+    if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
+        req.session.user = TEST_USER_ID;
+        req.session.email = TEST_USER_EMAIL;
+        res.send({ currentUser: TEST_USER_EMAIL })
+        return;
+    }
+
+
+    if (req.session.user) {
+        res.send({ userId: req.session._id });
+    } else {
+        res.status(401).send();
+    }
+});
+
+app.get("/hello", (req, res) => {
+    res.send("hello")
+})
+    
 
 /*** Webpage routes below **********************************/
 // Serve the build

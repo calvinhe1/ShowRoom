@@ -18,6 +18,10 @@ const EpisodeSchema = new mongoose.Schema({
         required: false,
         default: ""
 	},
+    airDate: {
+        type: Date,
+        required: false
+    },
     numLikes: {
         type: Number,
         required: true,
@@ -47,6 +51,14 @@ const SeasonSchema = new mongoose.Schema({
         required: false,
         default: ""
 	},
+    startDate: {
+        type: Date,
+        required: false,
+    },
+    endDate: {
+        type: Date,
+        required: false,
+    },
     numLikes: {
         type: Number,
         required: true,
@@ -65,7 +77,7 @@ const SeasonSchema = new mongoose.Schema({
 })
 
 // Shows with only 1 season have len(seasonList) == 1
-const Show = mongoose.model('Show', {
+const ShowSchema = new mongoose.Schema({
     title: {
 		type: String,
 		required: true,
@@ -76,6 +88,14 @@ const Show = mongoose.model('Show', {
         required: false,
         default: ""
 	},
+    startDate: {
+        type: Date,
+        required: false,
+    },
+    endDate: {
+        type: Date,
+        required: false,
+    },
     numLikes: {
         type: Number,
         required: true,
@@ -92,4 +112,8 @@ const Show = mongoose.model('Show', {
     }
 })
 
-module.exports = { Show }
+const Episode = mongoose.model('Episode', EpisodeSchema)
+const Season = mongoose.model('Season', SeasonSchema)
+const Show = mongoose.model('Show', ShowSchema)
+
+module.exports = { Show, Season, Episode }
