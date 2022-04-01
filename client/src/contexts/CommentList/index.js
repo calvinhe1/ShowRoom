@@ -34,6 +34,16 @@ export function useProvideCommentListContext() {
         return comments.filter(comment => comment.userId === id);
     }
 
+    function likeCommentByIds(commentId, userId) {
+        // add user to list of users that like this comment
+        // remove user from list of users that dislike this comment
+    }
+
+    function dislikeCommentByIds(commentId, userId) {
+        // add user to list of users that dislike this comment
+        // remove user from list of users that like this comment
+    }
+
     function addComment(comment) {
         const commentId = comments[comments.length - 1] + 1; //From lecture, replace with server UUID's
         comment.commentId = commentId;

@@ -1,24 +1,30 @@
 .comment-container {
-    width: 100%;
-    height: 50px;
-    border: 1px solid sandybrown;
-    margin: 5px;
     background-color: sandybrown;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .comment-user {
     width: 50px;
-    margin-right: 10px;
-    display: inline-block;
+    height: 50px;
+    border-radius: 50%;
 }
 
-.comment-date {
-    float: right;
-    margin-right: 10px;
+.comment-text {
+    width: 650px;
+    overflow: scroll;
+    max-height: 50px;
+}
+
+.comment-vote {
+    margin-left: 20px;
+    width: 100px;
 }
 
 .comment-delete {
-    float: right;
     background-color: red;
     color: white;
     border: red;
@@ -27,7 +33,4 @@
     cursor: pointer;
 }
 
-.comment-text {
-    position: relative;
-    top: -50%;
-}
+

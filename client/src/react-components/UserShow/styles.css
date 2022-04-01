@@ -1,5 +1,6 @@
 .top-show-container{
-    margin-right: 50px;
+    margin-left: 25px;
+    margin-right: 25px;;
     grid-row: 1;
     display: grid;
 }
