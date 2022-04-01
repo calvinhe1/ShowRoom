@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './styles.css'
 
 import { useUserProfileContext } from '../../contexts/UserProfile';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({email: "", password: ""})
@@ -20,9 +21,15 @@ function Login() {
         });
     };
 
+    const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
-        userProfile.login(loginInfo);
+        userProfile.login(loginInfo).then((res) => {
+            if (res) {
+                navigate('/');
+            }
+        })
     }
 
     return (

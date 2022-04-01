@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
-import { createUser, loginUser, logoutUser } from "../../actions/user";
+import { createUser, getUserInfo, loginUser, logoutUser } from "../../actions/user";
 
 export const userProfileDefaultValues = {
     // set default export states and functions here
@@ -8,6 +8,7 @@ export const userProfileDefaultValues = {
     login: () => {},
     logout: () => {},
     signUp: () => {},
+    getUser: () => {}
 }
 export const userProfileContext = createContext(userProfileDefaultValues);
 
@@ -21,7 +22,7 @@ export function useProvideUserProfileContext(){
     const [profile, setProfile] = useState({});
 
     function login(loginInfo) {
-        loginUser(loginInfo, setProfile);
+        return loginUser(loginInfo, setProfile);
     }
 
     function logout() {
@@ -29,7 +30,11 @@ export function useProvideUserProfileContext(){
     }
 
     function signUp(loginInfo) {
-        createUser(loginInfo, setProfile);
+        return createUser(loginInfo, setProfile);
+    }
+
+    function getUser(id) {
+        return getUserInfo(id);
     }
 
     return {
@@ -37,6 +42,7 @@ export function useProvideUserProfileContext(){
         login,
         logout,
         signUp,
+        getUser
     }
 
 }
