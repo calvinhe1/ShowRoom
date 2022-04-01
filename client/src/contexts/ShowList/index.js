@@ -9,7 +9,8 @@ export const showListDefaultValues = {
     getShowById: () => {},
     setShow: () => {},
     addShow: () => {},
-    getShowsByGenre: () => {}
+    getShowsByGenre: () => {},
+    getShowsBySeason: () => {}
 }
 
 export const showListContext = createContext(showListDefaultValues);
@@ -54,6 +55,11 @@ export function useProvideShowListContext(){
         return shows.filter(show => show.genre.includes(genre));
     }
 
+    function getShowsBySeason(season) {
+        return shows.filter(show => show.season.includes(season));
+
+    }
+
     return {
         shows,
         setShows,
@@ -61,7 +67,8 @@ export function useProvideShowListContext(){
         getShowById,
         setShow,
         addShow,
-        getShowsByGenre
+        getShowsByGenre,
+        getShowsBySeason
     }
 }
 

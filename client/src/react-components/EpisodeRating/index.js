@@ -36,7 +36,6 @@ function ShowRating(props) {
     function getNumVotes(i) {
         let count = 0;
         Object.keys(currentShowRating.ratings).forEach(r => {if (currentShowRating.ratings[r] == i) count++;})
-       
         return count;
     }
 
@@ -44,11 +43,7 @@ function ShowRating(props) {
         for (let i = 1; i <= 5; i++) {
             const percent = (getNumVotes(i) / currentShowRating.ratingCount) * 100;
             const bar = document.getElementsByClassName('bar' + String(i))[0];
-
-        
-
             bar.style.width = String(percent) + '%';
-           
         }
     });
 

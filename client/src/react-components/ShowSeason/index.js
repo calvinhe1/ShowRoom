@@ -3,9 +3,14 @@ import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
 import { useCommentListContext } from "../../contexts/CommentList";
 import ShowsBar from "../ShowsBar";
 import { useShowListContext } from "../../contexts/ShowList";
+import {useSeasonListContext } from "../../contexts/Season";
+
+import { uid } from "react-uid";
 
 
-function ShowBars() {
+//Rather than displaying the home elements, display by season.
+
+function ShowSeason(props) {
 
     const showContext = useShowListContext();
     const defaultGenres = ['Action', 'Drama', 'Fantasy'];
@@ -18,30 +23,21 @@ function ShowBars() {
     const mostTalkedAboutIds = commentContext.getMostCommentedIds();
     const mostTalkedAboutShows = mostTalkedAboutIds.map(id => showContext.getShowById(id));
 
+    //display seasons.
+    const seasonContext = useSeasonListContext();
+    const seasons = seasonContext.getSeasons();
+
     return (
-        <div className="showbars-container">
-            <div className="showbar">
-                <h2>Highest Rated</h2>
-                <ShowsBar shows={highestRatedShows} showRating={true}></ShowsBar>
-            </div>
-
-            <div className="showbar">
-             <h2>Most Talked About</h2>
-                <ShowsBar shows={mostTalkedAboutShows} showCommentCount={true}></ShowsBar>   
-            </div>
-
+      <div className="showbars-container">
             {
-            defaultGenres.map(genre => {
-                return (
-                <div key={genre} className="showbar">
-                    <h2>{genre}</h2>
-                    <ShowsBar shows={showContext.getShowsByGenre(genre)}></ShowsBar>
-                </div>
-                )
-            })
+            <div className = "showbar" key={uid(props.season)} >
+                <h2>{props.season}</h2>
+                <ShowsBar shows={showContext.getShowsBySeason(props.season)}></ShowsBar>
+            </div>
             }
+           
       </div>
     )
 }
 
-export default ShowBars;
+export default ShowSeason;
