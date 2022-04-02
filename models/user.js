@@ -17,12 +17,6 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		minlength: 1
 	},
-    profilePicture: {
-        type: String,
-        required: true,
-        trim: true,
-        default: '/images/profile-picture.jpg'
-    },
 	isAdmin: {
 		type: Boolean,
 		required: true,
@@ -33,6 +27,14 @@ const UserSchema = new mongoose.Schema({
 		required: false
 	},
 	bio: {
+		type: String,
+		required: false
+	},
+	image_id: {
+		type: String,
+		required: false
+	},
+	image_url: {
 		type: String,
 		required: false
 	}

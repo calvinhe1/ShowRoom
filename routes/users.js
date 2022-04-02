@@ -9,6 +9,18 @@ const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { authenticate } = require('./helpers/authenticate')
 const { ObjectID } = require('mongodb')
 
+// cloudinary: configure using credentials found on your Cloudinary Dashboard
+// sign up for a free account here: https://cloudinary.com/users/register/free
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dgd284zmh',
+    api_key: '939854537778158',
+    api_secret: 'FdY3dpnSqjBf8BHJd3d292OHA88'
+});
+
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
 
 router.post("/login", mongoChecker, (req, res) => {
     const email = req.body.email;
@@ -20,7 +32,7 @@ router.post("/login", mongoChecker, (req, res) => {
             req.session.user = user._id;
             req.session.email = user.email; 
             res.send({ _id: user._id, 
-                       profilePicture: user.profilePicture,
+                       image_url: user.image_url,
                        isAdmin: user.isAdmin }); //TODO send other user stuff like profile picture
         })
         .catch((e) => {
@@ -88,17 +100,26 @@ router.get("/:id", mongoChecker, async (req, res) => {
     const sendMe = {
         _id: result?._id,
         username: result?.username,
-        profilePicture: result?.profilePicture,
+        image_url: result?.image_url,
         bio: result?.bio
         //TODO top shows and stuff
     }
     res.send(sendMe);
 });
 
+async function deleteImage(imageId) {
+    return cloudinary.uploader.destroy(imageId);
+}
+
 router.delete("/:id", mongoChecker, authenticate, async (req, res) => {
     const id = req.params.id;
     //Only a user can edit themselves or an admin
     if (id == req.user._id || req.user.isAdmin) {
+        const user = await User.findById(id);
+        if (user.image_id) {
+            // Clean up their data from cloudinary
+            await deleteImage(user.image_id);
+        }
         const result = await User.deleteOne({_id: id});
         req.session.destroy();
         res.status(200).send(result);
@@ -118,5 +139,30 @@ router.post("/", mongoChecker, authenticate, async (req, res) => {
         res.status(401).send('Unauthorized');
     }
 });
+
+router.post("/profileImages/:id", multipartMiddleware, mongoChecker, authenticate, async (req, res) => {
+    const id = req.params.id;
+    if (id != req.user._id && !req.user.isAdmin) {
+        res.status(401).send('Unauthorized');
+        return;
+    }
+
+    if (req.user.image_id) {
+        // If user already has a profile picture, first delete the old one from cloudinary
+        await deleteImage(req.user.image_id);
+    }
+
+    // Use uploader.upload API to upload image to cloudinary server.
+    cloudinary.uploader.upload(
+        req.files.image.path, // req.files contains uploaded files
+        function (result) {
+            User.updateOne({_id: id}, {$set: {image_id: result.public_id, image_url: result.url}})
+                .then(() => {
+                    res.status(200).send(result);
+                });
+        });
+});
+
+
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import "./styles.css"
 
 import {useState} from "react";
-import { getUserInfo, modifyUser, removeUser } from "../../actions/user";
+import { getUserInfo, modifyUser, removeUser, setProfileImage } from "../../actions/user";
 import { useNavigate } from 'react-router-dom';
 import { useUserProfileContext } from "../../contexts/UserProfile";
 
@@ -54,10 +54,30 @@ function UserInformation(props) {
         }
     }
 
+    const DEFAULT_IMAGE = "/images/profile-picture.jpg";
+
+    const changeImage = function(e) {
+        e.preventDefault();
+        setProfileImage(e.target, props._id)
+            .then(res => {
+                if (res) {
+                    user.image_url = res;
+                    setUser(Object.assign({},user));
+                    //Progate it across the app
+                    userProfile.profile.image_url = res;
+                    userProfile.setProfile(Object.assign({},userProfile.profile));
+                }
+            });
+    }
+
     return (
         <div className='user-info'>
-            <span>
-                <img className='user-info-pic' src={user.profilePicture} alt='Profile Picture'></img>
+            <span className="user-info-pic-container">
+                <img className='user-info-pic' key={user.image_url} src={user.image_url || DEFAULT_IMAGE} alt='Profile Picture'></img>
+                <form onSubmit={changeImage}>
+                    <input name="image" type="file" />
+                    <button className="edit-button" type="submit">Upload Profile Picture</button>
+                </form>
             </span>
             <table className='user-info-container'>
                 <tr className="user-info-input">

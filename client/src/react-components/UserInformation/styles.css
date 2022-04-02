@@ -2,9 +2,29 @@
     height: 300px;
 }   
 
+.user-info-pic-container {
+    display: inline-block;
+    width: 400px;   
+}
+
+.user-info-pic-container form input {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.user-info-pic-container form .edit-button {
+    width: 160px;
+    margin: auto;
+    display: block;
+    margin-top: 5px;
+}
+
 .user-info-pic {
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 250px;
+    display: block;
+    margin: auto;
 }
 
 .user-info-container div > * {
