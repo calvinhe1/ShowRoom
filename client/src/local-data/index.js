@@ -83,18 +83,18 @@ export const commentList = [
 ];
 
 export const episodeList = [
-  {showId: 0, episode: 1, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 0, episode: 2, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 0, episode: 3, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 1, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
-  {showId: 1, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
-  {showId: 1, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg"},
-  {showId: 2, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 2, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 2, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 3, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 4, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
-  {showId: 4, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg"},
+  {showId: 0, episode: 1, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2016"},
+  {showId: 0, episode: 2, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2021"},
+  {showId: 0, episode: 3, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Winter 2022"},
+  {showId: 1, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg", season: "Fall 2021"},
+  {showId: 1, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg", season: "Fall 2021"},
+  {showId: 1, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250" , picture: "/images/demonslayer.jpg", season: "Fall 2021"},
+  {showId: 2, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Winter 2021"},
+  {showId: 2, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Winter 2021"},
+  {showId: 2, episode: 3, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Winter 2021"},
+  {showId: 3, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2020"},
+  {showId: 4, episode: 1, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2016"},
+  {showId: 4, episode: 2, title: "The awakining",description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2016"}
 
 ];
 

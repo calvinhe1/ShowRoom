@@ -15,6 +15,8 @@ import EpisodeInfo from "../../react-components/EpisodeInfo";
 
 import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
 
+import  ShowEpisodeCard from "../../react-components/ShowEpisodeCard";
+import EpisodesBar from "../../react-components/EpisodesBar";
 
 function ShowPage(props) {
 
@@ -29,6 +31,11 @@ function ShowPage(props) {
     const episodeRatingsContext = useEpisodeRatingsListContext();
     const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
     const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
+
+
+    //extract all the seasons for this show.
+    const showListContext = useShowListContext();
+    const shows = showListContext.getShowById(props.showId)  //extract seasons out.
 
     const ratings = []
 
@@ -45,7 +52,8 @@ function ShowPage(props) {
         setValue("Cover")
     }
 
-    useEffect(() => {        
+    useEffect(() => {    
+        window.scrollTo(0,0)
         if (value == "Cover") {
             setEpisode(false)
         }
@@ -56,18 +64,14 @@ function ShowPage(props) {
      }, [value]);
 
         const handleOnChange =  (e) => {
+        e.preventDefault()
         let test = e.target.getAttribute("value")
 
             //ensure value is actually set before moving on.
-
-
-
         if (test != null) {
             setValue(test)
             setShow(props.showId)
         }
-      
-        
         }
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
@@ -78,10 +82,10 @@ function ShowPage(props) {
             (
             <div className = "highestRatedEpisodes"  onClick={handleOnChange} > Top Rated Episodes! 
             <br></br><br></br>
-                {
+                {   
                     topThree.map(episode =>  {
                         return (
-                            <div key={uid(episode.episode)} className = "ep" value={episode.episode} >{episode.episode}<br></br>
+                            <div key={uid(episode.episode)} className = "ep" value={episode.episode} >{"Episode " + episode.episode}<br></br>
                             <div key={uid(episode.rating)} className = "rating"  value={episode.episode} >Rating: {episode.rating.toFixed(1)} </div>
                             
                             </div>                        
@@ -94,27 +98,37 @@ function ShowPage(props) {
             <div className="epContainer" value ={value} onClick={handleOnChange} >
                 <br></br>
                 <span className="ep" value={"Cover" }>
-                     Cover
+                     {shows.title}
                 </span>
                 {   
+                    /* Show episodes on top
                     episodesShow.map(episode => {
                         return (
                             <span key={uid(episode)} className="ep" value={episode.episode}  >
                                 {episode.episode}
                             </span>  
                         )
-                    })
+                    })*/
                 }      
             </div>
             {
-            
             episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>
+            }   
+
+            {
+            shows.season.map(season => {
+                return (
+                        <div className ="showbar" onClick={handleOnChange} key={uid(season)}>
+                            <h2>{season}</h2>
+                            <EpisodesBar currentShowId={props.showId} season={season}/>
+                        </div>
+                )
        
-            
+            })
             }
-        
-           
+          
             <div className="showbar">
+                <h2>Recommended</h2>
                 <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>
             </div>
             <CommentSection currentShowId={props.showId} />
