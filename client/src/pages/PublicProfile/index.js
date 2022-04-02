@@ -1,12 +1,13 @@
 import "./styles.css"
-// import UserInformation from "../../react-components/UserInformation";
 import ProfileInformation from "../../react-components/ProfileInformation";
+import { useParams } from "react-router-dom";
 
 
-function PublicProfile(props) {
+function PublicProfile() {
+    const { id } = useParams();
     return (
         <div>
-            <ProfileInformation></ProfileInformation>
+            <ProfileInformation id={id}></ProfileInformation>
         </div>
     );
 }

@@ -67,7 +67,7 @@ function App() {
             <Route exact path='/user_list' element={<UserList/>}/>
             <Route exact path='/show_list' element={<ShowList/>}/>
             <Route path='/profile/:id' element={<Profile/>}/>
-            <Route exact path='/user' element={<PublicProfile/>}/>
+            <Route path='/user/:id' element={<PublicProfile/>}/>
 
           </Routes>
         </BrowserRouter>
