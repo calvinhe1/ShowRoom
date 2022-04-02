@@ -6,6 +6,7 @@ function ShowCard(props) {
     function navigate(e) {
         if (props.changePage) {
             props.changePage(props.show.showId);
+            window.scrollTo(0,0)
         } 
     }
 
