@@ -78,7 +78,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 60000,
+            expires: 600000,
             httpOnly: true
         },
         // store the sessions on the database in production
@@ -88,14 +88,9 @@ app.use(
     })
 );
 
-// A route to login and create a session
 app.post("/users/login", mongoChecker, (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-
-    // log(email, password);
-    // Use the static method on the User model to find a user
-    // by their email and password
     User.findByEmailPassword(email, password)
         .then(user => {
             // Add the user's id to the session.
@@ -106,8 +101,8 @@ app.post("/users/login", mongoChecker, (req, res) => {
                        profilePicture: user.profilePicture,
                        isAdmin: user.isAdmin }); //TODO send other user stuff like profile picture
         })
-        .catch(error => {
-            res.status(400).send();
+        .catch((e) => {
+            res.status(e).send();
         });
 });
 
@@ -124,7 +119,7 @@ app.post("/users/create", mongoChecker, async (req, res) => {
 
     try {
 		const result = await user.save();
-		res.send({ _id: result._id, profilePictureL: result.profilePicture, isAdmin: result.isAdmin });
+		res.send({ _id: result._id, profilePicture: result.profilePicture, isAdmin: result.isAdmin });
 	} catch (error) {
 		log(error);
 		if (isMongoError(error)) { 
@@ -155,7 +150,7 @@ app.get("/users/logout", (req, res) => {
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ _id: req.session._id });
+        res.send({ _id: req.session.user });
     } else {
         res.status(401).send();
     }
@@ -178,25 +173,28 @@ app.get("/users/:id", mongoChecker, async (req, res) => {
     res.send(sendMe);
 });
 
-
 app.delete("/users/:id", mongoChecker, authenticate, async (req, res) => {
     const id = req.params.id;
+    console.log(req)
     //Only a user can edit themselves or an admin
-    if (id != req.user._id && !req.user.isAdmin) {
-        res.status(401).send('Unauthorized');
-    } else {
+    if (id == req.user._id || req.user.isAdmin) {
         const result = await User.deleteOne({_id: id});
+        req.session.destroy();
         res.status(200).send(result);
+    } else {
+        res.status(401).send('Unauthorized');
     }
 });
 
 app.post("/users", mongoChecker, authenticate, async (req, res) => {
     //Only a user can edit themselves or an admin
-    if (req.body._id != req.user._id && !req.user.isAdmin) {
-        res.status(401).send('Unauthorized');
-    } else {
+    const id = req.body._id;
+
+    if (id == req.user._id || req.user.isAdmin) {
         const result = await User.updateOne({_id: req.body._id}, {$set: { ...req.body }});
         res.status(200).send(result);
+    } else {
+        res.status(401).send('Unauthorized');
     }
 });
 

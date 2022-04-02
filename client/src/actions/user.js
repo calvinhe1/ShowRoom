@@ -46,15 +46,16 @@ export const loginUser = async (loginInfo, setProfile) => {
         .then(res => {
             if (res.status === 200) {
                 return res.json();
+            } else if (res.status === 404) {
+                alert('User not found');
+            } else if (res.status === 403) {
+                alert('Incorrect password');
             }
         })
         .then(json => {
-            if (json._id !== undefined) {
+            if (json?._id !== undefined) {
                 setProfile(json);
                 return true;
-            } else {
-                alert('Can\'t find user');
-                return false;
             }
         })
         .catch(error => {
@@ -79,6 +80,7 @@ export const createUser = (loginInfo, setProfile) => {
                 return res.json();
             } else if (res.status === 401) {
                 alert('Account already taken, please sign in.');
+                return Promise.reject();
             }
         })
         .then(json => {
@@ -86,9 +88,6 @@ export const createUser = (loginInfo, setProfile) => {
                 setProfile(json);
             }
         })
-        .catch(error => {
-            console.log(error);
-        });
 }
 
 // A function to send a GET request to logout the current user
@@ -139,7 +138,7 @@ export const modifyUser = (userInfo) => {
 
 export const removeUser = (id) => {
     const request = new Request(`${API_HOST}/users/${id}`, {
-        method: "delte",
+        method: "delete",
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
