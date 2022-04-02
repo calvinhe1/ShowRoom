@@ -58,6 +58,24 @@ UserSchema.pre('save', function(next) {
 	}
 })
 
+// Need to also salt the password when a user updates their
+UserSchema.pre('updateOne', function(next) {
+	const user = this; // binds this to User document instance
+
+	// checks to ensure we don't hash password more than once
+	if (user?._update?.$set?.password) {
+		// generate salt and hash the password
+		bcrypt.genSalt(10, (err, salt) => {
+			bcrypt.hash(user._update.$set.password, salt, (err, hash) => {
+				user._update.$set.password = hash
+				next()
+			})
+		})
+	} else {
+		next()
+	}
+})
+
 // A static method on the document model.
 // Allows us to find a User document by comparing the hashed password
 //  to a given one, for example when logging in.
