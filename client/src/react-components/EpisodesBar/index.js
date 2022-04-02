@@ -22,7 +22,6 @@ function EpisodesBar(props) {
     const ratingContext = useShowRatingsListContext();
     const commentContext = useCommentListContext();
 
-
     //get episodes from show.
     const episodeContext = useEpisodeListContext();
    
@@ -36,8 +35,6 @@ function EpisodesBar(props) {
             episodesOfShow.push(episodes[i])
         }
     }
-    console.log(episodesOfShow)
-
 
     const element = useRef(null);
 

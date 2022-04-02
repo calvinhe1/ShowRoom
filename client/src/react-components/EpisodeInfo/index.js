@@ -18,15 +18,8 @@ function EpisodeInfo(props) {
     const show = showContext.getShowById(props.currentShowId);
 
     const episodeContext = useEpisodeListContext();
-
-
-    //const episode = (episodeContext.getAllEpisodesByShow(props.currentShowId))[props.episode]
-
- 
     const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
-
-
-
+    
     const [edited, setEdited] = useState(false);
 
 

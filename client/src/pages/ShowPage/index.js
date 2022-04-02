@@ -37,9 +37,6 @@ function ShowPage(props) {
     const showListContext = useShowListContext();
     const shows = showListContext.getShowById(props.showId)  //extract seasons out.
 
-    console.log(shows.title)
-
-
     const ratings = []
 
     for (let i=0; i<topThree.length; i++) {
@@ -67,6 +64,7 @@ function ShowPage(props) {
      }, [value]);
 
         const handleOnChange =  (e) => {
+        e.preventDefault()
         let test = e.target.getAttribute("value")
 
             //ensure value is actually set before moving on.
@@ -75,12 +73,6 @@ function ShowPage(props) {
             setShow(props.showId)
         }
         }
-    function tester(e) {
-        let test = e.target.getAttribute("value")
-        console.log(test)
-
-
-    }
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
     return (

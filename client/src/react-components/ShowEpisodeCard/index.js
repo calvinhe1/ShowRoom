@@ -3,8 +3,6 @@ import "./styles.css"
 
 function ShowEpisodeCard(props) {
 
-    console.log("EPISODE CARD: ", props)
-
     return (
         
         
