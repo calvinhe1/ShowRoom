@@ -64,7 +64,7 @@ function Comment(props) {
 
 
     return (
-        <div className="comment-container">
+        <span className="comment-container">
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
 
             <img className="comment-user" src={getProfilePicture()} alt={currentUser.userName}></img>
@@ -87,7 +87,7 @@ function Comment(props) {
                     currentUser?.userId === props.comment.userId || currentUser?.isAdmin ?
                     <button onClick={deleteComment} className="comment-delete">X</button> : null
             }
-        </div>
+        </span>
     );
 }
 

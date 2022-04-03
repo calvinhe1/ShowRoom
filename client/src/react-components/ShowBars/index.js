@@ -24,12 +24,12 @@ function ShowBars() {
                 <h2>Highest Rated</h2>
                 <ShowsBar shows={highestRatedShows} showRating={true}></ShowsBar>
             </div>
-
+            
             <div className="showbar">
-             <h2>Most Talked About</h2>
+                <h2>Most Talked About</h2>
                 <ShowsBar shows={mostTalkedAboutShows} showCommentCount={true}></ShowsBar>   
             </div>
-
+            
             {
             defaultGenres.map(genre => {
                 return (

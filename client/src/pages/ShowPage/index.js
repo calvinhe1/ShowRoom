@@ -4,7 +4,6 @@ import ShowInfo from "../../react-components/ShowInfo";
 import ShowsBar from "../../react-components/ShowsBar";
 import CommentSection from "../../react-components/CommentSection";
 
-
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
 import { useShowListContext } from "../../contexts/ShowList";
 import {useState, useEffect} from "react";
@@ -76,7 +75,7 @@ function ShowPage(props) {
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
     return (
-        <div>
+        <div className="pageContainer">
             {
             !episode && topThree.length != 0? 
             (
@@ -113,25 +112,33 @@ function ShowPage(props) {
             </div>
             {
             episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>
-            }   
+            }  
+            
+              
+            <div className = "commentContainer">
+                <CommentSection currentShowId={props.showId} />
+            </div>
+            
+            
 
             {
             shows.season.map(season => {
                 return (
-                        <div className ="showbar" onClick={handleOnChange} key={uid(season)}>
+                        <div className ="showbartwo" onClick={handleOnChange} key={uid(season)}>
                             <h2>{season}</h2>
                             <EpisodesBar currentShowId={props.showId} season={season}/>
+                      
                         </div>
                 )
        
             })
             }
           
-            <div className="showbar">
+            <div className="showbartwo">
                 <h2>Recommended</h2>
                 <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>
             </div>
-            <CommentSection currentShowId={props.showId} />
+            
         </div>
 
     );
