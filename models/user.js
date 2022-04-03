@@ -4,6 +4,13 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
+const FavoriteShowSchema = new mongoose.Schema({
+	showId: {
+		type: String,
+		required: true
+	}
+})
+
 const UserSchema = new mongoose.Schema({
     email: {
 		type: String,
@@ -37,7 +44,8 @@ const UserSchema = new mongoose.Schema({
 	image_url: {
 		type: String,
 		required: false
-	}
+	},
+	favoriteShows: [FavoriteShowSchema]
 });
 
 // An example of Mongoose middleware.

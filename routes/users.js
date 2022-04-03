@@ -163,6 +163,30 @@ router.post("/profileImages/:id", multipartMiddleware, mongoChecker, authenticat
         });
 });
 
+router.post('/favorite', mongoChecker, authenticate, async (req, res) => {
+    try {
+    const user = await User.findById(req.user._id);
+    const show = await user.favoriteShows.create({
+        showId: req.body.showId
+    });
+    await user.favoriteShows.push(show);
+    const result = await user.save();
+    res.send(result);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+});
 
+router.delete('/favorite', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const show = await user.find({showId: req.body.showId});
+        await show.remove();
+        const result = await user.save();
+        res.send(result);
+    } catch (error) {
+        res.status(500).send('Internal Server Error')
+    }
+})
 
 module.exports = router;

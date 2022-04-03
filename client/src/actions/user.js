@@ -184,3 +184,19 @@ export const setProfileImage = async (form, id) => {
             console.log(error);
         });
 }; 
+
+export const addShowToFavorites = async (showId) => {
+    const request = new Request(`${API_HOST}/users/favorite`, {
+        method: 'post',
+        messageBody: JSON.stringify({showId})
+    });
+    return fetch(request);
+}
+
+export const removeShowFromFavorites = async (showId) => {
+    const request = new Request(`${API_HOST}/users/favorite`, {
+        method: 'delete',
+        messageBody: JSON.stringify({showId})
+    });
+    return fetch(request);
+}
