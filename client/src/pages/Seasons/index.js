@@ -41,14 +41,14 @@ function Seasons(props) {
     return (
         <div className="home">  
                 <div id="filter">
-                <h2>Seasons: </h2>
-                <form>
-                    <select name="seasons" onChange={handleOnChange} value={pick}>
-                        <option value="All">All</option>
+                <h2 className="seasonsLabel">Seasons </h2>
+                <form className = "seasons">
+                    <select className="dropdown" onChange={handleOnChange} value={pick}>
+                        <option className = "options" value="All">All</option>
                         {
                             seasons.map(season => {
                                 return (
-                                    <option key={uid(season.season)} value={season.season}>{season.season}</option>       
+                                    <option key={uid(season.season)} className = "options" value={season.season}>{season.season}</option>       
                                 )
                             })
                         }

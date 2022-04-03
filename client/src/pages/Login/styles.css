@@ -3,6 +3,16 @@
     margin: 15px;
 }
 
+button.formField {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 25px;
+}
+
 .textInput{
     width: 350px;
 }
@@ -16,6 +26,7 @@
     border-radius: 20px;
     border: 2px solid lightblue;
     box-shadow: 2px 2px 2px lightgrey;
+    
 }
 
 #loginButton{
