@@ -8,7 +8,7 @@ const { Episode } = require('../models/episode')
 const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
 
-
+// airDate example format: "2020-04-14"
 router.post('/create', mongoChecker, (req, res) => {
 
     const seasonId = req.body.seasonId;

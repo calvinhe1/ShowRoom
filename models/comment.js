@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 
 // Topic types: show, season, episode
 // based on topic type, topic id can be showId, seasonId, or episodeId
-// not sure how to do enum yet, but may change topicType to enum in the future
 const CommentSchema = new mongoose.Schema({
     authorId: {
         type: mongoose.Schema.Types.ObjectId,

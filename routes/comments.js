@@ -8,6 +8,8 @@ const { Comment } = require('../models/comment')
 const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
 
+// Topic types: show, season, episode
+// based on topic type, topic id can be showId, seasonId, or episodeId
 router.post('/create', mongoChecker, (req, res) => {
 
     const authorId = req.body.authorId;
