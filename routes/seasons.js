@@ -49,6 +49,7 @@ router.post('/create', mongoChecker, (req, res) => {
 router.patch('/:id', mongoChecker, (req, res) => {
 
     const id = req.params.id
+    const showId = req.body.showId;
     const seasonNum = req.body.seasonNum;
     const seasonCategory = req.body.seasonCategory;
     const title = req.body.title;
@@ -59,6 +60,7 @@ router.patch('/:id', mongoChecker, (req, res) => {
 
 
     Season.findById(ObjectID(id)).then((season) => {
+        season.showId = ObjectID(showId)
         season.seasonNum = seasonNum
         season.seasonCategory = seasonCategory
         season.title = title
