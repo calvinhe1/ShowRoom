@@ -17,6 +17,12 @@
     margin-left: 100px;
 }
 
+
+.info {
+    font-family: arial;
+    font-size: 15px;
+    
+}
 .input {
     width: 250px;
 }

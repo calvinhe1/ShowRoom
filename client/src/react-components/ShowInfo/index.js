@@ -81,7 +81,7 @@ function ShowInfo(props) {
                                 name="title" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={show?.title}></input>
+                                value={show?.title} className="info"></input>
                         </div>
                         <div>
                             <label>Genre: </label>
@@ -90,7 +90,7 @@ function ShowInfo(props) {
                                 name="genre" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={getGenre(show?.genre)}></input>
+                                value={getGenre(show?.genre)} className="info"></input>
                         </div>
                         <div>
                             <label>Start Date: </label>
@@ -99,7 +99,7 @@ function ShowInfo(props) {
                                 name="startDate" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={show.startDate}></input>
+                                value={show.startDate} className="info"></input>
                        
                         
                             {show.endDate || currentUser?.isAdmin ? 
@@ -110,7 +110,7 @@ function ShowInfo(props) {
                                         name="endDate" 
                                         disabled={!currentUser?.isAdmin}
                                         onChange={editShow}
-                                        value={show.endDate}></input>
+                                        value={show.endDate} className="info"></input>
                                 </div> :
                                 <label>Ongoing</label>
                             }
@@ -122,7 +122,7 @@ function ShowInfo(props) {
                                 name="season" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={getSeason(show?.season)}></input>
+                                value={getSeason(show?.season)} className="info"></input>
                         </div>
                         <div>
                             <label>Description: </label>
@@ -132,7 +132,7 @@ function ShowInfo(props) {
                                 name="description"
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={show.description}></textarea>
+                                value={show.description} className="info"></textarea>
                         </div>
                         { currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
