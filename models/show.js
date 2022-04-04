@@ -60,7 +60,7 @@ const ShowSchema = new mongoose.Schema({
     },
     tags: [String],
     genres: [String],
-    ratings: [RatingSchema],
+    ratings: RatingSchema,
     image_url: {
 		type: String,
 		required: false,
