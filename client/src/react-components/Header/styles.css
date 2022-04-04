@@ -30,14 +30,14 @@
     right: 70px; */
 }
 
-.login-button, .manage-button, .logout-button {
+.login-button, .manage-button, .logout-button, .edit-button {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
     cursor: pointer;
     border: 1px solid transparent;
     margin-left: 10px;
-    border-radius: 15%;
+    border-radius: 5px;
     height: 30px;
     width: 60px;
 }

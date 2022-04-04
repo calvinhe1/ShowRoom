@@ -5,10 +5,11 @@ import { createUser, getUserInfo, loginUser, logoutUser } from "../../actions/us
 export const userProfileDefaultValues = {
     // set default export states and functions here
     profile: {}, 
+    setProfile: () => {},
     login: () => {},
     logout: () => {},
     signUp: () => {},
-    getUser: () => {}
+    getUser: () => {},
 }
 export const userProfileContext = createContext(userProfileDefaultValues);
 
@@ -39,6 +40,7 @@ export function useProvideUserProfileContext(){
 
     return {
         profile,
+        setProfile,
         login,
         logout,
         signUp,

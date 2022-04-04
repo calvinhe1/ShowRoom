@@ -15,9 +15,9 @@ function Signup() {
         e.preventDefault();
         userProfile.signUp(loginInfo)
         .then((res) => {
-            console.log(res);
-            navigate('/profile/' + res._id);
-        });
+            navigate('/');
+        })
+        .catch((e) => {})
     }
 
 

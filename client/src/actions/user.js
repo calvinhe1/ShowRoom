@@ -46,15 +46,16 @@ export const loginUser = async (loginInfo, setProfile) => {
         .then(res => {
             if (res.status === 200) {
                 return res.json();
+            } else if (res.status === 404) {
+                alert('User not found');
+            } else if (res.status === 403) {
+                alert('Incorrect password');
             }
         })
         .then(json => {
-            if (json._id !== undefined) {
+            if (json?._id !== undefined) {
                 setProfile(json);
                 return true;
-            } else {
-                alert('Can\'t find user');
-                return false;
             }
         })
         .catch(error => {
@@ -79,6 +80,7 @@ export const createUser = (loginInfo, setProfile) => {
                 return res.json();
             } else if (res.status === 401) {
                 alert('Account already taken, please sign in.');
+                return Promise.reject();
             }
         })
         .then(json => {
@@ -86,9 +88,6 @@ export const createUser = (loginInfo, setProfile) => {
                 setProfile(json);
             }
         })
-        .catch(error => {
-            console.log(error);
-        });
 }
 
 // A function to send a GET request to logout the current user
@@ -139,12 +138,65 @@ export const modifyUser = (userInfo) => {
 
 export const removeUser = (id) => {
     const request = new Request(`${API_HOST}/users/${id}`, {
-        method: "delte",
+        method: "delete",
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
         }
     });
 
+    return fetch(request);
+}
+
+// Set a users profile image
+export const setProfileImage = async (form, id) => {
+
+    const url = `${API_HOST}/users/profileImages/${id}`;
+
+    // The data we are going to send in our request
+    const imageData = new FormData(form);
+
+    // Create our request constructor with all the parameters we need
+    const request = new Request(url, {
+        method: "post",
+        body: imageData,
+    });
+
+    // Send the request with fetch()
+    return fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            // Usually check the error codes to see what happened.
+            if (res.status === 200) {
+                // If image was added successfully, tell the user.
+                alert('Success!');
+                return res.json();
+            } else {
+                // If server couldn't add the image, tell the user.
+                // Here we are adding a generic message, but you could be more specific in your app.
+                alert('Error! Could not add image');
+            }
+        })
+        .then((res) => {
+            return res.url;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}; 
+
+export const addShowToFavorites = async (showId) => {
+    const request = new Request(`${API_HOST}/users/favorite`, {
+        method: 'post',
+        messageBody: JSON.stringify({showId})
+    });
+    return fetch(request);
+}
+
+export const removeShowFromFavorites = async (showId) => {
+    const request = new Request(`${API_HOST}/users/favorite`, {
+        method: 'delete',
+        messageBody: JSON.stringify({showId})
+    });
     return fetch(request);
 }

@@ -10,6 +10,7 @@ function Header(props) {
   // retrieve user from context
   const userProfile = useUserProfileContext();
 
+  const DEFAULT_IMAGE = "/images/profile-picture.jpg";
 
   function handleLogout(e){
     userProfile.logout();
@@ -37,7 +38,7 @@ function Header(props) {
               <button className="logout-button" onClick={handleLogout}>Logout</button>
             </Link>
             <Link to={"/profile/" + userProfile.profile._id}>
-              <img src={userProfile.profile.profilePicture} alt="profile picture" className="profile-pic"></img>
+              <img src={userProfile.profile.image_url || DEFAULT_IMAGE} alt="profile picture" className="profile-pic"></img>
             </Link>
             <Search></Search>
           </span>
