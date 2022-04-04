@@ -114,7 +114,8 @@ router.get('/findshow/:showid', mongoChecker, (req, res) => {
     })
 });
 
-router.get('/findseason/:id', mongoChecker, async (req, res) => {
+//get specific season info by seasonId
+router.get('/findseason/:id', mongoChecker, (req, res) => {
     const id = req.params.id
 
     Season.findById(ObjectID(id)).then((season) => {
@@ -130,7 +131,7 @@ router.get('/findseason/:id', mongoChecker, async (req, res) => {
 });
 
 // like or unlike a season; reactionType: "like" or "dislike"
-router.post('/reaction/:id', mongoChecker, async (req, res) => {
+router.post('/reaction/:id', mongoChecker, (req, res) => {
     const id = req.params.id
     const reactionType = req.body.reactionType
 
