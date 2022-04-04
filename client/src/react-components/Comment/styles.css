@@ -17,6 +17,8 @@
     width: 650px;
     overflow: scroll;
     max-height: 100px;
+    font-size: 12px;
+    margin: 5px;
 }
 
 .comment-vote {
@@ -37,5 +39,8 @@
 
 .vote-container {
     margin: 10px;
-    margin-right: 30px;
+}
+
+.comment-date{
+    font-size: 10px;
 }
