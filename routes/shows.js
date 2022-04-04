@@ -8,13 +8,11 @@ const { Show } = require('../models/show')
 const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
 
-// startDate and endDate format: "2020-04-14"
+
 router.post('/create', mongoChecker, (req, res) => {
 
     const title = req.body.title;
     const description = req.body.description;
-    const startDate = req.body.startDate;
-    const endDate = req.body.endDate;
 
     const tags = req.body.tags;
     const genres = req.body.genres;
@@ -28,9 +26,6 @@ router.post('/create', mongoChecker, (req, res) => {
         ratings: {},
         image_url: image_url
     });
-
-    show.startDate = (startDate == null) ? null : new Date(startDate)
-    show.endDate = (endDate == null) ? null : new Date(endDate)
 
     show.save().then((result) => {
         res.send(result)
@@ -51,10 +46,6 @@ router.patch('/:id', mongoChecker, (req, res) => {
 
     const title = req.body.title;
     const description = req.body.description;
-    const startDate = req.body.startDate;
-    const endDate = req.body.endDate;
-
-    // e.g. "Summer 2021"
     const tags = req.body.tags;
     const genres = req.body.genres;
     const image_url = req.body.image_url;
@@ -62,8 +53,6 @@ router.patch('/:id', mongoChecker, (req, res) => {
     Show.findById(ObjectID(id)).then((show) => {
         show.title = title
         show.description = description
-        show.startDate = (startDate == null) ? null : new Date(startDate)
-        show.endDate = (endDate == null) ? null : new Date(endDate)
         show.tags = tags
         show.genres = genres
         show.image_url = image_url

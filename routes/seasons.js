@@ -9,11 +9,13 @@ const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
 
 
-// Create a new show; todo: uncomment line with authenticate later
+// startDate and endDate format: "2020-04-14"
 router.post('/create', mongoChecker, (req, res) => {
 
     const showId = req.body.showId;
     const seasonNum = req.body.seasonNum;
+
+    // e.g. "Summer 2021"
     const seasonCategory = req.body.seasonCategory;
     const title = req.body.title;
     const description = req.body.description;
@@ -27,10 +29,11 @@ router.post('/create', mongoChecker, (req, res) => {
         seasonCategory: seasonCategory,
         title: title,
         description: description,
-        startDate: startDate,
-        endDate: endDate,
         image_url: image_url
     });
+
+    season.startDate = (startDate == null) ? null : new Date(startDate)
+    season.endDate = (endDate == null) ? null : new Date(endDate)
 
     season.save().then((result) => {
         res.send(result)
@@ -64,8 +67,8 @@ router.patch('/:id', mongoChecker, (req, res) => {
         season.seasonCategory = seasonCategory
         season.title = title
         season.description = description
-        season.startDate = startDate
-        season.endDate = endDate
+        season.startDate = (startDate == null) ? null : new Date(startDate)
+        season.endDate = (endDate == null) ? null : new Date(endDate)
         season.image_url = image_url
         season.save().then((result) => {
             res.send(result)

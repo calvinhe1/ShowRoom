@@ -46,14 +46,6 @@ const ShowSchema = new mongoose.Schema({
         required: false,
         default: ""
 	},
-    startDate: {
-        type: Date,
-        required: false,
-    },
-    endDate: {
-        type: Date,
-        required: false,
-    },
     tags: [String],
     genres: [String],
     ratings: RatingSchema,
