@@ -54,7 +54,7 @@ function Signup() {
 
                 </input><br/>
 
-                <button type="submit" className='formField' id='signupButton' onClick={handleSignup}>Sign Up</button>
+                <button type="submit" className='formField' id='signupButton' onClick={handleSignup}>Signup</button>
 
                 <Link to="/login">
                     <p id='loginLink'>Already have an account? Login here!</p>

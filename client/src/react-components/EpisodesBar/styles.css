@@ -2,6 +2,7 @@
     content: "";
     display: table;
     clear: both;
+    
 }
 
 .showsbar-row {
@@ -13,11 +14,14 @@
     display: inline-block;
     padding-left: 20px;
     margin-left: 80px;
+    
+
 }
 
 .showsbar-column {
     padding: 15px;
     width: 175px;
+
     display: inline-block;
 }
 

@@ -21,3 +21,20 @@
     font-size: 20px;
 
 }
+
+.dropdown {
+    font-size: 20px;
+    background-color: #DCDCDC;
+    font-weight: bold;
+
+}
+
+.options {
+    font-weight: bold;
+  
+}
+
+.seasonsLabel {
+   text-align: center;
+   
+}

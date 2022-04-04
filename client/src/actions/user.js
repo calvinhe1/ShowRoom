@@ -6,7 +6,7 @@ const API_HOST = ENV.api_host
 
 // Send a request to check if a user is logged in through the session cookie
 export const checkSession = (app) => {
-    const url = `${API_HOST}/users/check-session`;
+    const url = `${API_HOST}/api/users/check-session`;
 
     if (!ENV.use_frontend_test_user) {
         fetch(url)
@@ -32,7 +32,7 @@ export const checkSession = (app) => {
 // A function to send a POST request with the user to be logged in
 export const loginUser = async (loginInfo, setProfile) => {
     // Create our request constructor with all the parameters we need
-    const request = new Request(`${API_HOST}/users/login`, {
+    const request = new Request(`${API_HOST}/api/users/login`, {
         method: "post",
         body: JSON.stringify(loginInfo),
         headers: {
@@ -64,7 +64,7 @@ export const loginUser = async (loginInfo, setProfile) => {
 };
 
 export const createUser = (loginInfo, setProfile) => {
-    const request = new Request(`${API_HOST}/users/create`, {
+    const request = new Request(`${API_HOST}/api/users/create`, {
         method: "post",
         body: JSON.stringify(loginInfo),
         headers: {
@@ -92,7 +92,7 @@ export const createUser = (loginInfo, setProfile) => {
 
 // A function to send a GET request to logout the current user
 export const logoutUser = (setProfile) => {
-    const url = `${API_HOST}/users/logout`;
+    const url = `${API_HOST}/api/users/logout`;
 
     fetch(url)
         .then(res => {
@@ -104,7 +104,7 @@ export const logoutUser = (setProfile) => {
 };
 
 export const getUserInfo = (userId) => {
-    const request = new Request(`${API_HOST}/users/${userId}`, {
+    const request = new Request(`${API_HOST}/api/users/${userId}`, {
         method: "get",
         headers: {
             Accept: "application/json, text/plain, */*",
@@ -124,7 +124,7 @@ export const getUserInfo = (userId) => {
 }
 
 export const modifyUser = (userInfo) => {
-    const request = new Request(`${API_HOST}/users`, {
+    const request = new Request(`${API_HOST}/api/users`, {
         method: "post",
         body: JSON.stringify(userInfo),
         headers: {
@@ -137,7 +137,7 @@ export const modifyUser = (userInfo) => {
 }
 
 export const removeUser = (id) => {
-    const request = new Request(`${API_HOST}/users/${id}`, {
+    const request = new Request(`${API_HOST}/api/users/${id}`, {
         method: "delete",
         headers: {
             Accept: "application/json, text/plain, */*",
@@ -151,7 +151,7 @@ export const removeUser = (id) => {
 // Set a users profile image
 export const setProfileImage = async (form, id) => {
 
-    const url = `${API_HOST}/users/profileImages/${id}`;
+    const url = `${API_HOST}/api/users/profileImages/${id}`;
 
     // The data we are going to send in our request
     const imageData = new FormData(form);
@@ -186,7 +186,7 @@ export const setProfileImage = async (form, id) => {
 }; 
 
 export const addShowToFavorites = async (showId) => {
-    const request = new Request(`${API_HOST}/users/favorite`, {
+    const request = new Request(`${API_HOST}/api/users/favorite`, {
         method: 'post',
         messageBody: JSON.stringify({showId})
     });
@@ -194,7 +194,7 @@ export const addShowToFavorites = async (showId) => {
 }
 
 export const removeShowFromFavorites = async (showId) => {
-    const request = new Request(`${API_HOST}/users/favorite`, {
+    const request = new Request(`${API_HOST}/api/users/favorite`, {
         method: 'delete',
         messageBody: JSON.stringify({showId})
     });
