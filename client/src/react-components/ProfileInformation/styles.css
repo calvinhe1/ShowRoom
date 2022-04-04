@@ -22,9 +22,6 @@
     height: 150px;
     
     border-radius: 50%;
-
-    /* TODO remove when profile pictures linked*/
-    background-color: grey;
 }
 
 .username{
