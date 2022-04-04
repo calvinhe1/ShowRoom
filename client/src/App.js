@@ -30,6 +30,7 @@ import { ProvideShowRatingsListContext } from './contexts/ShowRatingList';
 import { ProvideSeasonListContext } from './contexts/Season';
 import { ProvideEpisodeListContext } from './contexts/EpisodeList';
 import { ProvideEpisodeRatingsListContext } from './contexts/EpisodeRatingList';
+import { ProvideEpisodeCommentListContext } from './contexts/EpisodeCommentList';
 
 // import styling and assets
 import './App.css';
@@ -48,6 +49,7 @@ function App() {
       <ProvideSeasonListContext>
       <ProvideEpisodeListContext>
       <ProvideEpisodeRatingsListContext>
+      <ProvideEpisodeCommentListContext>
     
 
         {/* navigation */}
@@ -71,6 +73,8 @@ function App() {
 
           </Routes>
         </BrowserRouter>
+
+      </ProvideEpisodeCommentListContext>
       </ProvideEpisodeRatingsListContext>
       </ProvideEpisodeListContext>
       </ProvideSeasonListContext>

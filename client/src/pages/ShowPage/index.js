@@ -3,6 +3,7 @@ import "./styles.css";
 import ShowInfo from "../../react-components/ShowInfo";
 import ShowsBar from "../../react-components/ShowsBar";
 import CommentSection from "../../react-components/CommentSection";
+import EpisodesCommentSection from "../../react-components/EpisodesCommentSection";
 
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
 import { useShowListContext } from "../../contexts/ShowList";
@@ -16,6 +17,8 @@ import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
 
 import  ShowEpisodeCard from "../../react-components/ShowEpisodeCard";
 import EpisodesBar from "../../react-components/EpisodesBar";
+
+
 
 function ShowPage(props) {
 
@@ -138,7 +141,13 @@ function ShowPage(props) {
                 <h2>Recommended</h2>
                 <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>
             </div>
-            
+
+
+            {
+            //show episode or show comment section.
+            episode? <EpisodesCommentSection currentShowId={props.showId} episode={value} /> : <CommentSection currentShowId={props.showId} />
+            }
+
         </div>
 
     );
