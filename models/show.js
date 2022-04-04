@@ -54,10 +54,6 @@ const ShowSchema = new mongoose.Schema({
         type: Date,
         required: false,
     },
-    scheduleSeason: {
-        type: String,
-        required: false,
-    },
     tags: [String],
     genres: [String],
     ratings: RatingSchema,

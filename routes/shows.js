@@ -18,8 +18,6 @@ router.post('/create', mongoChecker, (req, res) => {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
 
-    // e.g. "Summer 2021"
-    const scheduleSeason = req.body.scheduleSeason;
     const tags = req.body.tags;
     const genres = req.body.genres;
     const image_url = req.body.image_url;
@@ -31,7 +29,6 @@ router.post('/create', mongoChecker, (req, res) => {
         description: description,
         startDate: startDate,
         endDate: endDate,
-        scheduleSeason: scheduleSeason,
         tags: tags,
         genres: genres,
         image_url: image_url
@@ -61,17 +58,15 @@ router.patch('/:id', mongoChecker, (req, res) => {
     const endDate = req.body.endDate;
 
     // e.g. "Summer 2021"
-    const scheduleSeason = req.body.scheduleSeason;
     const tags = req.body.tags;
     const genres = req.body.genres;
     const image_url = req.body.image_url;
 
-    Show.findById(ObjectID(showId)).then((show) => {
+    Show.findById(ObjectID(id)).then((show) => {
         show.title = title
         show.description = description
         show.startDate = startDate
         show.endDate = endDate
-        show.scheduleSeason = scheduleSeason
         show.tags = tags
         show.genres = genres
         show.image_url = image_url
@@ -92,8 +87,8 @@ router.patch('/:id', mongoChecker, (req, res) => {
 // get all show information
 router.get('/find', mongoChecker, (req, res) => {
 
-    Show.find({}).then((result) => {
-        res.send({ result })
+    Show.find({}).then((shows) => {
+        res.send({ shows })
     }).catch((error) => {
         log(error)
         if (isMongoError(error)) { 
