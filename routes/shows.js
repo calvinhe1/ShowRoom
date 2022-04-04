@@ -8,9 +8,7 @@ const { Show } = require('../models/show')
 const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
 
-
-// Create a new show; todo: uncomment line with authenticate later
-// router.post("/shows/create", mongoChecker, authenticate, async (req, res) => {
+// startDate and endDate format: "2020-04-14"
 router.post('/create', mongoChecker, (req, res) => {
 
     const title = req.body.title;
@@ -22,18 +20,17 @@ router.post('/create', mongoChecker, (req, res) => {
     const genres = req.body.genres;
     const image_url = req.body.image_url;
 
-    // 
-
     const show = new Show({
         title: title,
         description: description,
-        startDate: startDate,
-        endDate: endDate,
         tags: tags,
         genres: genres,
+        ratings: {},
         image_url: image_url
     });
 
+    show.startDate = (startDate == null) ? null : new Date(startDate)
+    show.endDate = (endDate == null) ? null : new Date(endDate)
 
     show.save().then((result) => {
         res.send(result)
@@ -65,8 +62,8 @@ router.patch('/:id', mongoChecker, (req, res) => {
     Show.findById(ObjectID(id)).then((show) => {
         show.title = title
         show.description = description
-        show.startDate = startDate
-        show.endDate = endDate
+        show.startDate = (startDate == null) ? null : new Date(startDate)
+        show.endDate = (endDate == null) ? null : new Date(endDate)
         show.tags = tags
         show.genres = genres
         show.image_url = image_url
@@ -122,23 +119,29 @@ router.post('/rating/:id', mongoChecker, (req, res) => {
     const starRating = req.body.stars
 
     Show.findById(ObjectID(id)).then((show) => {
-        show.ratings.numTotalRatings++;
         switch(starRating) {
             case 1:
                 show.ratings.numOneStars++;
+                show.ratings.numTotalRatings++;
                 break;
             case 2:
                 show.ratings.numTwoStars++;
+                show.ratings.numTotalRatings++;
                 break;
             case 3:
                 show.ratings.numThreeStars++;
+                show.ratings.numTotalRatings++;
                 break;
             case 4:
                 show.ratings.numFourStars++;
+                show.ratings.numTotalRatings++;
                 break;
             case 5:
                 show.ratings.numFiveStars++;
+                show.ratings.numTotalRatings++;
                 break;
+            default:
+                res.status(400).send('Bad Request');
         }
         show.save().then((result) => {
             res.send(result)
@@ -159,7 +162,7 @@ router.get('/rating/:id', mongoChecker, (req, res) => {
     const id = req.params.id
 
     Show.findById(ObjectID(id)).then((show) => {
-        let totalStars = show.ratings.numFiveStars + show.ratings.numFourStars + show.ratings.numThreeStars + show.ratings.numTwoStars + show.ratings.numOneStars
+        let totalStars = show.ratings.numFiveStars*5 + show.ratings.numFourStars*4 + show.ratings.numThreeStars*3 + show.ratings.numTwoStars*2 + show.ratings.numOneStars
         let averageStars = totalStars / show.ratings.numTotalRatings
         averageStars = Math.round(averageStars * 100) / 100
         res.send({averageStars : averageStars})
