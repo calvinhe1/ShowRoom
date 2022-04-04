@@ -10,7 +10,6 @@ const { ObjectID } = require('mongodb')
 
 
 // Create a new show; todo: uncomment line with authenticate later
-// router.post("/seasons/create", mongoChecker, authenticate, async (req, res) => {
 router.post('/create', mongoChecker, (req, res) => {
 
     const showId = req.body.showId;
