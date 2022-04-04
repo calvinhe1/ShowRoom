@@ -39,7 +39,12 @@ const SeasonSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
-    }
+    },
+    image_url: {
+		type: String,
+		required: false,
+        default: "/images/aot.jpg"
+	},
 })
 
 const Season = mongoose.model('Season', SeasonSchema)
