@@ -82,7 +82,7 @@ function ShowInfo(props) {
                 { 
                     currentUser?.isAdmin ? 
                     //TODO cloudinary
-                    <input type="file" onChange={editShow} name="picture"></input> : null
+                    <input type="file" className="add-show-picture-button" onChange={editShow} name="picture"></input> : null
                 }
                 <div className="show-text">
                     <form>

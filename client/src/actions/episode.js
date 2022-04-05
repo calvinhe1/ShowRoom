@@ -6,7 +6,7 @@ const API_HOST = ENV.api_host
 
 
 // note: start and end dates can be null
-export const createEpisode = async (seasonId, episodeNum, title, description, airDate, image_url) => {
+export const createEpisode = async (showId, seasonId, episodeNum, title, description, airDate, image_url) => {
     const options = {
         url: `${API_HOST}/api/episodes/create`,
         method: "POST",
@@ -15,6 +15,7 @@ export const createEpisode = async (seasonId, episodeNum, title, description, ai
             "Content-Type": "application/json",
         },
         data: {
+            showId: showId,
             seasonId: seasonId,
             episodeNum: episodeNum,
             title: title,
@@ -43,6 +44,7 @@ export const modifyEpisode = (episodeInfo) => {
             "Content-Type": "application/json",
         },
         data: {
+            showId: episodeInfo.showId,
             seasonId: episodeInfo.seasonId,
             episodeNum: episodeInfo.episodeNum,
             title: episodeInfo.title,
@@ -130,6 +132,25 @@ export const likeDislikeEpisode = (episodeId, reactionType) => {
         data: {
             reactionType: reactionType
         }
+    }
+    return axios(options)
+    .then((response) => {
+        return {
+            data: response.data
+        }
+    }).catch((error) => {
+        return error
+    })
+}
+
+export const getTopRatedEpisdes = async (showId) => {
+    const options = {
+        url: `${API_HOST}/api/episodes/toprated/${showId}`,
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
     }
     return axios(options)
     .then((response) => {

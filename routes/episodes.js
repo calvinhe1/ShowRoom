@@ -10,7 +10,7 @@ const { ObjectID } = require('mongodb')
 
 // airDate example format: "2020-04-14"
 router.post('/create', mongoChecker, (req, res) => {
-
+    const showId = req.body.showId;
     const seasonId = req.body.seasonId;
     const episodeNum = req.body.episodeNum;
     const title = req.body.title;
@@ -19,6 +19,7 @@ router.post('/create', mongoChecker, (req, res) => {
     const image_url = req.body.image_url;
 
     const episode = new Episode({
+        showId: showId,
         seasonId: ObjectID(seasonId),
         episodeNum: episodeNum,
         title: title,
@@ -42,7 +43,7 @@ router.post('/create', mongoChecker, (req, res) => {
 
 
 router.patch('/:id', mongoChecker, (req, res) => {
-
+    const showId = req.body.showId;
     const id = req.params.id
     const seasonId = req.body.seasonId;
     const episodeNum = req.body.episodeNum;
@@ -53,6 +54,7 @@ router.patch('/:id', mongoChecker, (req, res) => {
 
 
     Episode.findById(ObjectID(id)).then((episode) => {
+        episode.showId = showId
         episode.seasonId = ObjectID(seasonId)
         episode.episodeNum = episodeNum
         episode.title = title
@@ -144,6 +146,16 @@ router.post('/reaction/:id', mongoChecker, (req, res) => {
             res.status(400).send('Bad Request'); 
         }
     })
+});
+
+router.get('/toprated/:id', async (req, res) => {
+    try {
+        const result = await Episode.find({}).sort({'numLikes': 'desc'});
+        //Only get the top 3
+        res.send(result.slice(0, 3));
+    } catch (e) {
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 

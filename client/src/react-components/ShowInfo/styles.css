@@ -69,3 +69,7 @@ textarea {
     height: 40px;
 }
 
+
+.add-show-picture-button {
+    display: block;
+}

@@ -3,6 +3,10 @@ const mongoose = require('mongoose')
 
 // For episodes that do not have title/description, store empty string
 const EpisodeSchema = new mongoose.Schema({
+    showId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     seasonId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
@@ -10,7 +14,7 @@ const EpisodeSchema = new mongoose.Schema({
     episodeNum: {
         type: Number,
         required: true,
-        unique: true
+        unique: false
     },
 	title: {
 		type: String,

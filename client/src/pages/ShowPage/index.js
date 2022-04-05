@@ -9,13 +9,11 @@ import {useState, useEffect} from "react";
 import { uid } from "react-uid";
 import EpisodeInfo from "../../react-components/EpisodeInfo";
 
-import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
-
 import EpisodesBar from "../../react-components/EpisodesBar";
 import { getShowById } from "../../actions/show";
 import { createSeason, getAllSeasonsByShow } from "../../actions/season";
 import { useUserProfileContext } from "../../contexts/UserProfile";
-import { createEpisode } from "../../actions/episode";
+import { createEpisode, getTopRatedEpisdes } from "../../actions/episode";
 
 function ShowPage(props) {
 
@@ -26,16 +24,17 @@ function ShowPage(props) {
     const [show, setShow] = useState(props.showId)
     const [currentShow, setCurrentShow] = useState({});
     const profile = useUserProfileContext().profile;
+    const [topThree, setTopThree] = useState([]);
 
     useEffect(() => {
         getShowById(props.showId).then(res => {
             setCurrentShow(res.data);
         });
+        getTopRatedEpisdes(props.showId).then(res => {
+            setTopThree(res.data);
+        })
     }, [])
 
-    const episodeRatingsContext = useEpisodeRatingsListContext();
-    const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
-    const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
 
     const [seasons, setSeasons] = useState([]);
     useEffect(() => {
@@ -44,14 +43,6 @@ function ShowPage(props) {
                 setSeasons(res.data.seasons);
             })
     }, [])
-
-    const ratings = []
-
-    for (let i=0; i<topThree.length; i++) {
-        const epRating = episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating
-        if (epRating != undefined)
-            ratings.push(episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating)
-    }
 
     if (show != props.showId) {
         setEpisode(false)
@@ -93,13 +84,15 @@ function ShowPage(props) {
                 if (!season) {
                     createSeason(props.showId, seasonNum)
                         .then(res => {
-                            createEpisode(res.data._id, episodeNum).then(result => {
+                            createEpisode(props.showId, res.data._id, episodeNum).then(result => {
                                 //TODO navigate to new episode
+                                alert('Show Created!');
                             });
                         })
                 } else {
-                    createEpisode(season._id, episodeNum).then(result => {
+                    createEpisode(props.showId, season._id, episodeNum).then(result => {
                         //TODO navigate to new episode
+                        alert('Show Created!');
                     });
                 }
             })
@@ -121,13 +114,13 @@ function ShowPage(props) {
             {
             !episode && topThree.length != 0? 
             (
-            <div className = "highestRatedEpisodes"  onClick={handleOnChange} > Top Rated Episodes! 
+            <div className = "highestRatedEpisodes"  onClick={handleOnChange} > Most Liked Episodes! 
             <br></br><br></br>
                 {   
                     topThree.map(episode =>  {
                         return (
-                            <div key={uid(episode.episode)} className = "ep" value={episode.episode} >{"Episode " + episode.episode}<br></br>
-                            <div key={uid(episode.rating)} className = "rating"  value={episode.episode} >Rating: {episode.rating.toFixed(1)} </div>
+                            <div key={uid(episode)} className = "ep" value={episode.episode} >{"Episode " + episode.episodeNum}<br></br>
+                            <div key={uid(episode._id)} className = "rating"  value={episode.numLikes} >Liked: {episode.numLikes} </div>
                             
                             </div>                        
                         )
