@@ -31,7 +31,8 @@ const UserSchema = new mongoose.Schema({
 	},
 	username: {
 		type: String,
-		required: false
+		required: false,
+		default: 'User'
 	},
 	bio: {
 		type: String,

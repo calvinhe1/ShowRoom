@@ -1,16 +1,10 @@
 import "./styles.css";
 import ShowsBar from "../ShowsBar";
-import { useShowListContext } from "../../contexts/ShowList";
 import { useEffect, useState } from "react";
-import { getHighestRatedShows, getMostTalkedABoutShows } from "../../actions/show";
+import { getHighestRatedShows, getMostTalkedABoutShows, getShowsByGenre } from "../../actions/show";
 
 
 function ShowBars() {
-    const defaultGenres = ['Action', 'Drama', 'Fantasy'];
-    const [actionShows, setActionShows] = useState([]);
-    const [dramaShows, setDramaShows] = useState([]);
-    const [fantasyShows, setFantasyShows] = useState({});
-
     const [highestRated, setHighestRated] = useState([]);
     useEffect(() => {
         getHighestRatedShows().then(res => {
@@ -30,6 +24,25 @@ function ShowBars() {
         })
     }, [])
 
+    const [actionShows, setActionShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Action').then(res => {
+            setActionShows(res)
+        })
+    }, [])
+    const [dramaShows, setDramaShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Drama').then(res => {
+            setDramaShows(res);
+        })
+    }, [])
+    const [fantasyShows, setFantasyShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Fantasy').then(res => {
+            setFantasyShows(res);
+        })
+    }, [])
+
     return (
         <div className="showbars-container">
             <div className="showbar">
@@ -42,16 +55,23 @@ function ShowBars() {
                 <ShowsBar shows={mostTalkedAbout} showCommentCount={true}></ShowsBar>   
             </div>
             
-            {
-            defaultGenres.map(genre => {
-                return (
-                <div key={genre} className="showbar">
-                    <h2>{genre}</h2>
-                    <ShowsBar shows={showContext.getShowsByGenre(genre)}></ShowsBar>
-                </div>
-                )
-            })
-            }
+            <div className="showbar">
+                <h2>Action</h2>
+                <ShowsBar shows={actionShows}></ShowsBar>
+            </div>
+
+            <div className="showbar">
+                <h2>Drama</h2>
+                <ShowsBar shows={dramaShows}></ShowsBar>
+            </div>
+
+            <div className="showbar">
+                <h2>Fantasy</h2>
+                <ShowsBar shows={fantasyShows}></ShowsBar>
+            </div>
+            
+            
+            
       </div>
     )
 }
