@@ -1,12 +1,10 @@
 import "./styles.css";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
-import { useUserListContext } from "../../contexts/UserList";
-import { useCommentListContext } from "../../contexts/CommentList";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../actions/user";
 import { Link } from "react-router-dom";
-import { deleteComment } from "../../actions/comment";
+import { deleteComment, likeDislikeComment } from "../../actions/comment";
 
 function Comment(props) {
 
@@ -20,7 +18,6 @@ function Comment(props) {
 
     const userContext = useUserProfileContext();
     const currentUser = userContext.profile;
-    const commentContext = useCommentListContext();
 
     function removeComment(e) {
         e.preventDefault();
@@ -30,47 +27,33 @@ function Comment(props) {
         });
     }
 
+    /** Trickery to get the state change */
+    function modifyComments() {
+        const newArr= [...props.comments];
+        const index = newArr.findIndex((a) => a._id === props.comment._id);
+        newArr[index] = Object.assign({}, props.comment);
+        props.setComments(newArr);
+    }
+
     function likeComment(){
-        //TODO
-        vote(true)
-    }
-
-    function dislikeComment (){
-        //TODO
-        vote(false)
-    }
-
-    function vote(clickedLike){
-        if (currentUser.userId == null){
+        if (currentUser._id == null){
             alert("You must be logged in to vote");
             return
         }
-
-        const likeIcon = document.getElementById("likeIcon" + props.comment.commentId);
-        const likeNum = document.getElementById("likeNum" + props.comment.commentId);
-        const dislikeIcon = document.getElementById("dislikeIcon" + props.comment.commentId);
-        const dislikeNum = document.getElementById("dislikeNum" + props.comment.commentId);
-
-        if (clickedLike){
-            likeIcon.style.color = "deepSkyBlue"
-            dislikeIcon.style.color = "black"
-            commentContext.likeCommentByIds(props.comment.commentId, currentUser.userId)
-        }
-        else {
-            dislikeIcon.style.color = "deepSkyBlue"
-            likeIcon.style.color = "black"   
-            commentContext.dislikeCommentByIds(props.comment.commentId, currentUser.userId)
-        }
-
-        // replace with amount of users that like/dislike the comment
-        const likeCount = 0
-        const dislikeCount = 0
-
-        likeNum.innerText = likeCount
-        dislikeNum.innerText = dislikeCount
-
+        props.comment.numLikes++;
+        modifyComments()
+        likeDislikeComment(props.comment._id, "like");
     }
 
+    function dislikeComment (){
+        if (currentUser._id == null){
+            alert("You must be logged in to vote");
+            return
+        }
+        props.comment.numDislikes++;
+        modifyComments()
+        likeDislikeComment(props.comment._id, "dislike");
+    }
 
     return (
         <span className="comment-container">
@@ -88,11 +71,11 @@ function Comment(props) {
                 <span className="vote-section">
                     <span className="vote-container">
                         <i className="fa fa-thumbs-up" id={"likeIcon" + props.comment._id} aria-hidden="true" onClick={likeComment}></i>
-                        <span className="vote-number" id={"likeNum" + props.comment._id}>0</span>
+                        <span className="vote-number" id={"likeNum" + props.comment._id} >({props.comment.numLikes || '0'})</span>
                     </span>
                     <span className="vote-container">
                         <i className="fa fa-thumbs-down" id={"dislikeIcon" + props.comment._id} aria-hidden="true" onClick={dislikeComment}></i>
-                        <span className="vote-number" id={"dislikeNum" + props.comment._id}>0</span>
+                        <span className="vote-number" id={"dislikeNum" + props.comment._id} >({props.comment.numDislikes || '0'})</span>
                     </span>
                 </span>
 
