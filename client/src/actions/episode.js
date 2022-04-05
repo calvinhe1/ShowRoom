@@ -143,7 +143,7 @@ export const likeDislikeEpisode = (episodeId, reactionType) => {
     })
 }
 
-export const getTopRatedEpisdes = async (showId) => {
+export const getTopRatedEpisodes = async (showId) => {
     const options = {
         url: `${API_HOST}/api/episodes/toprated/${showId}`,
         method: "GET",
