@@ -46,7 +46,7 @@ function ShowPage(props) {
         })
 
       
-    }, [])
+    }, [props.showId])
 
 
     console.log("TOP THREE: ", topThree)
@@ -56,7 +56,7 @@ function ShowPage(props) {
             .then(res => {
                 setSeasons(res.data.seasons);
             })
-    }, [])
+    }, [props.showId])
 
     if (show != props.showId) {
         setEpisode(false)

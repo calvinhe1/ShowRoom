@@ -11,4 +11,4 @@ const dev = {
 };
 
 // export the appropriate environment
-export default process.env.NODE_ENV === 'production' ? prod : dev; 
+export default process.env.NODE_ENV === 'production' ? prod : dev;

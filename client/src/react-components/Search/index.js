@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uid } from "react-uid";
 import { useShowListContext } from "../../contexts/ShowList";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import { getAllShows } from "../../actions/show";
 
 function Search() {
 
     const [value, setValue] = useState(undefined);
     const [visible, setVisible] = useState(false);
-    const shows = useShowListContext().getShows();
+    const [shows, setShows] = useState([]);
+    useEffect(() => {
+        getAllShows().then(res => {
+            setShows(res.data.shows);
+        })
+    }, [])
 
     function filterShows() {
         if (value === undefined) return shows;
@@ -47,8 +53,8 @@ function Search() {
                         filterShows().map(show => {
                             return (
                                 <li key={uid(show)} className="search-element">
-                                    <Link to={"/show_page/" + show.showId}>
-                                        <img src={show.picture}></img>    
+                                    <Link to={"/show_page/" + show._id}>
+                                        <img src={show.image_url}></img>    
                                         <span>{show.title}</span>
                                     </Link>
                                 </li>

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 function ShowCard(props) {
     function navigate(e) {
         if (props.changePage) {
-            props.changePage(props.show.showId);
+            props.changePage(props.show._id);
             window.scrollTo(0,0)
         } 
     }
