@@ -45,6 +45,10 @@ const EpisodeSchema = new mongoose.Schema({
 		required: false,
         default: "/images/aot.jpg"
 	},
+    image_id: {
+        type: String,
+        required: false
+    }
 })
 
 const Episode = mongoose.model('Episode', EpisodeSchema)

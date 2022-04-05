@@ -135,3 +135,74 @@ export const getAvgShowRating = async (showId) => {
         return error
     })
 }
+
+// Set a users profile image
+export const setShowImage = async (form, id) => {
+
+    const url = `${API_HOST}/api/shows/images/${id}`;
+
+    // The data we are going to send in our request
+    const imageData = new FormData(form);
+
+    // Create our request constructor with all the parameters we need
+    const request = new Request(url, {
+        method: "post",
+        body: imageData,
+    });
+
+    // Send the request with fetch()
+    return fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            // Usually check the error codes to see what happened.
+            if (res.status === 200) {
+                // If image was added successfully, tell the user.
+                alert('Success!');
+                return res.json();
+            } else {
+                // If server couldn't add the image, tell the user.
+                // Here we are adding a generic message, but you could be more specific in your app.
+                alert('Error! Could not add image');
+            }
+        })
+        .then((res) => {
+            return res.url;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}; 
+
+export const getHighestRatedShows = async () => {
+    const url = `${API_HOST}/api/shows/highestrated`;
+    return fetch(url).then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then((res) => {
+        return res;
+    })
+}
+
+export const getMostTalkedABoutShows = async () => {
+    const url = `${API_HOST}/api/shows/mosttalkedabout`;
+    return fetch(url).then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then(res => {
+        return res;
+    })
+}
+
+export const getShowsByGenre = async (genre) => {
+    const url = `${API_HOST}/api/shows/genre/${genre}`;
+    return fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        }).then(res => {
+            return res;
+        })
+}

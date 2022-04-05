@@ -16,11 +16,15 @@ function RecentComments() {
     return (
     <div className="home-recent-comment-container">
         <h2 className="home-recent-comment-header">Recent Comments</h2>
-        {
-            comments.map(comment => {
-                return <Comment comment={comment} key={uid(comment)}></Comment>
-            })
-        }
+        <div className="comment-section">
+            <div className="posted-comments">
+            {
+                comments.map(comment => {
+                    return <Comment comment={comment} comments={comments} setComments={setComments} key={uid(comment)}></Comment>
+                })
+            }
+            </div>
+        </div>
     </div>
     )
 }

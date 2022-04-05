@@ -17,6 +17,7 @@ function EpisodesBar(props) {
     //Extract episodes that match show.
     let episodesOfShow = []
 
+    console.log("EPISODES BAR!: ", episodes)
     for (let i =0; i<episodes.length; i++) {
         if (episodes[i].showId == props.currentShowId && episodes[i].season == props.season) {
             episodesOfShow.push(episodes[i])

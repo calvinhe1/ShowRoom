@@ -2,23 +2,27 @@ import "./styles.css"
 
 import { uid } from "react-uid";
 import ShowCard from "../ShowCard";
-import { useShowListContext } from "../../contexts/ShowList";
 import RatingStars from "../RatingStars";
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
 import CommentCount from "../CommentCount";
-import { useCommentListContext } from "../../contexts/CommentList";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getAllShows } from "../../actions/show";
 
 const MAX_SHOWS_RENDERED = 10;
 
 function ShowsBar(props) {
-
-    const showListContext = useShowListContext();
-    const shows = props.shows || showListContext.getShows();
-    const ratingContext = useShowRatingsListContext();
-    const commentContext = useCommentListContext();
-
     const element = useRef(null);
+    const [shows, setShows] = useState([]);
+
+    useEffect(() => {
+        if (props.shows) {
+            setShows(props.shows);
+        } else {
+            getAllShows().then(res => {
+                setShows(res.data.shows);
+            })
+        }
+    }, [props.shows])
+    
 
     function scrollRight() {
         element.current.children[1].scrollBy({left: 20, behaviour: "smooth"});
@@ -46,11 +50,11 @@ function ShowsBar(props) {
             <div className="showsbar-row">
             {
                 shows.slice(0, MAX_SHOWS_RENDERED).map(show => {
-                    return show.showId !== props.currentShowId ? 
+                    return show._id !== props.currentShowId ? 
                     <div className="showsbar-column" key={uid(show)}>
                         <ShowCard changePage={props.changePage} show={show} />
-                        {props.showRating ? <RatingStars ratingInfo={ratingContext.getShowRatingById(show.showId)} ></RatingStars> : null}
-                        {props.showCommentCount ? <CommentCount count={commentContext.getCommentsByShowId(show.showId).length} ></CommentCount> : null}
+                        {props.showRating ? <RatingStars ratingInfo={show.ratings} ></RatingStars> : null}
+                        {props.showCommentCount ? <CommentCount count={show.commentCount} ></CommentCount> : null}
                     </div>
                     : null;
                 })
