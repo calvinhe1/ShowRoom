@@ -156,7 +156,7 @@ export const getCommentById = (commentId) => {
 }
 
 
-export const likeDislikeComment = (commentId, reactionType) => {
+export const likeDislikeComment = async (commentId, reactionType) => {
     const options = {
         url: `${API_HOST}/api/comments/reaction/${commentId}`,
         method: "POST",

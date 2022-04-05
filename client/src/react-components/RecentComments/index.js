@@ -20,7 +20,7 @@ function RecentComments() {
             <div className="posted-comments">
             {
                 comments.map(comment => {
-                    return <Comment comment={comment} key={uid(comment)}></Comment>
+                    return <Comment comment={comment} comments={comments} setComments={setComments} key={uid(comment)}></Comment>
                 })
             }
             </div>
