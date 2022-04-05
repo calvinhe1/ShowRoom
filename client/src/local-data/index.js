@@ -82,6 +82,14 @@ export const commentList = [
   {showId: 1, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
 ];
 
+export const commentEpisodeList = [
+  {showId: 0, episodeId:1, userId: 0, text: 'Love this show3333', date: new Date().toDateString(), commentId: 0},
+  {showId: 0, episodeId:2, userId: 1, text: 'Me too!2222', date: new Date().toDateString(), commentId: 1},
+  {showId: 1, episodeId:1, userId: 0, text: 'Hate this show', date: new Date().toDateString(), commentId: 2},
+  {showId: 1, episodeId:2, userId: 1, text: 'It\'s not that bad', date: new Date().toDateString(), commentId: 3}
+
+]
+
 export const episodeList = [
   {showId: 0, episode: 1, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2016"},
   {showId: 0, episode: 2, title: "The awakining", description: "Description1", link: "https://www.crunchyroll.com/one-piece/episode-1002-a-new-rivalry-nami-and-ulti-821250", picture: "/images/demonslayer.jpg", season: "Fall 2021"},
