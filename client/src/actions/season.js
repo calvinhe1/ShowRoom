@@ -85,7 +85,7 @@ export const getAllSeasons = () => {
 }
 
 
-export const getAllSeasonsByShow = (showId) => {
+export const getAllSeasonsByShow = async (showId) => {
     const options = {
         url: `${API_HOST}/api/seasons/findshow/${showId}`,
         method: "GET",

@@ -6,7 +6,7 @@ const API_HOST = ENV.api_host
 
 
 // note: airDate can be null
-export const createComment = (authorId, topicType, topicId, content) => {
+export const createComment = async (authorId, topicType, topicId, content) => {
     const options = {
         url: `${API_HOST}/api/comments/create`,
         method: "POST",
@@ -95,7 +95,7 @@ export const getCommentsByAuthor = (authorId) => {
     })
 }
 
-export const getCommentsByTopicId = (topicId) => {
+export const getCommentsByTopicId = async (topicId) => {
     const options = {
         url: `${API_HOST}/api/comments/findtopic/${topicId}`,
         method: "GET",

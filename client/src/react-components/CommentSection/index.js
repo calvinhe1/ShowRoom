@@ -4,10 +4,11 @@ import Comment from "../Comment";
 
 import {uid} from "react-uid";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
 import { useCommentListContext } from "../../contexts/CommentList";
+import { createComment, getCommentsByTopicId } from "../../actions/comment";
 
 function CommentSection(props) {
 
@@ -16,8 +17,16 @@ function CommentSection(props) {
     const userContext = useUserProfileContext();
     const currentUser = userContext.profile;
 
-    const commentContext = useCommentListContext();
-    const comments = commentContext.getCommentsByShowId(props.currentShowId);
+    //const comments = commentContext.getCommentsByShowId(props.currentShowId);
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        if(props.showId) {
+            getCommentsByTopicId(props.showId)
+                .then(res => {
+                    setComments(res.data.comments);
+                })
+        }
+    }, [props.showId])
 
     function changeComment(e) {
         e.preventDefault();
@@ -26,15 +35,10 @@ function CommentSection(props) {
 
     function postNewComment(e) {
         if (comment === '') return;
-        const newComment = {
-            showId: props.currentShowId,
-            userId: currentUser.userId,
-            text: comment,
-            date: new Date().toDateString(),
-        }
-        //TODO better uuid's (for server)
-        commentContext.addComment(newComment);
-        setComment('');
+        createComment(currentUser._id, props.episode ? "episode" : "show", props.showId, comment)
+            .then(() => {
+                setComment('');
+            });
     }
 
     return (

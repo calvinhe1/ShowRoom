@@ -10,13 +10,14 @@ import { useShowListContext } from "../../contexts/ShowList";
 import {useState, useEffect} from "react";
 
 import { uid } from "react-uid";
-import {Link, useNavigate} from 'react-router-dom';
 import EpisodeInfo from "../../react-components/EpisodeInfo";
 
 import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
 
 import  ShowEpisodeCard from "../../react-components/ShowEpisodeCard";
 import EpisodesBar from "../../react-components/EpisodesBar";
+import { getShowById } from "../../actions/show";
+import { getAllSeasonsByShow } from "../../actions/season";
 
 
 
@@ -29,15 +30,29 @@ function ShowPage(props) {
     const episodeListContext = useEpisodeListContext();
     const episodes = episodeListContext.getEpisodes();
 
-    const episodesShow = episodeListContext.getAllEpisodesByShow(props.showId)
+    //const episodesShow = episodeListContext.getAllEpisodesByShow(props.showId)
+    const [currentShow, setCurrentShow] = useState({});
+    useEffect(() => {
+        getShowById(props.showId).then(res => {
+            setCurrentShow(res.data);
+        });
+    }, [])
+
     const episodeRatingsContext = useEpisodeRatingsListContext();
     const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
     const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
 
 
     //extract all the seasons for this show.
-    const showListContext = useShowListContext();
-    const shows = showListContext.getShowById(props.showId)  //extract seasons out.
+    //const showListContext = useShowListContext();
+    //const shows = showListContext.getShowById(props.showId)  //extract seasons out.
+    const [seasons, setSeasons] = useState([]);
+    useEffect(() => {
+        getAllSeasonsByShow(props.showId)
+            .then(res => {
+                setSeasons(res.data.seasons);
+            })
+    }, [])
 
     const ratings = []
 
@@ -100,7 +115,7 @@ function ShowPage(props) {
             <div className="epContainer" value ={value} onClick={handleOnChange} >
                 <br></br>
                 <span className="ep" value={"Cover" }>
-                     {shows.title}
+                     {currentShow?.title}
                 </span>
                 {   
                     /* Show episodes on top
@@ -114,7 +129,8 @@ function ShowPage(props) {
                 }      
             </div>
             {
-            episode? <EpisodeInfo currentShowId={props.showId} episode={value}></EpisodeInfo> : <ShowInfo currentShowId={props.showId} ></ShowInfo>
+            episode? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value}></EpisodeInfo> : 
+            <ShowInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} ></ShowInfo>
             }  
             
               
@@ -125,7 +141,7 @@ function ShowPage(props) {
             
 
             {
-            shows.season.map(season => {
+            seasons.map(season => {
                 return (
                         <div className ="showbartwo" onClick={handleOnChange} key={uid(season)}>
                             <h2>{season}</h2>
