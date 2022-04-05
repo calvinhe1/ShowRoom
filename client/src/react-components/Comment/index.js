@@ -5,6 +5,7 @@ import { useUserListContext } from "../../contexts/UserList";
 import { useCommentListContext } from "../../contexts/CommentList";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../actions/user";
+import { Link } from "react-router-dom";
 
 function Comment(props) {
 
@@ -72,7 +73,9 @@ function Comment(props) {
         <span className="comment-container">
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
 
-            <img className="comment-user" src={commentUser.image_url} alt={currentUser.username}></img>
+            <Link to={'/user/' + commentUser._id}>
+                <img className="comment-user" src={commentUser.image_url} alt={currentUser.username}></img>
+            </Link>
 
             <div className="comment-text">{props.comment.content}</div>
             <div className="vote-section">
@@ -87,7 +90,7 @@ function Comment(props) {
             </div>
 
 
-            <div className="comment-date">{props.comment.createdAt}</div>
+            <div className="comment-date">{new Date(props.comment.createdAt).toLocaleDateString("en-US")}</div>
             {
                     currentUser?._id === props.comment.authorId || currentUser?.isAdmin ?
                     <button onClick={deleteComment} className="comment-delete">X</button> : null

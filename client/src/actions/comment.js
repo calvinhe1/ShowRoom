@@ -177,3 +177,13 @@ export const likeDislikeComment = (commentId, reactionType) => {
         return error
     })
 }
+
+export const getRecentComemnts = async () => {
+    const url = `${API_HOST}/api/comments/findrecent`;
+    return fetch(url)
+    .then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    });
+}

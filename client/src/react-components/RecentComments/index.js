@@ -1,7 +1,7 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { uid } from "react-uid";
-import { getRecentComemnts } from "../../actions/comments";
+import { getRecentComemnts } from "../../actions/comment";
 import Comment from "../Comment";
 
 function RecentComments() {
