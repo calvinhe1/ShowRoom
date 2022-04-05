@@ -57,3 +57,11 @@
   .comment-meta-data {
       margin-left: auto;
   }
+
+.selected {
+    color: deepSkyBlue;
+}
+
+.not-selected {   
+   color: black;
+}

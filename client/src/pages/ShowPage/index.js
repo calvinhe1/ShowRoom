@@ -15,7 +15,7 @@ import { getEpisodeById } from "../../actions/episode";
 
 import { createSeason, getAllSeasonsByShow } from "../../actions/season";
 import { useUserProfileContext } from "../../contexts/UserProfile";
-import { createEpisode, getTopRatedEpisdes } from "../../actions/episode";
+import { createEpisode, getTopRatedEpisodes } from "../../actions/episode";
 
 function ShowPage(props) {
 
