@@ -100,8 +100,8 @@ function EpisodeInfo(props) {
                         <div>
                             <label>Released: </label>
                             <input type="text" 
-                                placeholder="episode" 
-                                name="episode" 
+                                placeholder="Released" 
+                                name="Released" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editEpisode}
                                 value={episode?.airDate}></input>

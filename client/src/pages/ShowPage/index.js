@@ -49,6 +49,7 @@ function ShowPage(props) {
     }, [])
 
 
+    console.log("TOP THREE: ", topThree)
     const [seasons, setSeasons] = useState([]);
     useEffect(() => {
         getAllSeasonsByShow(props.showId)
@@ -86,7 +87,6 @@ function ShowPage(props) {
                 setValue(test)
                 setShow(props.showId)
                 setepisodeID(test)
-
                 getEpisodeById(episodeID).then(res => {
                     setCurrentEpisode(res.data)//???
             })
@@ -145,13 +145,14 @@ function ShowPage(props) {
             {
             !episode && topThree.length != 0? 
             (
-            <div className = "highestRatedEpisodes"  onClick={handleOnChange} > Most Liked Episodes! 
+            <div className = "highestRatedEpisodes"  onClick={handleOnChange}  > Most Liked Episodes! 
             <br></br><br></br>
                 {   
+
                     topThree.map(episode =>  {
                         return (
-                            <div key={uid(episode)} className = "ep" value={episodeID} >{"Episode " + episode.episodeNum}<br></br>
-                            <div key={uid(episode._id)} className = "rating"  value={episode.numLikes} >Liked: {episode.numLikes} </div>
+                            <div key={uid(episode)} className = "ep" value={episode._id} >{"Episode " + episode.episodeNum}<br></br>
+                            <div key={uid(episode._id)} className = "rating"  valuetwo ={episode.numLikes} >Liked: {episode.numLikes} </div>
                             
                             </div>                        
                         )
