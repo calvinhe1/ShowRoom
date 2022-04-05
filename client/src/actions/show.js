@@ -13,7 +13,7 @@ export const createShow = (title, description, tags, genres, image_url) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             title: title,
             description: description,
             tags: tags,
@@ -39,7 +39,7 @@ export const modifyShow = (showInfo) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             title: showInfo.title,
             description: showInfo.description,
             tags: showInfo.tags,
@@ -103,7 +103,7 @@ export const rateShow = (showId, numStars) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             stars: numStars
         }
     }
