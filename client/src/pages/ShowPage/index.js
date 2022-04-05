@@ -3,9 +3,7 @@ import "./styles.css";
 import ShowInfo from "../../react-components/ShowInfo";
 import ShowsBar from "../../react-components/ShowsBar";
 import CommentSection from "../../react-components/CommentSection";
-import EpisodesCommentSection from "../../react-components/EpisodesCommentSection";
 
-import { useEpisodeListContext } from "../../contexts/EpisodeList";
 import {useState, useEffect} from "react";
 
 import { uid } from "react-uid";
@@ -15,14 +13,20 @@ import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
 
 import EpisodesBar from "../../react-components/EpisodesBar";
 import { getShowById } from "../../actions/show";
-import { getAllSeasonsByShow } from "../../actions/season";
+import { createSeason, getAllSeasonsByShow } from "../../actions/season";
+import { useUserProfileContext } from "../../contexts/UserProfile";
+import { createEpisode } from "../../actions/episode";
 
 function ShowPage(props) {
 
     const [value, setValue] = useState("Cover");
     const [episode, setEpisode] = useState(false);
+    const [seasonNum, setSeasonNum] = useState();
+    const [episodeNum, setEpisodeNum] = useState();
     const [show, setShow] = useState(props.showId)
     const [currentShow, setCurrentShow] = useState({});
+    const profile = useUserProfileContext().profile;
+
     useEffect(() => {
         getShowById(props.showId).then(res => {
             setCurrentShow(res.data);
@@ -77,6 +81,40 @@ function ShowPage(props) {
         }
         }
 
+    function addEpisode(e) {
+        e.preventDefault();
+        if (!(seasonNum >= 0) || !(episodeNum >= 0)) {
+            alert("Please specify the season and show number to add too")
+            return;
+        }
+        getAllSeasonsByShow(props.showId)
+            .then(res => {
+                const season = res.data.seasons.find(s => s.seasonNum == seasonNum);
+                if (!season) {
+                    createSeason(props.showId, seasonNum)
+                        .then(res => {
+                            createEpisode(res.data._id, episodeNum).then(result => {
+                                //TODO navigate to new episode
+                            });
+                        })
+                } else {
+                    createEpisode(season._id, episodeNum).then(result => {
+                        //TODO navigate to new episode
+                    });
+                }
+            })
+    }
+
+    function handleNewEpsiode(e) {
+        e.preventDefault()
+        setEpisodeNum(e.target.value);
+    }
+
+    function handleNewSeason(e) {
+        e.preventDefault();
+        setSeasonNum(e.target.value)
+    }
+
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
     return (
         <div className="pageContainer">
@@ -98,14 +136,23 @@ function ShowPage(props) {
             </div>) : null
             }
             
-            <div className="epContainer" value ={value} onClick={handleOnChange} >
+            <div className="epContainer" value ={value} >
                 <br></br>
-                <span className="ep" value={"Cover" }>
+                <span className="ep" value={"Cover" } onClick={handleOnChange} >
                      {currentShow?.title}
                 </span>
+                {
+                    profile.isAdmin ?
+                        <span>
+                            <input type="text" placeholder="Season Number" value={seasonNum} onChange={handleNewSeason}></input>
+                            <input type="text" placeholder="Episode Number" value={episodeNum} onChange={handleNewEpsiode}></input>
+                            <button className="edit-button" onClick={addEpisode}>Add Epsiode</button> 
+                        </span> :
+                        null
+                }
             </div>
             {
-            episode? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value}></EpisodeInfo> : 
+            episode ? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value}></EpisodeInfo> : 
             <ShowInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} ></ShowInfo>
             }  
             
@@ -115,7 +162,7 @@ function ShowPage(props) {
                     seasons.map(season => {
                         return (
                                 <div className ="showbartwo" onClick={handleOnChange} key={uid(season)}>
-                                    <h2>{season}</h2>
+                                    <h2>Season {season.seasonNum}</h2>
                                     <EpisodesBar currentShowId={props.showId} season={season}/>
                             
                                 </div>

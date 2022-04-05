@@ -1,32 +1,19 @@
 import "./styles.css"
 
 import { uid } from "react-uid";
-import ShowCard from "../ShowCard";
-import { useShowListContext } from "../../contexts/ShowList";
-import RatingStars from "../RatingStars";
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
-import CommentCount from "../CommentCount";
-import { useCommentListContext } from "../../contexts/CommentList";
-import { useEffect, useRef } from "react";
-
-import {useEpisodeListContext} from "../../contexts/EpisodeList";
+import { useEffect, useRef, useState } from "react";
 
 import ShowEpisodeCard from "../ShowEpisodeCard";
-
-const MAX_SHOWS_RENDERED = 10;
+import { getAllEpisodesBySeason } from "../../actions/episode";
 
 function EpisodesBar(props) {
-
-    const showListContext = useShowListContext();
-    const shows = props.shows || showListContext.getShows();
-    const ratingContext = useShowRatingsListContext();
-    const commentContext = useCommentListContext();
-
-    //get episodes from show.
-    const episodeContext = useEpisodeListContext();
    
-    const episodes = episodeContext.getEpisodes()
-
+    const [episodes, setEpisodes] = useState([]);
+    useEffect(() => {
+        getAllEpisodesBySeason(props.season._id).then(res => {
+            setEpisodes(res.data.episodes);
+        })
+    }, [])
     //Extract episodes that match show.
     let episodesOfShow = []
 
@@ -63,9 +50,9 @@ function EpisodesBar(props) {
             </div>
             <div className="showsbar-row">
             {
-                episodesOfShow.slice(0, MAX_SHOWS_RENDERED).map(episode => {
+                episodes.map(episode => {
                     return (
-                        <div className="showsbar-column" key={uid(episode.episode)}>
+                        <div className="showsbar-column" key={uid(episode)}>
                             <ShowEpisodeCard episode={episode} />
                         </div>  
                     )                 

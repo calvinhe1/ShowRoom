@@ -3,16 +3,11 @@ import "./styles.css"
 
 function ShowEpisodeCard(props) {
 
-    
-
     return (
-        
-        
-        <span className="show-card">
-            {/** TODO How do I propogate this URL change better? */}
-    
-        {<img src={props.episode.picture} alt="show photo" className="show-photo" value = {props.episode.episode}></img>}
-        <h4 className="epNumber">{"Episode " + props.episode.episode}</h4>
+        //TODO clicking here set's it to an episode?
+        <span className="show-card">    
+        {<img src={props.episode.image_url} alt="show photo" className="show-photo"></img>}
+        <h4 className="epNumber">{"Episode " + props.episode.episodeNum}</h4>
         </span>
     );
 }
