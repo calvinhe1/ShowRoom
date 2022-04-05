@@ -6,9 +6,10 @@ import { getHighestRatedShows, getMostTalkedABoutShows } from "../../actions/sho
 
 
 function ShowBars() {
-
-    const showContext = useShowListContext();
     const defaultGenres = ['Action', 'Drama', 'Fantasy'];
+    const [actionShows, setActionShows] = useState([]);
+    const [dramaShows, setDramaShows] = useState([]);
+    const [fantasyShows, setFantasyShows] = useState({});
 
     const [highestRated, setHighestRated] = useState([]);
     useEffect(() => {

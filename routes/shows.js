@@ -252,4 +252,11 @@ router.get('/mosttalkedabout', mongoChecker, async (req, res) => {
     })
 });
 
+router.get('/genre/:genre', mongoChecker, async (req, res) => {
+    const genre = req.params.genre;
+    Show.find({genres: genre}).then(result => {
+        res.send(result);
+    });
+})
+
 module.exports = router;

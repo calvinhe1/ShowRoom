@@ -194,3 +194,15 @@ export const getMostTalkedABoutShows = async () => {
         return res;
     })
 }
+
+export const getShowsByGenre = async (genre) => {
+    const url = `${API_HOST}/api/shows/genre/${genre}`;
+    return fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        }).then(res => {
+            return res;
+        })
+}
