@@ -14,11 +14,10 @@ import ShowRatingEpisode from "./../ShowRatingEpisode";
 function EpisodeInfo(props) {
 
     const currentUser =  useUserProfileContext().profile;
-    const showContext = useShowListContext();
-    const show = showContext.getShowById(props.currentShowId);
 
-    const episodeContext = useEpisodeListContext();
-    const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
+    //const episodeContext = useEpisodeListContext();
+    // const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
+    const episode = props.currentShow;
     
     const [edited, setEdited] = useState(false);
 
@@ -46,7 +45,8 @@ function EpisodeInfo(props) {
         } else {
             temp[e.target.name] = e.target.value;
         }
-        episodeContext.setEpisode(temp, props.currentShowId);
+        props.setCurrentEpisode(temp);
+        //episodeContext.setEpisode(temp, props.currentShowId);
         setEdited(true);
     }
 
@@ -60,8 +60,9 @@ function EpisodeInfo(props) {
         <div>
             <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
                 {/** TODO this image input can be used for admins to set new images */}
-                <img src={episode?.picture} alt="show picture" className="show-picture"></img>
+                <img src={episode?.image_url} alt="show picture" className="show-picture"></img>
                 { 
+                    //TODO cloudinary
                     currentUser?.isAdmin ? 
                     <input type="file" onChange={editEpisode} name="picture"></input> : null
                 }

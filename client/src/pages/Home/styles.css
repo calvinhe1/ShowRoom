@@ -10,9 +10,8 @@ body {
     background-color: aliceblue;
 }
 
-.seasonView {
+.seasonView-header {
     position: absolute;
-    right: 5%;
     margin-top: 2%;
     color: #fff;
     background-color: #007bff;

@@ -28,7 +28,7 @@ function ShowSeasonBars() {
     const seasons = seasonContext.getSeasons();
 
     return (
-        <div className="showbars-container">
+        <div className="showbars-container season-display">
             {
                seasons.map(season => {
                     return (

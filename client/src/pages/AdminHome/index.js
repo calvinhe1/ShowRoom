@@ -1,10 +1,10 @@
 import "./styles.css"
 import {Link, useNavigate} from 'react-router-dom';
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
 
 import { uid } from "react-uid";
-import { useShowListContext } from "../../contexts/ShowList";
 import { useUserListContext } from "../../contexts/UserList";
+import { useState, useEffect } from "react";
+import { createShow, getAllShows } from "../../actions/show";
 
 function AdminHome() {
     return (
@@ -26,18 +26,32 @@ function AdminHome() {
 
 function AdminManageShows() {
 
-    const showListContext = useShowListContext();
-    const shows = showListContext.getShows();
-
     const navigate = useNavigate();
 
-    const showRatingList = useShowRatingsListContext();
+    const [shows, setShows] = useState([]);
+    const [newShow, setNewShow] = useState('');
+
+    useEffect(() => {
+        getAllShows()
+            .then(res => {
+                setShows(res.data.shows);
+            })
+    }, [])
+
+    function editNewShow(e) {
+        e.preventDefault();
+        setNewShow(e.target.value);
+    }
 
     function addShow(e) {
         e.preventDefault();
-        const newShowId = showListContext.addShow();
-        showRatingList.addNewShowRating(newShowId);
-        navigate('/show_page/' + newShowId);
+        if (newShow.length === 0) {
+            alert("Please enter a name for the new show");
+            return;
+        }
+        createShow(newShow).then(res => {
+            navigate('/show_page/' + res._id);
+        });
     }
 
     return (
@@ -46,15 +60,18 @@ function AdminManageShows() {
             {
                 shows.map(show => {
                     return (
-                        <div key={uid(show)}>
-                            <Link to={"/show_page/" + show.showId}>
+                        <div className="manage-show-list" key={uid(show)}>
+                            <Link to={"/show_page/" + show._id}>
                                 <button className="Name"> {show.title} </button>
                             </Link>
                         </div>
                     )
                 })
             }
-            <button onClick={addShow} className="addShowButton">Add Show </button>
+            <form>
+                <input type="text" onChange={editNewShow} placeholder="New Show Title"></input>
+                <button onClick={addShow} className="addShowButton">Add Show</button>
+            </form>
         </div>
     );
 

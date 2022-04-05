@@ -13,12 +13,9 @@ function ShowPageWrapper(props) {
 
     let { id } = useParams();
 
-    id === undefined ? id = 0 : id = parseInt(id);
-
     const [showId, setShowId] = useState(id);
 
     function changePage(id) {
-        id === undefined ? id = 0 : id = parseInt(id);
         setShowId(id);
     }
 

@@ -1,32 +1,19 @@
 import "./styles.css"
 
 import { uid } from "react-uid";
-import ShowCard from "../ShowCard";
-import { useShowListContext } from "../../contexts/ShowList";
-import RatingStars from "../RatingStars";
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
-import CommentCount from "../CommentCount";
-import { useCommentListContext } from "../../contexts/CommentList";
-import { useEffect, useRef } from "react";
-
-import {useEpisodeListContext} from "../../contexts/EpisodeList";
+import { useEffect, useRef, useState } from "react";
 
 import ShowEpisodeCard from "../ShowEpisodeCard";
-
-const MAX_SHOWS_RENDERED = 10;
+import { getAllEpisodesBySeason } from "../../actions/episode";
 
 function EpisodesBar(props) {
-
-    const showListContext = useShowListContext();
-    const shows = props.shows || showListContext.getShows();
-    const ratingContext = useShowRatingsListContext();
-    const commentContext = useCommentListContext();
-
-    //get episodes from show.
-    const episodeContext = useEpisodeListContext();
    
-    const episodes = episodeContext.getEpisodes()
-
+    const [episodes, setEpisodes] = useState([]);
+    useEffect(() => {
+        getAllEpisodesBySeason(props.season._id).then(res => {
+            setEpisodes(res.data.episodes);
+        })
+    }, [])
     //Extract episodes that match show.
     let episodesOfShow = []
 
@@ -39,7 +26,7 @@ function EpisodesBar(props) {
     const element = useRef(null);
 
     function scrollRight() {
-        element.current.children[1].scrollBy({left: 10, behaviour: "smooth"});
+        element.current.children[1].scrollBy({left: 20, behaviour: "smooth"});
         setTimeout(() => {
             if (element.current.children[2].matches(':hover')) {
                 scrollRight(); 
@@ -48,7 +35,7 @@ function EpisodesBar(props) {
     }
 
     function scrollLeft() {
-        element.current.children[1].scrollBy({left: -10, behaviour: "smooth"});
+        element.current.children[1].scrollBy({left: -20, behaviour: "smooth"});
         setTimeout(() => {
             if (element.current.children[0].matches(':hover')) {
                 scrollLeft();
@@ -63,9 +50,9 @@ function EpisodesBar(props) {
             </div>
             <div className="showsbar-row">
             {
-                episodesOfShow.slice(0, MAX_SHOWS_RENDERED).map(episode => {
+                episodes.map(episode => {
                     return (
-                        <div className="showsbar-column" key={uid(episode.episode)}>
+                        <div className="showsbar-column" key={uid(episode)}>
                             <ShowEpisodeCard episode={episode} />
                         </div>  
                     )                 

@@ -1,31 +1,32 @@
 import "./styles.css";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
-import { useShowListContext } from "../../contexts/ShowList";
 import ShowRating from "./../ShowRating";
+import { modifyShow } from "../../actions/show";
 
 function ShowInfo(props) {
 
     const currentUser =  useUserProfileContext().profile;
-    const showContext = useShowListContext();
-    const show = showContext.getShowById(props.currentShowId);
+    const [show, setShow] = useState(props.currentShow);
+    const [genre, setGenre] = useState('');
+
+    useEffect(() => {
+        setShow(props.currentShow)
+        setGenre(getGenre(props.currentShow.genres));
+    }, [props.currentShow]);
 
     const [edited, setEdited] = useState(false);
-
-    //Store seasons as an array
 
 
     //Should store genres as an array 
     function getGenre(genres) {
-        if (!genres || genres.length === 0) return '';
-
-        let res = genres[0]
-        if (genres.length > 1) {
-            for (let i = 1; i < genres.length; i++) {
-                res = res + ', ' + genres[i];
-            }
+        let res = '';
+        if(genres) {
+            genres.forEach(g => {
+            res = res + g + ' ';
+        })
         }
         return res;
     }
@@ -46,31 +47,42 @@ function ShowInfo(props) {
     function editShow(e) {
         
         let temp = Object.assign({}, show)
-        if (e.target.name === 'genre') { 
-            temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
+        setEdited(true);
+        if (e.target.name === 'genre') {
+            setGenre(e.target.value);
+            return;
         } else if (e.target.name === 'picture' || e.target.name === 'season') {
             temp[e.target.name] = e.target.value.replaceAll('//', '/');
         } else {
             temp[e.target.name] = e.target.value;
         }
-        showContext.setShow(temp);
-        setEdited(true);
+        setShow(temp);
     }
 
     function saveShow(e) {
         e.preventDefault();
         setEdited(false);
-        //TODO send changes to server
+        const genreArr = genre.split(',').map(c => c.trim());
+        const showInfo = {
+            _id: show._id,
+            title: show.title,
+            description: show.description,
+            genres: genreArr,
+            tags: show.tags,
+            image_url: show.image_url
+        }
+        modifyShow(showInfo)
     }
 
     return (
         <div>
             <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
                 {/** TODO this image input can be used for admins to set new images */}
-                <img src={show?.picture} alt="show picture" className="show-picture"></img>
+                <img src={show?.image_url} alt="show picture" className="show-picture"></img>
                 { 
                     currentUser?.isAdmin ? 
-                    <input type="file" onChange={editShow} name="picture"></input> : null
+                    //TODO cloudinary
+                    <input type="file" className="add-show-picture-button" onChange={editShow} name="picture"></input> : null
                 }
                 <div className="show-text">
                     <form>
@@ -90,30 +102,7 @@ function ShowInfo(props) {
                                 name="genre" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editShow}
-                                value={getGenre(show?.genre)} className="info"></input>
-                        </div>
-                        <div>
-                            <label>Start Date: </label>
-                            <input type="date" 
-                                placeholder="start date" 
-                                name="startDate" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={show.startDate} className="info"></input>
-                       
-                        
-                            {show.endDate || currentUser?.isAdmin ? 
-                                <div>
-                                    <label>End Date: </label>
-                                    <input type="date" 
-                                        placeholder="end date" 
-                                        name="endDate" 
-                                        disabled={!currentUser?.isAdmin}
-                                        onChange={editShow}
-                                        value={show.endDate} className="info"></input>
-                                </div> :
-                                <label>Ongoing</label>
-                            }
+                                value={genre} className="info"></input>
                         </div>
                         <div>
                             <label>Season(s): </label>
@@ -142,7 +131,7 @@ function ShowInfo(props) {
                         }                         
                     </form>
                 </div>
-                <ShowRating show={show}></ShowRating>
+                <ShowRating show={show} setShow={setShow}></ShowRating>
             </div>
         </div>
     );

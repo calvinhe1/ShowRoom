@@ -6,7 +6,7 @@ const API_HOST = ENV.api_host
 
 
 // note: start and end dates can be null
-export const createSeason = (showId, seasonNum, seasonCategory, title, description, startDate, endDate, image_url) => {
+export const createSeason = async (showId, seasonNum, seasonCategory, title, description, startDate, endDate, image_url) => {
     const options = {
         url: `${API_HOST}/api/seasons/create`,
         method: "POST",
@@ -85,7 +85,7 @@ export const getAllSeasons = () => {
 }
 
 
-export const getAllSeasonsByShow = (showId) => {
+export const getAllSeasonsByShow = async (showId) => {
     const options = {
         url: `${API_HOST}/api/seasons/findshow/${showId}`,
         method: "GET",

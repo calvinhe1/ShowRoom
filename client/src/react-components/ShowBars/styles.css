@@ -2,22 +2,20 @@
     padding-left: 20px;
     width: 66%;
     padding-top: 10px;
- 
+    display: inline-block;
+    float: left;
 }
 
 .showbars-container h2 {
     margin-bottom: 0;
     margin-top: 0;
-    padding-top: 20px;
+    width: 60%;
 }
 
 .showbar {
-    margin: 30px 10px;
+    margin: 5px;
     background-color: white;
     padding: 5px;
-    width: 1000px;
-    padding: 20px;
-     
-    
-   
+    width: 100%;
+    padding: 5px;   
 }

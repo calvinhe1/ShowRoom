@@ -5,7 +5,7 @@ import ENV from './../config.js'
 const API_HOST = ENV.api_host
 
 // tags and genres are string arrays
-export const createShow = (title, description, tags, genres, image_url) => {
+export const createShow = async (title, description, tags, genres, image_url) => {
     const options = {
         url: `${API_HOST}/api/shows/create`,
         method: "POST",
@@ -57,7 +57,7 @@ export const modifyShow = (showInfo) => {
     })
 }
 
-export const getAllShows = () => {
+export const getAllShows = async () => {
     const options = {
         url: `${API_HOST}/api/shows/find`,
         method: "GET",
@@ -117,7 +117,7 @@ export const rateShow = (showId, numStars) => {
     })
 }
 
-export const getAvgShowRating = (showId) => {
+export const getAvgShowRating = async (showId) => {
     const options = {
         url: `${API_HOST}/api/shows/rating/${showId}`,
         method: "GET",
