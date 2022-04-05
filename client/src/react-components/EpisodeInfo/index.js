@@ -9,6 +9,12 @@ import { useEpisodeListContext } from "../../contexts/EpisodeList";
 
 import ShowRatingEpisode from "./../ShowRatingEpisode";
 
+import { modifyShow } from "../../actions/show";
+
+
+import { modifyEpisode } from "../../actions/episode";
+
+import { useEffect } from 'react';
 
 
 function EpisodeInfo(props) {
@@ -17,42 +23,53 @@ function EpisodeInfo(props) {
 
     //const episodeContext = useEpisodeListContext();
     // const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
-    const episode = props.currentShow;
-    
+    const [episode, setEpisode] = useState(props.episode)
+
+    useEffect(() => {
+        setEpisode(props.episode)
+    }, [props.episode]);
+
     const [edited, setEdited] = useState(false);
 
 
-    //Should store genres as an array 
-    function getGenre(genres) {
-        if (!genres || genres.length === 0) return '';
-
-        let res = genres[0]
-        if (genres.length > 1) {
-            for (let i = 1; i < genres.length; i++) {
-                res = res + ', ' + genres[i];
-            }
-        }
-        return res;
-    }
-
     function editEpisode(e) {
-        
+        e.preventDefault()
+        setEdited(true);
         let temp = Object.assign({}, episode)
-        if (e.target.name === 'genre') { 
+        /*
+        if (e.target.name === 'genre' || e.target.name === 'season') { 
             temp[e.target.name] = e.target.value.split(',').map(c => c.trim())
-        } else if (e.target.name === 'picture') {
+        } */
+        
+        if (e.target.name === 'picture') {
             temp[e.target.name] = e.target.value.replaceAll('//', '/');
         } else {
             temp[e.target.name] = e.target.value;
         }
-        props.setCurrentEpisode(temp);
+        setEpisode(temp);
         //episodeContext.setEpisode(temp, props.currentShowId);
-        setEdited(true);
+     
     }
 
     function saveEpisode(e) {
         e.preventDefault();
         setEdited(false);
+
+        const episodeInfo = {
+            _id: episode.episode,
+            showId: episode.showId,
+            seasonId: episode.seasonId,
+            episodeNum: episode.episode,
+            title: episode.title,
+            description: episode.description,
+            airDate: episode.airData,
+            image_url: episode.image_url
+        }
+        
+        console.log("Episode info", episodeInfo)
+        modifyEpisode(episodeInfo)
+
+
         //TODO send changes to server
     }
 
@@ -77,6 +94,25 @@ function EpisodeInfo(props) {
                                 onChange={editEpisode}
                                 value={episode?.episode}></input>
                         </div>
+                        <div>
+                            <label>Season: </label>
+                            <input type="text" 
+                                placeholder="episode" 
+                                name="episode" 
+                                disabled={!currentUser?.isAdmin}
+                                onChange={editEpisode}
+                                value={episode?.seasonId}></input>
+                        </div>
+                        <div>
+                            <label>Released: </label>
+                            <input type="text" 
+                                placeholder="episode" 
+                                name="episode" 
+                                disabled={!currentUser?.isAdmin}
+                                onChange={editEpisode}
+                                value={episode?.airDate}></input>
+                        </div>
+
                         <div>
                             <label>Title: </label>
                             <input type="text" 
@@ -113,7 +149,7 @@ function EpisodeInfo(props) {
                     </form>
                 </div>
                 
-                {props.episode == "Cover" ? null : <ShowRatingEpisode episode={episode}></ShowRatingEpisode>}
+                {/*props.episode == "Cover" ? null : <ShowRatingEpisode episode={episode}></ShowRatingEpisode>*/}
             
             </div>
         </div>

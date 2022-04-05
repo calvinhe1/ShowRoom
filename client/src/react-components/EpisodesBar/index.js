@@ -53,7 +53,7 @@ function EpisodesBar(props) {
                 episodes.map(episode => {
                     return (
                         <div className="showsbar-column" key={uid(episode)}>
-                            <ShowEpisodeCard episode={episode} />
+                            <ShowEpisodeCard episode={episode}  />
                         </div>  
                     )                 
                 })

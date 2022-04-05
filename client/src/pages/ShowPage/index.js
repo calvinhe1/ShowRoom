@@ -11,6 +11,8 @@ import EpisodeInfo from "../../react-components/EpisodeInfo";
 
 import EpisodesBar from "../../react-components/EpisodesBar";
 import { getShowById } from "../../actions/show";
+import { getEpisodeById } from "../../actions/episode";
+
 import { createSeason, getAllSeasonsByShow } from "../../actions/season";
 import { useUserProfileContext } from "../../contexts/UserProfile";
 import { createEpisode, getTopRatedEpisdes } from "../../actions/episode";
@@ -22,7 +24,10 @@ function ShowPage(props) {
     const [seasonNum, setSeasonNum] = useState();
     const [episodeNum, setEpisodeNum] = useState();
     const [show, setShow] = useState(props.showId)
+
     const [currentShow, setCurrentShow] = useState({});
+    const [currentEpisode, setCurrentEpisode] = useState({});
+
     const profile = useUserProfileContext().profile;
     const [topThree, setTopThree] = useState([]);
 
@@ -30,9 +35,10 @@ function ShowPage(props) {
         getShowById(props.showId).then(res => {
             setCurrentShow(res.data);
         });
-        getTopRatedEpisdes(props.showId).then(res => {
+        getTopRatedEpisodes(props.showId).then(res => {
             setTopThree(res.data);
         })
+      
     }, [])
 
 
@@ -57,6 +63,7 @@ function ShowPage(props) {
         }
         else {
             setEpisode(true)
+       
         }
         
      }, [value]);
@@ -64,6 +71,8 @@ function ShowPage(props) {
         const handleOnChange =  (e) => {
         e.preventDefault()
         let test = e.target.getAttribute("value")
+
+        console.log("VALUE OF TEST: ", test)
 
             //ensure value is actually set before moving on.
         if (test != null) {
@@ -145,7 +154,7 @@ function ShowPage(props) {
                 }
             </div>
             {
-            episode ? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value}></EpisodeInfo> : 
+            episode ? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value} setCurrentEpisode={setCurrentEpisode}></EpisodeInfo> : 
             <ShowInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} ></ShowInfo>
             }  
             
