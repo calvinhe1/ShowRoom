@@ -16,7 +16,9 @@ function ShowRating(props) {
                     setAvgShowRating(res.data.averageStars);
                 })
         }
-
+    }, [props.show])
+    
+    useEffect(() => {
         const percent1 =  ratings.numOneStars ? (ratings.numOneStars / ratings.numTotalRatings) * 100 : 0;
         let bar = document.getElementsByClassName('bar' + String(1))[0];  
         bar.style.width = String(percent1) + '%';
@@ -36,7 +38,7 @@ function ShowRating(props) {
         const percent5 = ratings.numFiveStars ? (ratings.numFiveStars / ratings.numTotalRatings) * 100 : 0;
         bar = document.getElementsByClassName('bar' + String(5))[0];  
         bar.style.width = String(percent5) + '%';
-    }, [props.show])
+    }, [ratings]);
 
 
     const userProfile = useUserProfileContext();
