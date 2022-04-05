@@ -1,0 +1,66 @@
+.info-container{
+    background-color: lavenderblush;
+    width: 1000px;
+    min-height: 500px;
+    padding: 10px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profile-info-container {
+    display: flex;
+    height: 35%;
+    margin: 10px;
+    align-items: center;
+}
+
+.profile-picture{
+    width: 150px;
+    height: 150px;
+    
+    border-radius: 50%;
+}
+
+.username{
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin: 30px;
+    font-size: 2.5em;
+}
+
+.top-shows-container{
+    margin: 10px;
+}
+
+
+.top-shows-title{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.top-shows{
+    margin: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.recent-comments-container{
+    margin: 10px;
+}
+
+.recent-comments-title{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+
+.user-comments{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}

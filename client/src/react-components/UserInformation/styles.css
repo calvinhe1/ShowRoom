@@ -1,0 +1,61 @@
+.user-info {
+    height: 300px;
+}   
+
+.user-info-pic-container {
+    display: inline-block;
+    width: 400px;   
+}
+
+.user-info-pic-container form input {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.user-info-pic-container form .edit-button {
+    width: 160px;
+    margin: auto;
+    display: block;
+    margin-top: 5px;
+}
+
+.user-info-pic {
+    height: 250px;
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+
+.user-info-container div > * {
+    margin: 10px;
+}
+
+.user-info-container {
+    display: inline-block;
+    background-color: lightgray;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    height: 250px;
+    border-spacing: 10px;
+}
+
+.user-info-container .edit-button {
+    width: 140px;
+    float: right;
+}
+
+.user-bottom-row {
+    display: flex;
+    justify-content: center;
+}
+
+.user-bottom-row .edit-button {
+    background-color: red;
+}
+
+.user-info-container input {
+    width: 100%;
+}

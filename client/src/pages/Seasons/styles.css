@@ -1,0 +1,40 @@
+.showbar-container {
+    padding: 50px 150px;
+}
+
+.home {
+    background-color: aliceblue;
+}
+
+.seasonView {
+    position: absolute;
+    right: 5%;
+    margin-top: 2%;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+
+}
+
+.dropdown {
+    font-size: 20px;
+    background-color: #DCDCDC;
+    font-weight: bold;
+
+}
+
+.options {
+    font-weight: bold;
+  
+}
+
+.seasonsLabel {
+   text-align: center;
+   
+}

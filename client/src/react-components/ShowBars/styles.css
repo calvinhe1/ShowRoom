@@ -1,0 +1,21 @@
+.showbars-container {
+    padding-left: 20px;
+    width: 66%;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+}
+
+.showbars-container h2 {
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 60%;
+}
+
+.showbar {
+    margin: 5px;
+    background-color: white;
+    padding: 5px;
+    width: 100%;
+    padding: 5px;   
+}

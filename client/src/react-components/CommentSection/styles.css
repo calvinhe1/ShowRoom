@@ -1,0 +1,45 @@
+.comment-section-container {
+    float:right;
+    width: 100%;
+    margin-top: 25px;
+    margin-right: 10px;
+}
+
+.comment-label {
+    margin-left: 10px;
+    color: crimson;
+    font-size: 20px;
+    text-align: center;
+
+ 
+}
+
+.post-button {
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 10%;
+    height: 30px;
+    width: 80px;
+    margin: 10px;
+    background-color: green;
+    border-color: green;
+}
+
+.comment-new {
+    width: 80%;
+}
+
+.comment-new-container {
+    margin-left: 10%;
+}
+
+.posted-comments {
+    overflow-y: scroll;
+    max-height: 500px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    margin-right: 10px;
+}

@@ -1,0 +1,26 @@
+.formField{
+    margin: 15px;
+}
+
+.textInput{
+    width: 350px;
+}
+
+#loginForm {
+    display: block;
+    width: 400px;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid lightblue;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+#signupButton{
+    width: 60px;
+    margin-left: 170px;
+    margin-bottom: 0px;
+}
+
+#loginLink {
+    margin-left: 75px;
+}

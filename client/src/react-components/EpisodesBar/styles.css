@@ -1,0 +1,32 @@
+.showsbar-row:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+}
+
+
+.showsbar-column {
+    padding: 10px;
+    width: 175px;
+
+    display: inline-block;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-button {
+    width: 30px;
+    position: absolute;
+    margin-top: 4%;
+}
+
+.scroll-button-left {
+    width: 50px;
+}
+
+.scroll-button-right {
+    width: 50px;
+}
