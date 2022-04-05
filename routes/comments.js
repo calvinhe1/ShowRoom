@@ -115,6 +115,15 @@ router.get('/findtopic/:topicid', mongoChecker, (req, res) => {
     })
 });
 
+router.get('/findrecent', mongoChecker, async (req, res) => {
+    try {
+        const result = await Comment.find({}).sort({'createdAt': 'desc'});
+        res.send(result);
+    } catch (e) {
+        res.status(500).send('Internal Server Error');
+    }
+})
+
 // get all comments from a specific topic type
 router.get('/findtopic', mongoChecker, (req, res) => {
 

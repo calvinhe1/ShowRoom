@@ -39,7 +39,7 @@ function EpisodesBar(props) {
     const element = useRef(null);
 
     function scrollRight() {
-        element.current.children[1].scrollBy({left: 10, behaviour: "smooth"});
+        element.current.children[1].scrollBy({left: 20, behaviour: "smooth"});
         setTimeout(() => {
             if (element.current.children[2].matches(':hover')) {
                 scrollRight(); 
@@ -48,7 +48,7 @@ function EpisodesBar(props) {
     }
 
     function scrollLeft() {
-        element.current.children[1].scrollBy({left: -10, behaviour: "smooth"});
+        element.current.children[1].scrollBy({left: -20, behaviour: "smooth"});
         setTimeout(() => {
             if (element.current.children[0].matches(':hover')) {
                 scrollLeft();
