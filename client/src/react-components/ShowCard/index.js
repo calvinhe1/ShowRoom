@@ -13,8 +13,8 @@ function ShowCard(props) {
     return (
         <span className="show-card">
             {/** TODO How do I propogate this URL change better? */}
-            <Link to={'/show_page/' + props.show.showId} onClick={navigate}>
-                <img src={props.show.picture} alt="show photo" className="show-photo"></img>
+            <Link to={'/show_page/' + props.show._id} onClick={navigate}>
+                <img src={props.show.image_url} alt="show photo" className="show-photo"></img>
             </Link>            
         </span>
     );

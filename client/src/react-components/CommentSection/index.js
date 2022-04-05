@@ -16,7 +16,6 @@ function CommentSection(props) {
     const userContext = useUserProfileContext();
     const currentUser = userContext.profile;
 
-    //const comments = commentContext.getCommentsByShowId(props.currentShowId);
     const [comments, setComments] = useState([]);
     useEffect(() => {
         if(props.showId) {
@@ -36,9 +35,9 @@ function CommentSection(props) {
         if (comment === '') return;
         createComment(currentUser._id, props.episode ? "episode" : "show", props.showId, comment)
             .then((res) => {
-                setComment('');
-                comments.push(res.data);
+                comments.unshift(res.data);
                 setComments(comments);
+                setComment('');
             });
     }
 

@@ -8,12 +8,12 @@
     height: 300px;
     float: left;
     display: inline;
+    max-width: 300px;
 }
 
 .show-text {
     display: inline-block;
     width: 400px;
-    margin-right: 100px;
     margin-left: 100px;
 }
 
