@@ -12,7 +12,7 @@ import ShowRatingEpisode from "./../ShowRatingEpisode";
 import { modifyShow } from "../../actions/show";
 
 
-import { modifyEpisode } from "../../actions/episode";
+import { modifyEpisode, setEpisodeImage } from "../../actions/episode";
 
 import { useEffect } from 'react';
 
@@ -32,7 +32,7 @@ function EpisodeInfo(props) {
     const [edited, setEdited] = useState(false);
 
 
-    console.log("Episode from state:", episode)
+  
 
     function editEpisode(e) {
         e.preventDefault()
@@ -69,12 +69,24 @@ function EpisodeInfo(props) {
             image_url: episode.image_url
         }
         
-        console.log("Episode info", episodeInfo)
         modifyEpisode(episodeInfo)
 
 
         //TODO send changes to server
     }
+
+    
+    function changeImage(e) { 
+        e.preventDefault();
+        setEpisodeImage(e.target, episode._id)
+            .then(res => {
+                if (res) {
+                    episode.image_url = res;
+                    setEpisode(Object.assign({}, episode));
+                }
+            });
+    }
+
 
     return (
         <div>
@@ -84,7 +96,11 @@ function EpisodeInfo(props) {
                 { 
                     //TODO cloudinary
                     currentUser?.isAdmin ? 
-                    <input type="file" onChange={editEpisode} name="picture"></input> : null
+                    <form onSubmit={changeImage}>
+                        <input name="image" type="file" />
+                        <button className="edit-button" type="submit">Upload Picture</button>
+                    </form> 
+                    : null
                 }
                 <div className="show-text">
                     <form>

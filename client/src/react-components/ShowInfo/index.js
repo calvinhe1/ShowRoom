@@ -73,7 +73,7 @@ function ShowInfo(props) {
             tags: show.tags,
             image_url: show.image_url
         }
-        console.log("SHow info", showInfo)
+   
         modifyShow(showInfo)
     }
 

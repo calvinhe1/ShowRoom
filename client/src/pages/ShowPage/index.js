@@ -176,10 +176,7 @@ function ShowPage(props) {
                         null
                 }
             </div>
-            {
-                console.log("CURRENT EPISODE, SHOW ", currentEpisode, currentShow)
-               
-            }
+          
             {
                 //erased episode paramter to EpisodeInfo component.
             
