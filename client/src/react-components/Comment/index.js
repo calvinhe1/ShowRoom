@@ -25,7 +25,7 @@ function Comment(props) {
     function removeComment(e) {
         e.preventDefault();
         deleteComment(props.comment._id).then(() => {
-            const filteredC = props.comments.filter(c => c !== props.comment._id);
+            const filteredC = props.comments.filter(c => c._id !== props.comment._id);
             props.setComments(filteredC);
         });
     }

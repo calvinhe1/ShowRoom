@@ -1,45 +1,77 @@
 import "./styles.css";
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
-import { useCommentListContext } from "../../contexts/CommentList";
 import ShowsBar from "../ShowsBar";
-import { useShowListContext } from "../../contexts/ShowList";
+import { useEffect, useState } from "react";
+import { getHighestRatedShows, getMostTalkedABoutShows, getShowsByGenre } from "../../actions/show";
 
 
 function ShowBars() {
+    const [highestRated, setHighestRated] = useState([]);
+    useEffect(() => {
+        getHighestRatedShows().then(res => {
+            setHighestRated(res.data)
+        })
+    }, [])
 
-    const showContext = useShowListContext();
-    const defaultGenres = ['Action', 'Drama', 'Fantasy'];
+    const [mostTalkedAbout, setMostTalkedAbout] = useState([]);
+    useEffect(() => {
+        getMostTalkedABoutShows().then(res => {
+            const newShows = []
+            res.forEach(r => {
+                r.show.commentCount = r.count
+                newShows.push(r.show);
+            })
+            setMostTalkedAbout(newShows)
+        })
+    }, [])
 
-    const ratingContext = useShowRatingsListContext();
-    const highestRatedIds = ratingContext.getHighestRatedIds();
-    const highestRatedShows = highestRatedIds.map(id => showContext.getShowById(id));
-
-    const commentContext = useCommentListContext();
-    const mostTalkedAboutIds = commentContext.getMostCommentedIds();
-    const mostTalkedAboutShows = mostTalkedAboutIds.map(id => showContext.getShowById(id));
+    const [actionShows, setActionShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Action').then(res => {
+            setActionShows(res)
+        })
+    }, [])
+    const [dramaShows, setDramaShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Drama').then(res => {
+            setDramaShows(res);
+        })
+    }, [])
+    const [fantasyShows, setFantasyShows] = useState([]);
+    useEffect(() => {
+        getShowsByGenre('Fantasy').then(res => {
+            setFantasyShows(res);
+        })
+    }, [])
 
     return (
         <div className="showbars-container">
             <div className="showbar">
                 <h2>Highest Rated</h2>
-                <ShowsBar shows={highestRatedShows} showRating={true}></ShowsBar>
+                <ShowsBar shows={highestRated} showRating={true}></ShowsBar>
             </div>
             
             <div className="showbar">
                 <h2>Most Talked About</h2>
-                <ShowsBar shows={mostTalkedAboutShows} showCommentCount={true}></ShowsBar>   
+                <ShowsBar shows={mostTalkedAbout} showCommentCount={true}></ShowsBar>   
             </div>
             
-            {
-            defaultGenres.map(genre => {
-                return (
-                <div key={genre} className="showbar">
-                    <h2>{genre}</h2>
-                    <ShowsBar shows={showContext.getShowsByGenre(genre)}></ShowsBar>
-                </div>
-                )
-            })
-            }
+            <div className="showbar">
+                <h2>Action</h2>
+                <ShowsBar shows={actionShows}></ShowsBar>
+            </div>
+
+            <div className="showbar">
+                <h2>Drama</h2>
+                <ShowsBar shows={dramaShows}></ShowsBar>
+            </div>
+
+            <div className="showbar">
+                <h2>Fantasy</h2>
+                <ShowsBar shows={fantasyShows}></ShowsBar>
+            </div>
+            
+            
+            
       </div>
     )
 }

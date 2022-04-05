@@ -50,7 +50,7 @@ function AdminManageShows() {
             return;
         }
         createShow(newShow).then(res => {
-            navigate('/show_page/' + res._id);
+            navigate('/show_page/' + res.data._id);
         });
     }
 

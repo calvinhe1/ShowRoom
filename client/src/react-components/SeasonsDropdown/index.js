@@ -21,7 +21,7 @@ function SeasonsDropdown() {
         if (season == false) {
             setSeason(true)
         }
-     });
+     }, []);
 
     const handleOnChange = (e) => {
         setPick(e.target.value)

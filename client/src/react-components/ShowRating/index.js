@@ -17,8 +17,8 @@ function ShowRating(props) {
                 })
         }
     }, [props.show])
-    
-    useEffect(() => {
+
+    function styleRatings() {
         const percent1 =  ratings.numOneStars ? (ratings.numOneStars / ratings.numTotalRatings) * 100 : 0;
         let bar = document.getElementsByClassName('bar' + String(1))[0];  
         bar.style.width = String(percent1) + '%';
@@ -38,6 +38,10 @@ function ShowRating(props) {
         const percent5 = ratings.numFiveStars ? (ratings.numFiveStars / ratings.numTotalRatings) * 100 : 0;
         bar = document.getElementsByClassName('bar' + String(5))[0];  
         bar.style.width = String(percent5) + '%';
+    }
+    
+    useEffect(() => {
+        styleRatings();
     }, [ratings]);
 
 
@@ -79,6 +83,8 @@ function ShowRating(props) {
                         break;
                 }
                 props.setShow(Object.assign({}, props.show))
+                setRatings(Object.assign({}, props.show.ratings))
+                styleRatings();
             })
         } else {
             alert("Must be logged in to vote");

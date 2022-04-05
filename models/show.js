@@ -54,6 +54,10 @@ const ShowSchema = new mongoose.Schema({
 		required: false,
         default: "/images/aot.jpg"
 	},
+    image_id: {
+        type: String,
+        required: false
+    }
 })
 
 const Show = mongoose.model('Show', ShowSchema)
