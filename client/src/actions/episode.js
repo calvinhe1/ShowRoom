@@ -14,7 +14,7 @@ export const createEpisode = (seasonId, episodeNum, title, description, airDate,
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             seasonId: seasonId,
             episodeNum: episodeNum,
             title: title,
@@ -42,7 +42,7 @@ export const modifyEpisode = (episodeInfo) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             seasonId: episodeInfo.seasonId,
             episodeNum: episodeInfo.episodeNum,
             title: episodeInfo.title,
@@ -127,7 +127,7 @@ export const likeDislikeEpisode = (episodeId, reactionType) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             reactionType: reactionType
         }
     }

@@ -14,7 +14,7 @@ export const createComment = (authorId, topicType, topicId, content) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             authorId: authorId,
             topicType: topicType,
             topicId: topicId,
@@ -40,7 +40,7 @@ export const modifyComment = (commentInfo) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             authorId: commentInfo.authorId,
             topicType: commentInfo.topicType,
             topicId: commentInfo.topicId,
@@ -122,7 +122,7 @@ export const getCommentsByTopicType = (topicType) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             topicType: topicType
         }
     }
@@ -164,7 +164,7 @@ export const likeDislikeComment = (commentId, reactionType) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             reactionType: reactionType
         }
     }

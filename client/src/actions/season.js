@@ -14,7 +14,7 @@ export const createSeason = (showId, seasonNum, seasonCategory, title, descripti
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             showId: showId,
             seasonNum: seasonNum,
             seasonCategory: seasonCategory,
@@ -43,7 +43,7 @@ export const modifySeason = (seasonInfo) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             showId: seasonInfo.showId,
             seasonNum: seasonInfo.seasonNum,
             seasonCategory: seasonInfo.seasonCategory,
@@ -131,7 +131,7 @@ export const likeDislikeSeason = (seasonId, reactionType) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: {
+        data: {
             reactionType: reactionType
         }
     }
