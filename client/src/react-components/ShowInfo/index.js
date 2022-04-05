@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
 import ShowRating from "./../ShowRating";
-import { modifyShow } from "../../actions/show";
+import { modifyShow, setShowImage } from "../../actions/show";
 
 function ShowInfo(props) {
 
@@ -74,6 +74,17 @@ function ShowInfo(props) {
         modifyShow(showInfo)
     }
 
+    function changeImage(e) { 
+        e.preventDefault();
+        setShowImage(e.target, show._id)
+            .then(res => {
+                if (res) {
+                    show.image_url = res;
+                    setShow(Object.assign({}, show));
+                }
+            });
+    }
+
     return (
         <div>
             <div className={!currentUser?.isAdmin ? "user-view show-info" : "show-info"}>
@@ -82,7 +93,11 @@ function ShowInfo(props) {
                 { 
                     currentUser?.isAdmin ? 
                     //TODO cloudinary
-                    <input type="file" className="add-show-picture-button" onChange={editShow} name="picture"></input> : null
+                    <form onSubmit={changeImage}>
+                        <input name="image" type="file" />
+                        <button className="edit-button" type="submit">Upload Picture</button>
+                    </form> 
+                    : null
                 }
                 <div className="show-text">
                     <form>
