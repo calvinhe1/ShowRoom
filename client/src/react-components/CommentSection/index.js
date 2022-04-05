@@ -7,7 +7,6 @@ import {uid} from "react-uid";
 import {useEffect, useState} from "react";
 
 import { useUserProfileContext } from './../../contexts/UserProfile';
-import { useCommentListContext } from "../../contexts/CommentList";
 import { createComment, getCommentsByTopicId } from "../../actions/comment";
 
 function CommentSection(props) {
@@ -36,8 +35,10 @@ function CommentSection(props) {
     function postNewComment(e) {
         if (comment === '') return;
         createComment(currentUser._id, props.episode ? "episode" : "show", props.showId, comment)
-            .then(() => {
+            .then((res) => {
                 setComment('');
+                comments.push(res.data);
+                setComments(comments);
             });
     }
 
@@ -45,14 +46,16 @@ function CommentSection(props) {
         <div className="comment-section-container">
             <label className="comment-label">Comment Section!</label>
             <div className="comment-section">
+                <div className="posted-comments">
                 {
                     comments.map(c => {
-                        return c.showId === props.currentShowId ? <Comment comment={c} key={uid(c)}/> : null;
+                        return <Comment comment={c} comments={comments} setComments={setComments} key={uid(c)}/>;
                     })
                 }
+                </div>
                 {
-                    currentUser.userId !== undefined ? <div className="comment-new-container">
-                        <input type="text" placeholder="Enter comment" value={comment} className="comment-new" onChange={changeComment}></input>
+                    currentUser._id !== undefined ? <div className="comment-new-container">
+                        <textarea type="text" placeholder="Enter comment" value={comment} className="comment-new" onChange={changeComment}></textarea>
                         <button onClick={postNewComment} className="post-button">Post</button>
                     </div> : null
                 }

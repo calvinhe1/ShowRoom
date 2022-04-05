@@ -6,7 +6,6 @@ import CommentSection from "../../react-components/CommentSection";
 import EpisodesCommentSection from "../../react-components/EpisodesCommentSection";
 
 import { useEpisodeListContext } from "../../contexts/EpisodeList";
-import { useShowListContext } from "../../contexts/ShowList";
 import {useState, useEffect} from "react";
 
 import { uid } from "react-uid";
@@ -14,23 +13,15 @@ import EpisodeInfo from "../../react-components/EpisodeInfo";
 
 import { useEpisodeRatingsListContext } from "../../contexts/EpisodeRatingList";
 
-import  ShowEpisodeCard from "../../react-components/ShowEpisodeCard";
 import EpisodesBar from "../../react-components/EpisodesBar";
 import { getShowById } from "../../actions/show";
 import { getAllSeasonsByShow } from "../../actions/season";
-
-
 
 function ShowPage(props) {
 
     const [value, setValue] = useState("Cover");
     const [episode, setEpisode] = useState(false);
     const [show, setShow] = useState(props.showId)
-
-    const episodeListContext = useEpisodeListContext();
-    const episodes = episodeListContext.getEpisodes();
-
-    //const episodesShow = episodeListContext.getAllEpisodesByShow(props.showId)
     const [currentShow, setCurrentShow] = useState({});
     useEffect(() => {
         getShowById(props.showId).then(res => {
@@ -42,10 +33,6 @@ function ShowPage(props) {
     const highestRatedEpisodes = episodeRatingsContext.getHighestRatedIds(props.showId)
     const topThree = highestRatedEpisodes == undefined ? [] : highestRatedEpisodes.slice(0,3)
 
-
-    //extract all the seasons for this show.
-    //const showListContext = useShowListContext();
-    //const shows = showListContext.getShowById(props.showId)  //extract seasons out.
     const [seasons, setSeasons] = useState([]);
     useEffect(() => {
         getAllSeasonsByShow(props.showId)
@@ -62,7 +49,6 @@ function ShowPage(props) {
             ratings.push(episodeRatingsContext.getEpisodeRatingById(props.showId, topThree[i].episode).rating)
     }
 
-    
     if (show != props.showId) {
         setEpisode(false)
         setShow(props.showId)
@@ -117,53 +103,35 @@ function ShowPage(props) {
                 <span className="ep" value={"Cover" }>
                      {currentShow?.title}
                 </span>
-                {   
-                    /* Show episodes on top
-                    episodesShow.map(episode => {
-                        return (
-                            <span key={uid(episode)} className="ep" value={episode.episode}  >
-                                {episode.episode}
-                            </span>  
-                        )
-                    })*/
-                }      
             </div>
             {
             episode? <EpisodeInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} episode={value}></EpisodeInfo> : 
             <ShowInfo currentShowId={props.showId} currentShow={currentShow} setCurrentShow={setCurrentShow} ></ShowInfo>
             }  
             
-              
-            <div className = "commentContainer">
-                <CommentSection currentShowId={props.showId} />
-            </div>
+            <div>
+                <div className="show-page-show-bars-left">
+                {
+                    seasons.map(season => {
+                        return (
+                                <div className ="showbartwo" onClick={handleOnChange} key={uid(season)}>
+                                    <h2>{season}</h2>
+                                    <EpisodesBar currentShowId={props.showId} season={season}/>
+                            
+                                </div>
+                        )
             
-            
-
-            {
-            seasons.map(season => {
-                return (
-                        <div className ="showbartwo" onClick={handleOnChange} key={uid(season)}>
-                            <h2>{season}</h2>
-                            <EpisodesBar currentShowId={props.showId} season={season}/>
-                      
-                        </div>
-                )
-       
-            })
-            }
-          
-            <div className="showbartwo">
-                <h2>Recommended</h2>
-                <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>
+                    })
+                }
+                    <div className="showbartwo">
+                        <h2>Recommended</h2>
+                        <ShowsBar changePage={props.changePage} currentShowId={props.showId}/>
+                    </div>
+                </div>
+                <div className="show-page-comments-right">
+                    <CommentSection showId={props.showId} />
+                </div>
             </div>
-
-
-            {
-            //show episode or show comment section.
-            episode? <EpisodesCommentSection currentShowId={props.showId} episode={value} /> : <CommentSection currentShowId={props.showId} />
-            }
-
         </div>
 
     );

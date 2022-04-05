@@ -6,6 +6,7 @@ import { useCommentListContext } from "../../contexts/CommentList";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../actions/user";
 import { Link } from "react-router-dom";
+import { deleteComment } from "../../actions/comment";
 
 function Comment(props) {
 
@@ -19,21 +20,23 @@ function Comment(props) {
 
     const userContext = useUserProfileContext();
     const currentUser = userContext.profile;
-
-    const userListContext = useUserListContext();
-
     const commentContext = useCommentListContext();
 
-    function deleteComment(e) {
+    function removeComment(e) {
         e.preventDefault();
-        commentContext.deleteCommentById(props.comment.commentId);
+        deleteComment(props.comment._id).then(() => {
+            const filteredC = props.comments.filter(c => c !== props.comment._id);
+            props.setComments(filteredC);
+        });
     }
 
     function likeComment(){
+        //TODO
         vote(true)
     }
 
     function dislikeComment (){
+        //TODO
         vote(false)
     }
 
@@ -78,23 +81,27 @@ function Comment(props) {
             </Link>
 
             <div className="comment-text">{props.comment.content}</div>
-            <div className="vote-section">
-                <div className="vote-container">
-                    <i className="fa fa-thumbs-up" id={"likeIcon" + props.comment._id} aria-hidden="true" onClick={likeComment}></i>
-                    <span className="vote-number" id={"likeNum" + props.comment._id}>0</span>
-                </div>
-                <div className="vote-container">
-                    <i className="fa fa-thumbs-down" id={"dislikeIcon" + props.comment._id} aria-hidden="true" onClick={dislikeComment}></i>
-                    <span className="vote-number" id={"dislikeNum" + props.comment._id}>0</span>
-                </div>
+            
+            <div class="break"></div>
+
+            <div className="comment-meta-data">
+                <span className="vote-section">
+                    <span className="vote-container">
+                        <i className="fa fa-thumbs-up" id={"likeIcon" + props.comment._id} aria-hidden="true" onClick={likeComment}></i>
+                        <span className="vote-number" id={"likeNum" + props.comment._id}>0</span>
+                    </span>
+                    <span className="vote-container">
+                        <i className="fa fa-thumbs-down" id={"dislikeIcon" + props.comment._id} aria-hidden="true" onClick={dislikeComment}></i>
+                        <span className="vote-number" id={"dislikeNum" + props.comment._id}>0</span>
+                    </span>
+                </span>
+
+                <span className="comment-date">{new Date(props.comment.createdAt).toLocaleDateString("en-US")}</span>
+                {
+                        currentUser?._id === props.comment.authorId || currentUser?.isAdmin ?
+                        <button onClick={removeComment} className="comment-delete">X</button> : null
+                }
             </div>
-
-
-            <div className="comment-date">{new Date(props.comment.createdAt).toLocaleDateString("en-US")}</div>
-            {
-                    currentUser?._id === props.comment.authorId || currentUser?.isAdmin ?
-                    <button onClick={deleteComment} className="comment-delete">X</button> : null
-            }
         </span>
     );
 }

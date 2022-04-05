@@ -187,3 +187,22 @@ export const getRecentComemnts = async () => {
         }
     });
 }
+
+export const deleteComment = async (id) => {
+    const options = {
+        url: `${API_HOST}/api/comments/${id}`,
+        method: "DELETE",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    }
+    return axios(options)
+    .then((response) => {
+        return {
+            data: response.data
+        }
+    }).catch((error) => {
+        return error
+    })
+}

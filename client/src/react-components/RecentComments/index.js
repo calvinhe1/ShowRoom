@@ -15,7 +15,7 @@ function RecentComments() {
 
     return (
     <div className="home-recent-comment-container">
-        <h2 className="home-recent-comment-header">Recently Talked about</h2>
+        <h2 className="home-recent-comment-header">Recent Comments</h2>
         {
             comments.map(comment => {
                 return <Comment comment={comment} key={uid(comment)}></Comment>

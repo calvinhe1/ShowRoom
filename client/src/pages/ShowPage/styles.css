@@ -57,10 +57,21 @@
 }
 
 .showbartwo {
-    margin: 30px 10px;
+    margin: 10px;
     background-color: white;
-    padding: 5px;
-    padding: 20px;
-    max-width: 1000px;
-   
+    width: 100%;
+    display: inline-block;
+}
+
+.show-page-show-bars-left {
+    display: inline-block;
+    width: 66%;
+    float: left;
+}
+
+.show-page-comments-right {
+    width: 30%;
+    margin-left: 3%;
+    display: inline-block;
+    float: right;
 }

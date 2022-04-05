@@ -4,12 +4,6 @@
     border-radius: 50%;
 }
 
-.comment-text {
-    width: 650px;
-    overflow: scroll;
-    max-height: 50px;
-}
-
 .comment-vote {
     margin-left: 20px;
     width: 100px;

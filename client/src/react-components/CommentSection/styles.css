@@ -1,15 +1,8 @@
-.comment-section {
-
-    
-
-}
-
 .comment-section-container {
     float:right;
-    width: 300px;
+    width: 100%;
     margin-top: 25px;
     margin-right: 10px;
-
 }
 
 .comment-label {
@@ -38,6 +31,14 @@
 }
 
 .comment-new-container {
-    width: 35%;
-    margin-left: 50px;
+    margin-left: 10%;
+}
+
+.posted-comments {
+    overflow-y: scroll;
+    max-height: 500px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
 }
