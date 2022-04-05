@@ -12,6 +12,8 @@ function ShowInfo(props) {
     const [show, setShow] = useState(props.currentShow);
     const [genre, setGenre] = useState('');
 
+
+
     useEffect(() => {
         setShow(props.currentShow)
         setGenre(getGenre(props.currentShow.genres));

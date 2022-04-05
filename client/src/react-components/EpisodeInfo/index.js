@@ -23,14 +23,16 @@ function EpisodeInfo(props) {
 
     //const episodeContext = useEpisodeListContext();
     // const episode = episodeContext.getEpisode(props.currentShowId, props.episode)
-    const [episode, setEpisode] = useState(props.episode)
+    const [episode, setEpisode] = useState(props.currentEpisode)
 
     useEffect(() => {
-        setEpisode(props.episode)
-    }, [props.episode]);
+        setEpisode(props.currentEpisode)
+    }, [props.currentEpisode]);
 
     const [edited, setEdited] = useState(false);
 
+
+    console.log("Episode from state:", episode)
 
     function editEpisode(e) {
         e.preventDefault()
@@ -56,13 +58,14 @@ function EpisodeInfo(props) {
         setEdited(false);
 
         const episodeInfo = {
-            _id: episode.episode,
+            _id: episode._id, //This should be a unique ID.
             showId: episode.showId,
             seasonId: episode.seasonId,
-            episodeNum: episode.episode,
+            episodeNum: episode.episodeNum,
             title: episode.title,
             description: episode.description,
             airDate: episode.airData,
+            watch_url: episode.watch_url,
             image_url: episode.image_url
         }
         
@@ -92,16 +95,7 @@ function EpisodeInfo(props) {
                                 name="episode" 
                                 disabled={!currentUser?.isAdmin}
                                 onChange={editEpisode}
-                                value={episode?.episode}></input>
-                        </div>
-                        <div>
-                            <label>Season: </label>
-                            <input type="text" 
-                                placeholder="episode" 
-                                name="episode" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editEpisode}
-                                value={episode?.seasonId}></input>
+                                value={episode?.episodeNum}></input>
                         </div>
                         <div>
                             <label>Released: </label>
@@ -133,13 +127,7 @@ function EpisodeInfo(props) {
                                 onChange={editEpisode}
                                 value={episode?.description}></textarea>
                         </div>
-                        <div>
-                            <label> <a href={episode?.link}>Watch here!</a></label>
-                            <input type="text" 
-                                name="link" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editEpisode}></input>
-                        </div> 
+                        
                         { currentUser?.isAdmin && edited ?     
                             <div className="edit-buttons">
                                 <button onClick={saveEpisode} className="admin-button save-button">SAVE</button>
