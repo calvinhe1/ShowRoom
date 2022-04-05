@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const { Show } = require('../models/show')
+const { Comment } = require('../models/comment')
 
 const { mongoChecker, isMongoError } = require('./helpers/mongoHelpers')
 const { ObjectID } = require('mongodb')
@@ -203,6 +204,52 @@ router.post("/images/:id", multipartMiddleware, mongoChecker, authenticate, asyn
                     res.status(200).send(result);
                 });
         });
+});
+
+router.get('/highestrated', mongoChecker, async (req, res) => {
+    const avg = []
+    Show.find().then((shows) => {
+        shows.forEach(show => {
+            let totalStars = show.ratings.numFiveStars*5 + show.ratings.numFourStars*4 + show.ratings.numThreeStars*3 + show.ratings.numTwoStars*2 + show.ratings.numOneStars
+            let averageStars = totalStars / (show.ratings.numTotalRatings || 1)
+            averageStars = Math.round(averageStars * 100) / 100
+            avg.push({rating: averageStars, show: show});
+        })
+        avg.sort((a,b) => {
+            return b.rating - a.rating
+        })
+        const sendMe = avg.map(a => a.show);
+        res.send({data: sendMe.slice(0, 10)})
+    })
+});
+
+router.get('/mosttalkedabout', mongoChecker, async (req, res) => {
+    const count = {}
+    const avg = []
+    Comment.find().then(com => {
+        com.forEach(c => {
+            if (count[c.topicId]) {
+                count[c.topicId]++;
+            } else {
+                count[c.topicId] = 1;
+            }
+        });
+        Object.keys(count).forEach(key => {
+            avg.push({showId: key, count: count[key]});
+        })
+        avg.sort((a,b) => {
+            return b.count - a.count
+        });
+        const ids = avg.map(a => a.showId);
+        Show.find({'_id': { $in: ids }}).then(shows => {
+            const sendMe = []
+            shows.forEach(show => {
+                show.commentCount = count[show._id];
+                sendMe.push({show: show, count: count[show._id]})
+            });
+            res.send(sendMe.slice(0, 10));
+        })
+    })
 });
 
 module.exports = router;

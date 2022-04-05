@@ -172,3 +172,25 @@ export const setShowImage = async (form, id) => {
             console.log(error);
         });
 }; 
+
+export const getHighestRatedShows = async () => {
+    const url = `${API_HOST}/api/shows/highestrated`;
+    return fetch(url).then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then((res) => {
+        return res;
+    })
+}
+
+export const getMostTalkedABoutShows = async () => {
+    const url = `${API_HOST}/api/shows/mosttalkedabout`;
+    return fetch(url).then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then(res => {
+        return res;
+    })
+}

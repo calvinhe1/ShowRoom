@@ -1,8 +1,8 @@
 import "./styles.css";
-import { useShowRatingsListContext } from "../../contexts/ShowRatingList";
-import { useCommentListContext } from "../../contexts/CommentList";
 import ShowsBar from "../ShowsBar";
 import { useShowListContext } from "../../contexts/ShowList";
+import { useEffect, useState } from "react";
+import { getHighestRatedShows, getMostTalkedABoutShows } from "../../actions/show";
 
 
 function ShowBars() {
@@ -10,24 +10,35 @@ function ShowBars() {
     const showContext = useShowListContext();
     const defaultGenres = ['Action', 'Drama', 'Fantasy'];
 
-    const ratingContext = useShowRatingsListContext();
-    const highestRatedIds = ratingContext.getHighestRatedIds();
-    const highestRatedShows = highestRatedIds.map(id => showContext.getShowById(id));
+    const [highestRated, setHighestRated] = useState([]);
+    useEffect(() => {
+        getHighestRatedShows().then(res => {
+            setHighestRated(res.data)
+        })
+    }, [])
 
-    const commentContext = useCommentListContext();
-    const mostTalkedAboutIds = commentContext.getMostCommentedIds();
-    const mostTalkedAboutShows = mostTalkedAboutIds.map(id => showContext.getShowById(id));
+    const [mostTalkedAbout, setMostTalkedAbout] = useState([]);
+    useEffect(() => {
+        getMostTalkedABoutShows().then(res => {
+            const newShows = []
+            res.forEach(r => {
+                r.show.commentCount = r.count
+                newShows.push(r.show);
+            })
+            setMostTalkedAbout(newShows)
+        })
+    }, [])
 
     return (
         <div className="showbars-container">
             <div className="showbar">
                 <h2>Highest Rated</h2>
-                <ShowsBar shows={highestRatedShows} showRating={true}></ShowsBar>
+                <ShowsBar shows={highestRated} showRating={true}></ShowsBar>
             </div>
             
             <div className="showbar">
                 <h2>Most Talked About</h2>
-                <ShowsBar shows={mostTalkedAboutShows} showCommentCount={true}></ShowsBar>   
+                <ShowsBar shows={mostTalkedAbout} showCommentCount={true}></ShowsBar>   
             </div>
             
             {

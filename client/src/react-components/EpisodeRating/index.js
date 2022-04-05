@@ -45,7 +45,7 @@ function ShowRating(props) {
             const bar = document.getElementsByClassName('bar' + String(i))[0];
             bar.style.width = String(percent) + '%';
         }
-    });
+    }, []);
 
     return (
         <div className="rating-container">
