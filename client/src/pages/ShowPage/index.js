@@ -108,6 +108,12 @@ function ShowPage(props) {
                                 //TODO navigate to new episode
                              
                                 alert('Episode Created!');
+                                setValue(test)
+                                setShow(props.showId)
+                                setepisodeID(test)
+                                getEpisodeById(episodeID).then(res => {
+                                    setCurrentEpisode(res.data)//???
+                                })
                                 /*
                                 setValue(test)
                                 setShow(props.showId)
