@@ -34,7 +34,7 @@ function ProfileInformation(props) {
                 <div className="username"> {user.username}'s Profile </div>
             </div>
 
-            /** TODO style the bio */
+
             <div>{user.bio}</div>
 
             <div className="top-shows-container">

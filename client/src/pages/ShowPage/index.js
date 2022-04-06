@@ -49,7 +49,6 @@ function ShowPage(props) {
     }, [props.showId])
 
 
-    console.log("TOP THREE: ", topThree)
     const [seasons, setSeasons] = useState([]);
     useEffect(() => {
         getAllSeasonsByShow(props.showId)

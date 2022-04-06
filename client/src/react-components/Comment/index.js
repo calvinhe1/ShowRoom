@@ -60,7 +60,7 @@ function Comment(props) {
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
 
             <Link to={'/user/' + commentUser._id}>
-                <img className="comment-user" src={commentUser.image_url} alt={currentUser.username}></img>
+                <img className="comment-user" src={commentUser.image_url} alt={commentUser.username}></img>
             </Link>
 
             <div className="comment-text">{props.comment.content}</div>
