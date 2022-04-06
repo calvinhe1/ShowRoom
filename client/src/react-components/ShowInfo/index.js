@@ -123,15 +123,6 @@ function ShowInfo(props) {
                                 value={genre} className="info"></input>
                         </div>
                         <div>
-                            <label>Season(s): </label>
-                            <input type="text" 
-                                placeholder="season" 
-                                name="season" 
-                                disabled={!currentUser?.isAdmin}
-                                onChange={editShow}
-                                value={getSeason(show?.season)} className="info"></input>
-                        </div>
-                        <div>
                             <label>Description: </label>
                             <br></br>
                             <textarea type="text"

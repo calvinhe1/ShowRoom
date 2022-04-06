@@ -34,31 +34,7 @@ function ProfileInformation(props) {
                 <div className="username"> {user.username}'s Profile </div>
             </div>
 
-            /** TODO style the bio */
             <div>{user.bio}</div>
-
-            <div className="top-shows-container">
-                <div className="top-shows-title">{user.username}'s Top Shows</div>
-                <div className="top-shows">
-                    {
-                        ids.map(i => {
-                            return <UserShow show={showContext.getShowById(i)}/>;
-                        })
-                    }
-                </div>
-                    
-            </div>
-
-            <div className="recent-comments-container">
-                <div className="recent-comments-title">{user.username}'s Recent Comments</div>
-                <div className="user-comments">
-                {
-                    comments.map(c => {
-                        return <UserComment comment={c}/>;
-                    })
-                }
-                </div>
-            </div>
         </div>
     );
 }

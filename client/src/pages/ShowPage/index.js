@@ -141,26 +141,7 @@ function ShowPage(props) {
 
     //extract top 3 most rated episodes, and put into cover page. (Also indicate the rating on it.)
     return (
-        <div className="pageContainer">
-            {
-            !episode && topThree.length != 0? 
-            (
-            <div className = "highestRatedEpisodes"  onClick={handleOnChange}  > Most Liked Episodes! 
-            <br></br><br></br>
-                {   
-
-                    topThree.map(episode =>  {
-                        return (
-                            <div key={uid(episode)} className = "ep" value={episode._id} >{"Episode " + episode.episodeNum}<br></br>
-                            <div key={uid(episode._id)} className = "rating"  valuetwo ={episode.numLikes} >Liked: {episode.numLikes} </div>
-                            
-                            </div>                        
-                        )
-                    })
-                }
-            </div>) : null
-            }
-            
+        <div className="pageContainer">          
             <div className="epContainer" value ={value} >
                 <br></br>
                 <span className="ep" value={"Cover" } onClick={handleOnChange} >
