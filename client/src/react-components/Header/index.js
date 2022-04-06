@@ -50,10 +50,6 @@ function Header(props) {
             <Link to="/">
               <h1 className="logo">ShowRoom</h1>
             </Link>
-            
-            <Link to="/seasons">
-              <button className="login-button">Seasons</button>
-            </Link>
           </span>
 
           <span className="header-right">
