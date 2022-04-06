@@ -17,6 +17,11 @@
     display: inline;
 }
 
+
+.header-logo{
+    height: 55px;
+}
+
 .header-right {
     float: right;
     margin-right: 20px;

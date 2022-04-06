@@ -22,7 +22,7 @@ function Header(props) {
       <div className="header logged-in">
           <span className="header-left">
             <Link to="/">
-              <h1 className="logo">ShowRoom</h1>
+            <img className = "header-logo" alt="ShowRoom Logo" src="/images/ShowRoomLogo.png"/>
             </Link>
           </span>
 
@@ -48,7 +48,7 @@ function Header(props) {
     <div className="header">
           <span className="header-left">
             <Link to="/">
-              <h1 className="logo">ShowRoom</h1>
+            <img className = "header-logo" alt="ShowRoom Logo" src="/images/ShowRoomLogo.png"/>
             </Link>
           </span>
 
