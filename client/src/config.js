@@ -3,7 +3,7 @@
 
 const prod = {
     env: 'production',
-    api_host: 'https://mighty-fortress-52651.herokuapp.com' // an empty string to signify a relative path. can also put a deployment URL.
+    api_host: 'https://mighty-fortress-52651.herokuapp.com/ShowRoomAPI' // an empty string to signify a relative path. can also put a deployment URL.
 };
 const dev = {
     env: 'development',
