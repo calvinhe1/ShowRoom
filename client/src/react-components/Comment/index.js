@@ -55,12 +55,15 @@ function Comment(props) {
         likeDislikeComment(props.comment._id, "dislike");
     }
 
+    const DEFAULT_IMAGE = "/images/profile-picture.jpg";
+
+
     return (
         <span className="comment-container">
             {/** TODO when profiles are set up <Link to={"/profile/" + props.comment.userId}/> */}
 
             <Link to={'/user/' + commentUser._id}>
-                <img className="comment-user" src={commentUser.image_url} alt={commentUser.username}></img>
+                <img className="comment-user" src={commentUser.image_url || DEFAULT_IMAGE} alt={commentUser.username}></img>
             </Link>
 
             <div className="comment-text">{props.comment.content}</div>

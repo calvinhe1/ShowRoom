@@ -13,9 +13,9 @@ const { ObjectID } = require('mongodb')
 // sign up for a free account here: https://cloudinary.com/users/register/free
 const cloudinary = require('cloudinary');
 cloudinary.config({
-    cloud_name: 'dgd284zmh',
-    api_key: '939854537778158',
-    api_secret: 'FdY3dpnSqjBf8BHJd3d292OHA88'
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
 });
 
 const multipart = require('connect-multiparty');
